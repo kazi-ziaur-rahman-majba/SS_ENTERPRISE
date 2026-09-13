@@ -1,0 +1,25 @@
+{
+    "name": "SS Group",
+    "short_name": "SS Group",
+    "description": "Welcome to SS Group",
+    "theme_color": "#1fc6a7",
+    "background_color": "#FCFFFE",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "purpose": "maskable",
+            "sizes": "512x512",
+            "src": "assets/images/sslogo.png",
+            "type": "image/png"
+        },
+        {
+            "purpose": "any",
+            "sizes": "512x512",
+            "src": "assets/images/sslogo.png",
+            "type": "image/png"
+        }
+    ],
+    "scope": "/"
+}
