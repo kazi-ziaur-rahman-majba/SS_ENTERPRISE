@@ -11,7 +11,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
             <Head title={`${pageCms?.banner_title || 'About Us'} - SS Group`} />
 
             {/* Banner Section */}
-            <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+            <section className="relative bg-slate-900 text-white py-10 sm:py-24 overflow-hidden">
                 {pageCms?.banner_image && (
                     <img
                         src={`/${pageCms.banner_image}`}
@@ -26,7 +26,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                             <span>/</span>
                             <span className="text-slate-300">{pageCms?.page_title || 'About Us'}</span>
                         </nav>
-                        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
+                        <h1 className="text-3xl sm:text-5xl font-semibold sm:font-extrabold tracking-tight">
                             {pageCms?.banner_title || 'About Our Company'}
                         </h1>
                     </div>

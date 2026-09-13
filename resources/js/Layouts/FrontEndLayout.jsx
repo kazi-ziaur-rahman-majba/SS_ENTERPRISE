@@ -41,22 +41,22 @@ export default function FrontEndLayout({ children }) {
             {/* Top Bar */}
             <div className="bg-[#0056c6] text-white text-xs py-2.5 shadow-sm">
                 <div className={containerClass}>
-                    <div className="flex flex-wrap justify-between items-center gap-2">
-                        <div className="flex items-center gap-6">
+                    <div className="flex justify-between items-center w-full text-[11px] sm:text-xs">
+                        <div className="flex items-center gap-3 sm:gap-6">
                             {siteSetting?.phone && (
-                                <a href={`tel:${siteSetting.phone}`} className="flex items-center gap-1.5 hover:text-blue-100 transition-colors">
-                                    <Phone className="w-3.5 h-3.5 text-white" />
+                                <a href={`tel:${siteSetting.phone}`} className="flex items-center gap-1.5 hover:text-blue-100 transition-colors shrink-0">
+                                    <Phone className="w-3.5 h-3.5 text-white shrink-0" />
                                     <span>{siteSetting.phone}</span>
                                 </a>
                             )}
                             {siteSetting?.email && (
-                                <a href={`mailto:${siteSetting.email}`} className="flex items-center gap-1.5 hover:text-blue-100 transition-colors">
-                                    <Mail className="w-3.5 h-3.5 text-white" />
+                                <a href={`mailto:${siteSetting.email}`} className="hidden sm:flex items-center gap-1.5 hover:text-blue-100 transition-colors">
+                                    <Mail className="w-3.5 h-3.5 text-white shrink-0" />
                                     <span>{siteSetting.email}</span>
                                 </a>
                             )}
                         </div>
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-2.5 sm:gap-3">
                             {siteSetting?.facebook_link && (
                                 <a href={siteSetting.facebook_link} target="_blank" rel="noreferrer" className="hover:text-blue-100 transition-colors p-1">
                                     <FacebookIcon />

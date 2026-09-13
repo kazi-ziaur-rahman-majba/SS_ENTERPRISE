@@ -11,7 +11,7 @@ export default function Services({ pageCms, serviceCategory }) {
             <Head title={`${pageCms?.banner_title || 'Our Businesses'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
                 {pageCms?.banner_image && (
                     <img
                         src={`/${pageCms.banner_image}`}

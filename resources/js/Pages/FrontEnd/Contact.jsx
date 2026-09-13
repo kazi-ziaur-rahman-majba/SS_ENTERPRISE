@@ -47,7 +47,7 @@ export default function Contact({ pageCms, siteSetting }) {
             <Head title={`${pageCms?.banner_title || 'Contact Us'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
                 {pageCms?.banner_image && (
                     <img
                         src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}

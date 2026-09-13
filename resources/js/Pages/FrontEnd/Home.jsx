@@ -26,7 +26,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
 
             {/* 1. Hero Slider Section */}
             {sliders && sliders.length > 0 && (
-                <section className="relative bg-slate-900 text-white overflow-hidden min-h-[550px] lg:min-h-[650px] flex items-center">
+                <section className="relative bg-slate-900 text-white overflow-hidden min-h-[320px] sm:min-h-[550px] lg:min-h-[650px] flex items-center">
                     {sliders.map((slider, idx) => {
                         const subTitleText = slider.sub_title || slider.subtitle;
                         const buttonLinkUrl = slider.button_link || slider.link || '/about-us';
@@ -56,27 +56,27 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     />
                                 )}
 
-                                <div className={`relative z-20 ${containerClass} h-full flex flex-col justify-center py-20`}>
-                                    <div className={`max-w-2xl space-y-6 animate-in fade-in slide-in-from-left duration-700 flex flex-col ${textAlignClass}`}>
+                                <div className={`relative z-20 ${containerClass} h-full flex flex-col justify-center py-6 sm:py-20 pb-16 sm:pb-20`}>
+                                    <div className={`max-w-2xl space-y-3 sm:space-y-6 animate-in fade-in slide-in-from-left duration-700 flex flex-col ${textAlignClass}`}>
                                         <div className="flex items-center gap-2">
                                             <span className="font-bold text-xs uppercase tracking-widest text-white">SS GROUP</span>
                                             <div className="w-8 h-0.5 bg-[#0066ff]" />
                                         </div>
                                         {slider.title && (
-                                            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
+                                            <h1 className="text-xl sm:text-5xl lg:text-6xl font-semibold sm:font-bold tracking-tight leading-tight text-white drop-shadow-md">
                                                 {slider.title}
                                             </h1>
                                         )}
                                         {subTitleText && (
-                                            <p className="text-base sm:text-lg text-white leading-relaxed drop-shadow">
+                                            <p className="text-xs sm:text-lg text-white leading-relaxed drop-shadow line-clamp-3 sm:line-clamp-none">
                                                 {subTitleText}
                                             </p>
                                         )}
-                                        <div className="pt-4 flex flex-wrap gap-4">
+                                        <div className="pt-2 sm:pt-4 flex flex-wrap gap-4">
                                             {slider.button_text && (
                                                 <a
                                                     href={buttonLinkUrl}
-                                                    className="inline-flex items-center gap-2 bg-[#0066ff] hover:bg-[#0052cc] text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:scale-105 uppercase tracking-wider text-sm"
+                                                    className="inline-flex items-center gap-2 bg-[#0066ff] hover:bg-[#0052cc] text-white font-bold px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:scale-105 uppercase tracking-wider text-xs sm:text-sm"
                                                 >
                                                     <span>{slider.button_text}</span>
                                                     <ArrowRight className="w-4 h-4" />
@@ -91,18 +91,18 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
 
                     {/* Slider Arrows */}
                     {sliders.length > 1 && (
-                        <div className="absolute right-6 bottom-8 z-30 flex items-center gap-2">
+                        <div className="absolute right-4 sm:right-6 bottom-16 sm:bottom-8 z-30 flex items-center gap-2">
                             <button
                                 onClick={() => setCurrentSlider((prev) => (prev === 0 ? sliders.length - 1 : prev - 1))}
-                                className="w-10 h-10 rounded-full bg-slate-900/60 hover:bg-[#0066ff] text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
+                                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900/60 hover:bg-[#0066ff] text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
                             >
-                                <ChevronLeft className="w-5 h-5" />
+                                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                             </button>
                             <button
                                 onClick={() => setCurrentSlider((prev) => (prev + 1) % sliders.length)}
-                                className="w-10 h-10 rounded-full bg-slate-900/60 hover:bg-[#0066ff] text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
+                                className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900/60 hover:bg-[#0066ff] text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
                             >
-                                <ChevronRight className="w-5 h-5" />
+                                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                             </button>
                         </div>
                     )}
@@ -113,56 +113,56 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
             {(() => {
                 const getStat = (val, fallback) => (val !== null && val !== undefined && String(val).trim() !== '' ? val : fallback);
                 return (
-                    <div className={`relative z-30 ${containerClass} -mt-12 mb-8`}>
-                        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 items-center divide-y sm:divide-y-0 md:divide-x divide-slate-100">
-                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0">
-                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
-                                    <Award className="w-6 h-6" />
+                    <div className={`relative z-30 ${containerClass} -mt-10 sm:-mt-12 mb-8`}>
+                        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-4 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 items-center divide-y-0 sm:divide-y-0 md:divide-x divide-slate-100">
+                            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-0 rounded-xl bg-slate-50/70 sm:bg-transparent border border-slate-100/80 sm:border-none">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
-                                <div>
-                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                <div className="min-w-0">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_1_number, '27+')}
                                     </span>
-                                    <span className="text-xs font-semibold text-slate-600">
+                                    <span className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
                                         {getStat(homePageCms?.stat_1_label, 'Years of Experience')}
                                     </span>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0 md:pl-6">
-                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
-                                    <Users className="w-6 h-6" />
+                            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-0 rounded-xl bg-slate-50/70 sm:bg-transparent border border-slate-100/80 sm:border-none md:pl-6">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <Users className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
-                                <div>
-                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                <div className="min-w-0">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_2_number, '1170+')}
                                     </span>
-                                    <span className="text-xs font-semibold text-slate-600">
+                                    <span className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
                                         {getStat(homePageCms?.stat_2_label, 'Construction Experts')}
                                     </span>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0 md:pl-6">
-                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
-                                    <Sliders className="w-6 h-6" />
+                            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-0 rounded-xl bg-slate-50/70 sm:bg-transparent border border-slate-100/80 sm:border-none md:pl-6">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <Sliders className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
-                                <div>
-                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                <div className="min-w-0">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_3_number, '500+')}
                                     </span>
-                                    <span className="text-xs font-semibold text-slate-600">
+                                    <span className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
                                         {getStat(homePageCms?.stat_3_label, 'Successful Projects')}
                                     </span>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0 md:pl-6">
-                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
-                                    <ThumbsUp className="w-6 h-6" />
+                            <div className="flex items-center gap-3 sm:gap-4 p-3 sm:p-0 rounded-xl bg-slate-50/70 sm:bg-transparent border border-slate-100/80 sm:border-none md:pl-6">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <ThumbsUp className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
-                                <div>
-                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                <div className="min-w-0">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_4_number, '100%')}
                                     </span>
-                                    <span className="text-xs font-semibold text-slate-600">
+                                    <span className="text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
                                         {getStat(homePageCms?.stat_4_label, 'Client Satisfaction')}
                                     </span>
                                 </div>

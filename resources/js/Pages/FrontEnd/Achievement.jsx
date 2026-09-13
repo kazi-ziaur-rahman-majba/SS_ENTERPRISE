@@ -9,7 +9,7 @@ export default function Achievement({ membershipCertificate }) {
             <Head title="Certification & Achievements - SS Group" />
 
             {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>

@@ -12,7 +12,7 @@ export default function ServiceDetails({ pageCms, service, serviceCategory, slug
             <Head title={`${service?.title || service?.category_name || 'Business Detail'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
                 {pageCms?.detail_page_banner_image && (
                     <img
                         src={`/${pageCms.detail_page_banner_image}`}

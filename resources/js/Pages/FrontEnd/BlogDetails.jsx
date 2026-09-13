@@ -23,7 +23,7 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
             <Head title={`${blog?.title || 'Article'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
                 {pageCms?.detail_page_banner_image && (
                     <img
                         src={`/${pageCms.detail_page_banner_image}`}
