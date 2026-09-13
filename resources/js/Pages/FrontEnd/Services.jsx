@@ -20,7 +20,7 @@ export default function Services({ pageCms, serviceCategory }) {
                     />
                 )}
                 <div className={`relative z-10 ${containerClass}`}>
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <span className="text-slate-300">{pageCms?.page_title || 'Businesses'}</span>
@@ -55,7 +55,7 @@ export default function Services({ pageCms, serviceCategory }) {
                                     )}
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow">
-                                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-orange-600 transition-colors mb-3">
+                                    <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-3">
                                         <Link href={`/service/${service.slug}`}>{service.name}</Link>
                                     </h3>
                                     <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
@@ -63,7 +63,7 @@ export default function Services({ pageCms, serviceCategory }) {
                                     </p>
                                     <Link
                                         href={`/service/${service.slug}`}
-                                        className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-orange-600 hover:text-orange-700 mt-auto"
+                                        className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-blue-600 hover:text-blue-700 mt-auto"
                                     >
                                         <span>Learn More</span>
                                         <ChevronRight className="w-4 h-4" />

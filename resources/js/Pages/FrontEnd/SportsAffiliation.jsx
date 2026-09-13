@@ -11,7 +11,7 @@ export default function SportsAffiliation() {
             {/* Banner */}
             <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <span className="text-slate-300">Sports Affiliation</span>
@@ -27,7 +27,7 @@ export default function SportsAffiliation() {
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-slate-100 space-y-6">
                         <div className="flex items-center gap-4 border-b border-slate-100 pb-6">
-                            <div className="w-14 h-14 bg-orange-500/10 text-orange-600 rounded-2xl flex items-center justify-center shrink-0">
+                            <div className="w-14 h-14 bg-blue-500/10 text-blue-600 rounded-2xl flex items-center justify-center shrink-0">
                                 <Trophy className="w-7 h-7" />
                             </div>
                             <div>

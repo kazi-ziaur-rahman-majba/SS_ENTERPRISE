@@ -37,38 +37,38 @@ export default function FrontEndLayout({ children }) {
     };
 
     return (
-        <div className="min-h-screen flex flex-col font-sans bg-slate-50 text-slate-800 antialiased selection:bg-orange-500 selection:text-white">
+        <div className="min-h-screen flex flex-col font-sans bg-slate-50 text-slate-800 antialiased selection:bg-blue-600 selection:text-white">
             {/* Top Bar */}
-            <div className="bg-slate-900 text-slate-300 text-xs py-2 border-b border-slate-800">
+            <div className="bg-[#0056c6] text-white text-xs py-2.5 shadow-sm">
                 <div className={containerClass}>
                     <div className="flex flex-wrap justify-between items-center gap-2">
                         <div className="flex items-center gap-6">
                             {siteSetting?.phone && (
-                                <a href={`tel:${siteSetting.phone}`} className="flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                                    <Phone className="w-3.5 h-3.5 text-orange-500" />
+                                <a href={`tel:${siteSetting.phone}`} className="flex items-center gap-1.5 hover:text-blue-100 transition-colors">
+                                    <Phone className="w-3.5 h-3.5 text-white" />
                                     <span>{siteSetting.phone}</span>
                                 </a>
                             )}
                             {siteSetting?.email && (
-                                <a href={`mailto:${siteSetting.email}`} className="flex items-center gap-1.5 hover:text-orange-400 transition-colors">
-                                    <Mail className="w-3.5 h-3.5 text-orange-500" />
+                                <a href={`mailto:${siteSetting.email}`} className="flex items-center gap-1.5 hover:text-blue-100 transition-colors">
+                                    <Mail className="w-3.5 h-3.5 text-white" />
                                     <span>{siteSetting.email}</span>
                                 </a>
                             )}
                         </div>
                         <div className="flex items-center gap-3">
                             {siteSetting?.facebook_link && (
-                                <a href={siteSetting.facebook_link} target="_blank" rel="noreferrer" className="hover:text-orange-400 transition-colors p-1">
+                                <a href={siteSetting.facebook_link} target="_blank" rel="noreferrer" className="hover:text-blue-100 transition-colors p-1">
                                     <FacebookIcon />
                                 </a>
                             )}
                             {siteSetting?.instagram_link && (
-                                <a href={siteSetting.instagram_link} target="_blank" rel="noreferrer" className="hover:text-orange-400 transition-colors p-1">
+                                <a href={siteSetting.instagram_link} target="_blank" rel="noreferrer" className="hover:text-blue-100 transition-colors p-1">
                                     <InstagramIcon />
                                 </a>
                             )}
                             {siteSetting?.linkedin_link && (
-                                <a href={siteSetting.linkedin_link} target="_blank" rel="noreferrer" className="hover:text-orange-400 transition-colors p-1">
+                                <a href={siteSetting.linkedin_link} target="_blank" rel="noreferrer" className="hover:text-blue-100 transition-colors p-1">
                                     <LinkedinIcon />
                                 </a>
                             )}
@@ -91,7 +91,7 @@ export default function FrontEndLayout({ children }) {
                                 />
                             ) : (
                                 <span className="text-2xl font-black tracking-tight text-slate-900">
-                                    SS<span className="text-orange-500">GROUP</span>
+                                    SS<span className="text-blue-600">GROUP</span>
                                 </span>
                             )}
                         </Link>
@@ -101,7 +101,7 @@ export default function FrontEndLayout({ children }) {
                             <Link
                                 href="/"
                                 className={`px-3.5 py-2 rounded-lg transition-colors ${
-                                    window.location.pathname === '/' ? 'text-orange-600 bg-orange-50 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'
+                                    window.location.pathname === '/' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
                                 }`}
                             >
                                 Home
@@ -109,16 +109,16 @@ export default function FrontEndLayout({ children }) {
 
                             {/* About Dropdown */}
                             <div className="relative group" onMouseEnter={() => setAboutDropdownOpen(true)} onMouseLeave={() => setAboutDropdownOpen(false)}>
-                                <button className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-slate-700 hover:text-orange-600 hover:bg-slate-50 transition-colors">
+                                <button className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
                                     <span>About Us</span>
-                                    <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-orange-600 transition-transform duration-200 group-hover:rotate-180" />
+                                    <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-transform duration-200 group-hover:rotate-180" />
                                 </button>
                                 {aboutDropdownOpen && (
                                     <div className="absolute top-full left-0 w-52 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                                        <Link href="/about-us" className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
+                                        <Link href="/about-us" className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                                             About Us
                                         </Link>
-                                        <Link href="/mission-vision" className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors">
+                                        <Link href="/mission-vision" className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                                             Mission & Vision
                                         </Link>
                                     </div>
@@ -127,9 +127,9 @@ export default function FrontEndLayout({ children }) {
 
                             {/* Businesses Dropdown */}
                             <div className="relative group" onMouseEnter={() => setBusinessDropdownOpen(true)} onMouseLeave={() => setBusinessDropdownOpen(false)}>
-                                <button className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-slate-700 hover:text-orange-600 hover:bg-slate-50 transition-colors">
+                                <button className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-slate-700 hover:text-blue-600 hover:bg-slate-50 transition-colors">
                                     <span>Our Businesses</span>
-                                    <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-orange-600 transition-transform duration-200 group-hover:rotate-180" />
+                                    <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-transform duration-200 group-hover:rotate-180" />
                                 </button>
                                 {businessDropdownOpen && (
                                     <div className="absolute top-full left-0 w-64 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200 max-h-80 overflow-y-auto">
@@ -138,13 +138,13 @@ export default function FrontEndLayout({ children }) {
                                                 <Link
                                                     key={idx}
                                                     href={`/service/${item.slug}`}
-                                                    className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50 hover:text-orange-600 transition-colors border-b border-slate-50 last:border-0"
+                                                    className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors border-b border-slate-50 last:border-0"
                                                 >
                                                     {item.name}
                                                 </Link>
                                             ))
                                         ) : (
-                                            <Link href="/business" className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-orange-50">
+                                            <Link href="/business" className="block px-4 py-2.5 text-sm text-slate-700 hover:bg-blue-50">
                                                 All Businesses
                                             </Link>
                                         )}
@@ -155,7 +155,7 @@ export default function FrontEndLayout({ children }) {
                             <Link
                                 href="/projects"
                                 className={`px-3.5 py-2 rounded-lg transition-colors ${
-                                    window.location.pathname === '/projects' ? 'text-orange-600 bg-orange-50 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'
+                                    window.location.pathname === '/projects' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
                                 }`}
                             >
                                 Projects
@@ -164,7 +164,7 @@ export default function FrontEndLayout({ children }) {
                             <Link
                                 href="/certification"
                                 className={`px-3.5 py-2 rounded-lg transition-colors ${
-                                    window.location.pathname === '/certification' ? 'text-orange-600 bg-orange-50 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'
+                                    window.location.pathname === '/certification' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
                                 }`}
                             >
                                 Certification
@@ -173,7 +173,7 @@ export default function FrontEndLayout({ children }) {
                             <Link
                                 href="/sports-affiliation"
                                 className={`px-3.5 py-2 rounded-lg transition-colors ${
-                                    window.location.pathname === '/sports-affiliation' ? 'text-orange-600 bg-orange-50 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'
+                                    window.location.pathname === '/sports-affiliation' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
                                 }`}
                             >
                                 Sports Affiliation
@@ -182,7 +182,7 @@ export default function FrontEndLayout({ children }) {
                             <Link
                                 href="/contact"
                                 className={`px-3.5 py-2 rounded-lg transition-colors ${
-                                    window.location.pathname === '/contact' ? 'text-orange-600 bg-orange-50 font-semibold' : 'text-slate-700 hover:text-orange-600 hover:bg-slate-50'
+                                    window.location.pathname === '/contact' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
                                 }`}
                             >
                                 Contact
@@ -191,7 +191,7 @@ export default function FrontEndLayout({ children }) {
                             {/* Search Button */}
                             <button
                                 onClick={() => setSearchOpen(!searchOpen)}
-                                className="p-2.5 rounded-full text-slate-600 hover:text-orange-600 hover:bg-slate-100 transition-colors ml-2"
+                                className="p-2.5 rounded-full text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors ml-2"
                                 title="Search"
                             >
                                 <Search className="w-4 h-4" />
@@ -226,10 +226,10 @@ export default function FrontEndLayout({ children }) {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder="Type keyword and press Enter..."
-                                    className="w-full bg-slate-800 text-white placeholder-slate-400 rounded-xl pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
+                                    className="w-full bg-slate-800 text-white placeholder-slate-400 rounded-xl pl-4 pr-12 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
                                     autoFocus
                                 />
-                                <button type="submit" className="absolute right-3 text-slate-400 hover:text-orange-400 p-1">
+                                <button type="submit" className="absolute right-3 text-slate-400 hover:text-blue-400 p-1">
                                     <Search className="w-5 h-5" />
                                 </button>
                             </form>
@@ -240,7 +240,7 @@ export default function FrontEndLayout({ children }) {
                 {/* Mobile Dropdown Menu */}
                 {mobileMenuOpen && (
                     <div className="lg:hidden border-t border-slate-100 bg-white px-4 pt-2 pb-6 space-y-1 shadow-lg max-h-[80vh] overflow-y-auto">
-                        <Link href="/" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-orange-50 font-medium">Home</Link>
+                        <Link href="/" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Home</Link>
                         
                         <div className="space-y-1 pl-2 border-l-2 border-slate-100 my-1">
                             <span className="block text-xs font-bold uppercase tracking-wider text-slate-400 px-3 py-1">About</span>
@@ -257,10 +257,10 @@ export default function FrontEndLayout({ children }) {
                             ))}
                         </div>
 
-                        <Link href="/projects" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-orange-50 font-medium">Projects</Link>
-                        <Link href="/certification" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-orange-50 font-medium">Certification</Link>
-                        <Link href="/sports-affiliation" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-orange-50 font-medium">Sports Affiliation</Link>
-                        <Link href="/contact" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-orange-50 font-medium">Contact</Link>
+                        <Link href="/projects" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Projects</Link>
+                        <Link href="/certification" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Certification</Link>
+                        <Link href="/sports-affiliation" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Sports Affiliation</Link>
+                        <Link href="/contact" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Contact</Link>
                     </div>
                 )}
             </header>
@@ -276,23 +276,23 @@ export default function FrontEndLayout({ children }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                         {/* About Column */}
                         <div className="space-y-4">
-                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-orange-500 pb-2 inline-block">
+                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-blue-600 pb-2 inline-block">
                                 About Us
                             </h3>
                             <p className="text-sm text-slate-400 leading-relaxed" dangerouslySetInnerHTML={{ __html: siteSetting?.about_us || 'SS Group is a prominent consortium committed to excellence across industries.' }} />
                             <div className="flex items-center gap-3 pt-2">
                                 {siteSetting?.facebook_link && (
-                                    <a href={siteSetting.facebook_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                                    <a href={siteSetting.facebook_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
                                         <FacebookIcon />
                                     </a>
                                 )}
                                 {siteSetting?.instagram_link && (
-                                    <a href={siteSetting.instagram_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                                    <a href={siteSetting.instagram_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
                                         <InstagramIcon />
                                     </a>
                                 )}
                                 {siteSetting?.linkedin_link && (
-                                    <a href={siteSetting.linkedin_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-orange-500 hover:text-white transition-all duration-300">
+                                    <a href={siteSetting.linkedin_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
                                         <LinkedinIcon />
                                     </a>
                                 )}
@@ -301,38 +301,38 @@ export default function FrontEndLayout({ children }) {
 
                         {/* Useful Links Column */}
                         <div className="space-y-4">
-                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-orange-500 pb-2 inline-block">
+                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-blue-600 pb-2 inline-block">
                                 Useful Links
                             </h3>
                             <ul className="space-y-2.5 text-sm">
-                                <li><Link href="/about-us" className="text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> About Us</Link></li>
-                                <li><Link href="/faq" className="text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> FAQ</Link></li>
-                                <li><Link href="/business" className="text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> Our Businesses</Link></li>
-                                <li><Link href="/contact" className="text-slate-400 hover:text-orange-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> Contact Us</Link></li>
+                                <li><Link href="/about-us" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> About Us</Link></li>
+                                <li><Link href="/faq" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> FAQ</Link></li>
+                                <li><Link href="/business" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> Our Businesses</Link></li>
+                                <li><Link href="/contact" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> Contact Us</Link></li>
                             </ul>
                         </div>
 
                         {/* Registered Office Column */}
                         <div className="space-y-4 lg:col-span-2">
-                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-orange-500 pb-2 inline-block">
+                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-blue-600 pb-2 inline-block">
                                 Registered Office
                             </h3>
                             <ul className="space-y-3 text-sm text-slate-400">
                                 {siteSetting?.phone && (
                                     <li className="flex items-start gap-3">
-                                        <Phone className="w-4 h-4 text-orange-500 shrink-0 mt-1" />
-                                        <a href={`tel:${siteSetting.phone}`} className="hover:text-orange-400 transition-colors">{siteSetting.phone}</a>
+                                        <Phone className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
+                                        <a href={`tel:${siteSetting.phone}`} className="hover:text-blue-400 transition-colors">{siteSetting.phone}</a>
                                     </li>
                                 )}
                                 {siteSetting?.email && (
                                     <li className="flex items-start gap-3">
-                                        <Mail className="w-4 h-4 text-orange-500 shrink-0 mt-1" />
-                                        <a href={`mailto:${siteSetting.email}`} className="hover:text-orange-400 transition-colors">{siteSetting.email}</a>
+                                        <Mail className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
+                                        <a href={`mailto:${siteSetting.email}`} className="hover:text-blue-400 transition-colors">{siteSetting.email}</a>
                                     </li>
                                 )}
                                 {siteSetting?.corporate_office_address && (
                                     <li className="flex items-start gap-3">
-                                        <MapPin className="w-4 h-4 text-orange-500 shrink-0 mt-1" />
+                                        <MapPin className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
                                         <span dangerouslySetInnerHTML={{ __html: siteSetting.corporate_office_address }} />
                                     </li>
                                 )}
@@ -345,7 +345,7 @@ export default function FrontEndLayout({ children }) {
                         <p>© {new Date().getFullYear()} SS Group. All Rights Reserved.</p>
                         <button
                             onClick={scrollToTop}
-                            className="flex items-center gap-2 bg-slate-900 hover:bg-orange-500 hover:text-white px-3 py-2 rounded-lg transition-all duration-300 text-slate-400"
+                            className="flex items-center gap-2 bg-slate-900 hover:bg-blue-600 hover:text-white px-3 py-2 rounded-lg transition-all duration-300 text-slate-400"
                         >
                             <span>Back to top</span>
                             <ArrowUp className="w-3.5 h-3.5" />

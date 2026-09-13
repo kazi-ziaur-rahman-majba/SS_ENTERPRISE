@@ -24,7 +24,7 @@ export default function Faq({ pageCms, blogs }) {
                     />
                 )}
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <span className="text-slate-300">FAQ</span>
@@ -39,7 +39,7 @@ export default function Faq({ pageCms, blogs }) {
             <section className="py-20 bg-slate-50">
                 <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
                     <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-100 shadow-sm space-y-6">
-                        <div className="flex items-center gap-3 text-orange-600 font-bold text-sm">
+                        <div className="flex items-center gap-3 text-blue-600 font-bold text-sm">
                             <HelpCircle className="w-5 h-5" />
                             <span>Help & Support</span>
                         </div>
@@ -58,7 +58,7 @@ export default function Faq({ pageCms, blogs }) {
                                 {blogs.map((b) => (
                                     <div key={b.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
                                         <h4 className="font-bold text-slate-900 text-lg mb-2">
-                                            <Link href={`/blog/${b.slug}`} className="hover:text-orange-600 transition-colors">{b.title}</Link>
+                                            <Link href={`/blog/${b.slug}`} className="hover:text-blue-600 transition-colors">{b.title}</Link>
                                         </h4>
                                         <p className="text-slate-500 text-xs line-clamp-2">{b.short_details}</p>
                                     </div>

@@ -28,10 +28,10 @@
                     <div class="slider-content text-{{ $slider->text_position }}">
                         <div class="col-md-12">
                             <h3 class="slide-title animated3">{{ $slider->title }}</h3>
-                            <h3 class="slide-sub-title animated3">{{ $slider->subtitle }}</h3>
+                            <h3 class="slide-sub-title animated3">{{ $slider->sub_title ?? $slider->subtitle }}</h3>
                             <p class="animated3">
-                                <a href="{{ $slider->link }}"
-                                    class="slider btn btn-primary border">{{ $slider->button_text }}</a>
+                                <a href="{{ $slider->button_link ?? $slider->link ?? '#' }}"
+                                    class="slider btn btn-primary border">{{ $slider->button_text ?? 'Learn More' }}</a>
                             </p>
                         </div>
                     </div>

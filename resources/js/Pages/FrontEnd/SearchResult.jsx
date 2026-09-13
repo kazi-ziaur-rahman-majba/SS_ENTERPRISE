@@ -14,7 +14,7 @@ export default function SearchResult({ data }) {
             {/* Banner */}
             <section className="relative bg-slate-900 text-white py-20 overflow-hidden">
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <span className="text-slate-300">Search Results</span>
@@ -32,14 +32,14 @@ export default function SearchResult({ data }) {
                     {services.length > 0 && (
                         <div className="space-y-6">
                             <div className="flex items-center gap-2 text-slate-900 font-bold text-xl border-b border-slate-200 pb-3">
-                                <Briefcase className="w-5 h-5 text-orange-500" />
+                                <Briefcase className="w-5 h-5 text-blue-600" />
                                 <h2>Businesses & Services ({services.length})</h2>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {services.map((item) => (
                                     <div key={item.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                                         <div className="space-y-3">
-                                            <h3 className="font-bold text-slate-900 text-lg hover:text-orange-600 transition-colors">
+                                            <h3 className="font-bold text-slate-900 text-lg hover:text-blue-600 transition-colors">
                                                 <Link href={`/service/${item.slug}`}>{item.title}</Link>
                                             </h3>
                                             <p className="text-slate-500 text-xs line-clamp-3">
@@ -47,7 +47,7 @@ export default function SearchResult({ data }) {
                                             </p>
                                         </div>
                                         <div className="pt-4 mt-4 border-t border-slate-100 flex justify-end">
-                                            <Link href={`/service/${item.slug}`} className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
+                                            <Link href={`/service/${item.slug}`} className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
                                                 <span>View Business</span>
                                                 <ArrowRight className="w-3.5 h-3.5" />
                                             </Link>
@@ -62,14 +62,14 @@ export default function SearchResult({ data }) {
                     {blogs.length > 0 && (
                         <div className="space-y-6">
                             <div className="flex items-center gap-2 text-slate-900 font-bold text-xl border-b border-slate-200 pb-3">
-                                <BookOpen className="w-5 h-5 text-orange-500" />
+                                <BookOpen className="w-5 h-5 text-blue-600" />
                                 <h2>Articles & Journal ({blogs.length})</h2>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {blogs.map((item) => (
                                     <div key={item.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                                         <div className="space-y-3">
-                                            <h3 className="font-bold text-slate-900 text-lg hover:text-orange-600 transition-colors">
+                                            <h3 className="font-bold text-slate-900 text-lg hover:text-blue-600 transition-colors">
                                                 <Link href={`/blog/${item.slug}`}>{item.title}</Link>
                                             </h3>
                                             <p className="text-slate-500 text-xs line-clamp-3">
@@ -77,7 +77,7 @@ export default function SearchResult({ data }) {
                                             </p>
                                         </div>
                                         <div className="pt-4 mt-4 border-t border-slate-100 flex justify-end">
-                                            <Link href={`/blog/${item.slug}`} className="text-xs font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
+                                            <Link href={`/blog/${item.slug}`} className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
                                                 <span>Read Article</span>
                                                 <ArrowRight className="w-3.5 h-3.5" />
                                             </Link>

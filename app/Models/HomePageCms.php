@@ -23,6 +23,14 @@ class HomePageCms extends Model
         'news_button_link',
         'meta',
         'meta_description',
+        'stat_1_number',
+        'stat_1_label',
+        'stat_2_number',
+        'stat_2_label',
+        'stat_3_number',
+        'stat_3_label',
+        'stat_4_number',
+        'stat_4_label',
     ];
     
 }

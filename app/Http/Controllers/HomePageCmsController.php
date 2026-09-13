@@ -45,11 +45,19 @@ class HomePageCmsController extends Controller
             'news_button_link' => 'nullable|string|max:255',
             'meta' => 'nullable|string',
             'meta_description' => 'nullable|string',
+            'stat_1_number' => 'nullable|string|max:255',
+            'stat_1_label' => 'nullable|string|max:255',
+            'stat_2_number' => 'nullable|string|max:255',
+            'stat_2_label' => 'nullable|string|max:255',
+            'stat_3_number' => 'nullable|string|max:255',
+            'stat_3_label' => 'nullable|string|max:255',
+            'stat_4_number' => 'nullable|string|max:255',
+            'stat_4_label' => 'nullable|string|max:255',
         ]);
         
         
 
-        HomePageCms::create($validatedData);
+        HomePageCms::updateOrCreate(['id' => 1], $validatedData);
 
         return redirect()->route('home-page-cms.index')->with('success', 'Home page cms created successfully.');
     }
@@ -73,7 +81,7 @@ class HomePageCmsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
             'slider_bottom_title' => 'nullable|string|max:255',
@@ -90,14 +98,17 @@ class HomePageCmsController extends Controller
             'news_button_link' => 'nullable|string|max:255',
             'meta' => 'nullable|string',
             'meta_description' => 'nullable|string',
+            'stat_1_number' => 'nullable|string|max:255',
+            'stat_1_label' => 'nullable|string|max:255',
+            'stat_2_number' => 'nullable|string|max:255',
+            'stat_2_label' => 'nullable|string|max:255',
+            'stat_3_number' => 'nullable|string|max:255',
+            'stat_3_label' => 'nullable|string|max:255',
+            'stat_4_number' => 'nullable|string|max:255',
+            'stat_4_label' => 'nullable|string|max:255',
         ]);
 
-        
-
-        $homePageCms = HomePageCms::findOrFail($id);
-
-
-        $homePageCms->update($validatedData);
+        HomePageCms::updateOrCreate(['id' => $id], $validatedData);
 
         return redirect()->route('home-page-cms.index')->with('success', 'Home page cms updated successfully.');
     }

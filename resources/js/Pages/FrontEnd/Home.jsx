@@ -27,67 +27,80 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
             {/* 1. Hero Slider Section */}
             {sliders && sliders.length > 0 && (
                 <section className="relative bg-slate-900 text-white overflow-hidden min-h-[550px] lg:min-h-[650px] flex items-center">
-                    {sliders.map((slider, idx) => (
-                        <div
-                            key={slider.id || idx}
-                            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                                idx === currentSlider ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-                            }`}
-                        >
-                            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-slate-950/90 z-10" />
-                            <img
-                                src={`/${slider.image}`}
-                                alt={slider.title || 'Slider image'}
-                                className="w-full h-full object-cover"
-                            />
+                    {sliders.map((slider, idx) => {
+                        const subTitleText = slider.sub_title || slider.subtitle;
+                        const buttonLinkUrl = slider.button_link || slider.link || '/about-us';
+                        const position = (slider.text_position || 'left').toLowerCase();
+                        const textAlignClass = position === 'right' 
+                            ? 'text-right items-end ml-auto' 
+                            : position === 'center' 
+                                ? 'text-center items-center mx-auto' 
+                                : 'text-left items-start mr-auto';
+                        const imgSrc = slider.image 
+                            ? (slider.image.startsWith('http') || slider.image.startsWith('/') ? slider.image : `/${slider.image}`) 
+                            : '';
 
-                            <div className={`relative z-20 ${containerClass} h-full flex flex-col justify-center py-20`}>
-                                <div className="max-w-2xl space-y-6 animate-in fade-in slide-in-from-left duration-700">
-                                    <span className="inline-block bg-orange-500/20 text-orange-400 border border-orange-500/30 font-semibold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider">
-                                        Welcome to SS Group
-                                    </span>
-                                    <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-                                        {slider.title}
-                                    </h1>
-                                    {slider.subtitle && (
-                                        <p className="text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-                                            {slider.subtitle}
-                                        </p>
-                                    )}
-                                    <div className="pt-4 flex flex-wrap gap-4">
-                                        {slider.button_text && (
-                                            <a
-                                                href={slider.link || '/about-us'}
-                                                className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-orange-500/30 transition-all duration-300 hover:scale-105"
-                                            >
-                                                <span>{slider.button_text}</span>
-                                                <ArrowRight className="w-4 h-4" />
-                                            </a>
+                        return (
+                            <div
+                                key={slider.id || idx}
+                                className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                                    idx === currentSlider ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                                }`}
+                            >
+                                <div className="absolute inset-0 z-10 pointer-events-none" />
+                                {imgSrc && (
+                                    <img
+                                        src={imgSrc}
+                                        alt={slider.title || 'Slider image'}
+                                        className="absolute inset-0 w-full h-full object-cover z-0"
+                                    />
+                                )}
+
+                                <div className={`relative z-20 ${containerClass} h-full flex flex-col justify-center py-20`}>
+                                    <div className={`max-w-2xl space-y-6 animate-in fade-in slide-in-from-left duration-700 flex flex-col ${textAlignClass}`}>
+                                        <div className="flex items-center gap-2">
+                                            <span className="font-bold text-xs uppercase tracking-widest text-white">SS GROUP</span>
+                                            <div className="w-8 h-0.5 bg-[#0066ff]" />
+                                        </div>
+                                        {slider.title && (
+                                            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
+                                                {slider.title}
+                                            </h1>
                                         )}
-                                        <Link
-                                            href="/contact"
-                                            className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-6 py-3.5 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-300"
-                                        >
-                                            Contact Us
-                                        </Link>
+                                        {subTitleText && (
+                                            <p className="text-base sm:text-lg text-white leading-relaxed drop-shadow">
+                                                {subTitleText}
+                                            </p>
+                                        )}
+                                        <div className="pt-4 flex flex-wrap gap-4">
+                                            {slider.button_text && (
+                                                <a
+                                                    href={buttonLinkUrl}
+                                                    className="inline-flex items-center gap-2 bg-[#0066ff] hover:bg-[#0052cc] text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-300 hover:scale-105 uppercase tracking-wider text-sm"
+                                                >
+                                                    <span>{slider.button_text}</span>
+                                                    <ArrowRight className="w-4 h-4" />
+                                                </a>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
 
                     {/* Slider Arrows */}
                     {sliders.length > 1 && (
                         <div className="absolute right-6 bottom-8 z-30 flex items-center gap-2">
                             <button
                                 onClick={() => setCurrentSlider((prev) => (prev === 0 ? sliders.length - 1 : prev - 1))}
-                                className="w-10 h-10 rounded-full bg-slate-900/60 hover:bg-orange-500 text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
+                                className="w-10 h-10 rounded-full bg-slate-900/60 hover:bg-[#0066ff] text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
                             >
                                 <ChevronLeft className="w-5 h-5" />
                             </button>
                             <button
                                 onClick={() => setCurrentSlider((prev) => (prev + 1) % sliders.length)}
-                                className="w-10 h-10 rounded-full bg-slate-900/60 hover:bg-orange-500 text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
+                                className="w-10 h-10 rounded-full bg-slate-900/60 hover:bg-[#0066ff] text-white flex items-center justify-center backdrop-blur-md border border-slate-700 transition-colors"
                             >
                                 <ChevronRight className="w-5 h-5" />
                             </button>
@@ -96,20 +109,85 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                 </section>
             )}
 
+            {/* Floating Statistics Counter Bar */}
+            {(() => {
+                const getStat = (val, fallback) => (val !== null && val !== undefined && String(val).trim() !== '' ? val : fallback);
+                return (
+                    <div className={`relative z-30 ${containerClass} -mt-12 mb-8`}>
+                        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 sm:p-8 grid grid-cols-2 md:grid-cols-4 gap-6 items-center divide-y sm:divide-y-0 md:divide-x divide-slate-100">
+                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0">
+                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <Award className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                        {getStat(homePageCms?.stat_1_number, '27+')}
+                                    </span>
+                                    <span className="text-xs font-semibold text-slate-600">
+                                        {getStat(homePageCms?.stat_1_label, 'Years of Experience')}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0 md:pl-6">
+                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <Users className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                        {getStat(homePageCms?.stat_2_number, '1170+')}
+                                    </span>
+                                    <span className="text-xs font-semibold text-slate-600">
+                                        {getStat(homePageCms?.stat_2_label, 'Construction Experts')}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0 md:pl-6">
+                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <Sliders className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                        {getStat(homePageCms?.stat_3_number, '500+')}
+                                    </span>
+                                    <span className="text-xs font-semibold text-slate-600">
+                                        {getStat(homePageCms?.stat_3_label, 'Successful Projects')}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4 px-2 py-2 sm:py-0 md:pl-6">
+                                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#0066ff] flex items-center justify-center shrink-0">
+                                    <ThumbsUp className="w-6 h-6" />
+                                </div>
+                                <div>
+                                    <span className="block text-2xl sm:text-3xl font-extrabold text-[#0066ff]">
+                                        {getStat(homePageCms?.stat_4_number, '100%')}
+                                    </span>
+                                    <span className="text-xs font-semibold text-slate-600">
+                                        {getStat(homePageCms?.stat_4_label, 'Client Satisfaction')}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                );
+            })()}
+
             {/* 2. Call to Action Banner (Original Feature) */}
-            {homePageCms?.slider_bottom_title && (
-                <section className="bg-orange-600 text-white py-8 shadow-inner">
+            {(homePageCms?.slider_bottom_title || homePageCms?.slider_bottom_link_title || homePageCms?.slider_bottom_link) && (
+                <section className="bg-[#0056c6] text-white py-8 shadow-inner">
                     <div className={containerClass}>
                         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-center md:text-left">
-                                {homePageCms.slider_bottom_title}
-                            </h3>
-                            {homePageCms.slider_bottom_link && (
+                            {homePageCms?.slider_bottom_title && (
+                                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-center md:text-left">
+                                    {homePageCms.slider_bottom_title}
+                                </h3>
+                            )}
+                            {(homePageCms?.slider_bottom_link_title || homePageCms?.slider_bottom_link) && (
                                 <a
-                                    href={homePageCms.slider_bottom_link}
+                                    href={homePageCms.slider_bottom_link || '/contact'}
                                     className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all duration-300 shrink-0 text-sm"
                                 >
-                                    <Send className="w-4 h-4 text-orange-400" />
+                                    <Send className="w-4 h-4 text-blue-400" />
                                     <span>{homePageCms.slider_bottom_link_title || 'Get In Touch'}</span>
                                 </a>
                             )}
@@ -125,7 +203,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                             {/* Left Text Intro */}
                             <div className="space-y-6">
-                                <span className="text-orange-600 font-bold text-xs uppercase tracking-widest bg-orange-50 px-3.5 py-1.5 rounded-md">
+                                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-md">
                                     About Our Company
                                 </span>
                                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -139,7 +217,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <div className="pt-2">
                                         <a
                                             href={aboutUs.button_link || '/about-us'}
-                                            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm shadow-md"
+                                            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm shadow-md"
                                         >
                                             <span>{aboutUs.button_title}</span>
                                             <ArrowRight className="w-4 h-4" />
@@ -155,7 +233,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <button
                                         onClick={() => setAboutTab('trust')}
                                         className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 ${
-                                            aboutTab === 'trust' ? 'border-orange-500 text-orange-600' : 'border-transparent text-slate-500 hover:text-slate-900'
+                                            aboutTab === 'trust' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
                                         }`}
                                     >
                                         Trust
@@ -163,7 +241,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <button
                                         onClick={() => setAboutTab('expertise')}
                                         className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 ${
-                                            aboutTab === 'expertise' ? 'border-orange-500 text-orange-600' : 'border-transparent text-slate-500 hover:text-slate-900'
+                                            aboutTab === 'expertise' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
                                         }`}
                                     >
                                         Expertise
@@ -171,7 +249,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <button
                                         onClick={() => setAboutTab('safety')}
                                         className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 ${
-                                            aboutTab === 'safety' ? 'border-orange-500 text-orange-600' : 'border-transparent text-slate-500 hover:text-slate-900'
+                                            aboutTab === 'safety' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
                                         }`}
                                     >
                                         Safety
@@ -183,7 +261,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <div className="space-y-4 animate-in fade-in duration-300">
                                         {aboutUs.trust_title_one && (
                                             <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Award className="w-6 h-6 text-orange-500 shrink-0 mt-1" />
+                                                <Award className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                                                 <div>
                                                     <h4 className="font-bold text-slate-900 text-base">{aboutUs.trust_title_one}</h4>
                                                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.trust_detail_one}</p>
@@ -192,7 +270,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         )}
                                         {aboutUs.trust_title_two && (
                                             <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Sliders className="w-6 h-6 text-orange-500 shrink-0 mt-1" />
+                                                <Sliders className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                                                 <div>
                                                     <h4 className="font-bold text-slate-900 text-base">{aboutUs.trust_title_two}</h4>
                                                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.trust_detail_two}</p>
@@ -201,7 +279,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         )}
                                         {aboutUs.trust_title_three && (
                                             <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <ThumbsUp className="w-6 h-6 text-orange-500 shrink-0 mt-1" />
+                                                <ThumbsUp className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                                                 <div>
                                                     <h4 className="font-bold text-slate-900 text-base">{aboutUs.trust_title_three}</h4>
                                                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.trust_detail_three}</p>
@@ -220,7 +298,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         )}
                                         {aboutUs.expertise_title_one && (
                                             <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Users className="w-6 h-6 text-blue-500 shrink-0 mt-1" />
+                                                <Users className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                                                 <div>
                                                     <h4 className="font-bold text-slate-900 text-base">{aboutUs.expertise_title_one}</h4>
                                                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.expertise_detail_one}</p>
@@ -229,7 +307,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         )}
                                         {aboutUs.expertise_title_two && (
                                             <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Hourglass className="w-6 h-6 text-blue-500 shrink-0 mt-1" />
+                                                <Hourglass className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                                                 <div>
                                                     <h4 className="font-bold text-slate-900 text-base">{aboutUs.expertise_title_two}</h4>
                                                     <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.expertise_detail_two}</p>
@@ -262,7 +340,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                 <section className="py-20 bg-slate-900 text-white relative">
                     <div className={containerClass}>
                         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                            <span className="text-orange-400 font-bold text-xs uppercase tracking-widest bg-orange-500/10 border border-orange-500/20 px-3.5 py-1.5 rounded-full">
+                            <span className="text-blue-400 font-bold text-xs uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full">
                                 {whatWeDo.title || 'What We Do'}
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
@@ -274,7 +352,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                             {/* Column 1: First 3 services */}
                             <div className="space-y-6">
                                 {firstHalfWorks.map((item, idx) => (
-                                    <div key={idx} className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 hover:border-orange-500/50 transition-all flex items-start gap-4">
+                                    <div key={idx} className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 hover:border-blue-500/50 transition-all flex items-start gap-4">
                                         {item.icon && (
                                             <img src={`/${item.icon}`} alt={item.title} className="w-10 h-10 object-contain shrink-0 mt-1" />
                                         )}
@@ -300,7 +378,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                             {/* Column 3: Remaining services */}
                             <div className="space-y-6">
                                 {secondHalfWorks.map((item, idx) => (
-                                    <div key={idx} className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 hover:border-orange-500/50 transition-all flex items-start gap-4">
+                                    <div key={idx} className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 hover:border-blue-500/50 transition-all flex items-start gap-4">
                                         {item.icon && (
                                             <img src={`/${item.icon}`} alt={item.title} className="w-10 h-10 object-contain shrink-0 mt-1" />
                                         )}
@@ -322,16 +400,20 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                     <div className={containerClass}>
                         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                             <div>
-                                <span className="text-orange-600 font-bold text-xs uppercase tracking-widest bg-orange-50 px-3 py-1.5 rounded-md">
+                                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md">
                                     Our Portfolio
                                 </span>
                                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
                                     {homePageCms?.project_title || 'Featured Projects'}
                                 </h2>
                             </div>
-                            <Link href="/projects" className="inline-flex items-center gap-2 text-orange-600 font-bold hover:text-orange-700 text-sm">
-                                View All Projects <ArrowRight className="w-4 h-4" />
-                            </Link>
+                            <a
+                                href={homePageCms?.project_button_link || '/projects'}
+                                className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 text-sm"
+                            >
+                                <span>{homePageCms?.project_button_title || 'View All Projects'}</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
                         </div>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -358,7 +440,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                     <div className={containerClass}>
                         <div className="text-center">
                             <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-8">
-                                Trusted By Corporate Leaders & Brands
+                                {homePageCms?.client_title || 'Trusted By Corporate Leaders & Brands'}
                             </span>
                             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
                                 {ourClient.map((client, idx) => (
@@ -382,16 +464,23 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                     <div className={containerClass}>
                         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
                             <div>
-                                <span className="text-orange-600 font-bold text-xs uppercase tracking-widest bg-orange-50 px-3 py-1.5 rounded-md">
+                                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md">
                                     Our Journal
                                 </span>
                                 <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
-                                    Latest Articles & Insights
+                                    {homePageCms?.news_title || 'Latest Articles & Insights'}
                                 </h2>
+                                {homePageCms?.news_sub_title && (
+                                    <p className="text-slate-500 text-sm mt-1">{homePageCms.news_sub_title}</p>
+                                )}
                             </div>
-                            <Link href="/blog" className="inline-flex items-center gap-2 text-orange-600 font-bold hover:text-orange-700 text-sm">
-                                View All Blogs <ArrowRight className="w-4 h-4" />
-                            </Link>
+                            <a
+                                href={homePageCms?.news_button_link || '/blog'}
+                                className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 text-sm"
+                            >
+                                <span>{homePageCms?.news_button_title || 'See All Posts'}</span>
+                                <ArrowRight className="w-4 h-4" />
+                            </a>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -407,7 +496,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         )}
                                     </div>
                                     <div className="p-6 flex flex-col flex-grow">
-                                        <h3 className="text-lg font-bold text-slate-900 group-hover:text-orange-600 transition-colors line-clamp-2 mb-3">
+                                        <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-3">
                                             <Link href={`/blog/${item.slug}`}>{item.title}</Link>
                                         </h3>
                                         <p className="text-slate-500 text-sm line-clamp-3 mb-4 leading-relaxed">
@@ -415,7 +504,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         </p>
                                         <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
                                             <span>{new Date(item.created_at).toLocaleDateString()}</span>
-                                            <Link href={`/blog/${item.slug}`} className="font-semibold text-orange-600 hover:text-orange-700">
+                                            <Link href={`/blog/${item.slug}`} className="font-semibold text-blue-600 hover:text-blue-700">
                                                 Read More &rarr;
                                             </Link>
                                         </div>

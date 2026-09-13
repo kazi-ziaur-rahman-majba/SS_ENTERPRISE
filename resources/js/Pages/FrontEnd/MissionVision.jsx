@@ -20,7 +20,7 @@ export default function MissionVision({ pageCms }) {
                     />
                 )}
                 <div className={`relative z-10 ${containerClass}`}>
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <span className="text-slate-300">{pageCms?.page_title || 'Mission & Vision'}</span>
@@ -38,7 +38,7 @@ export default function MissionVision({ pageCms }) {
                     {pageCms?.mission_title && (
                         <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-slate-100 relative overflow-hidden group hover:shadow-xl transition-all">
                             <div className="flex items-center gap-4 mb-6">
-                                <div className="w-14 h-14 rounded-2xl bg-orange-500/10 text-orange-600 flex items-center justify-center shrink-0">
+                                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 text-blue-600 flex items-center justify-center shrink-0">
                                     <Target className="w-7 h-7" />
                                 </div>
                                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">

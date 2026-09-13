@@ -25,7 +25,7 @@ export default function Projects({ pageCms, galleryCategory, gallery }) {
                     />
                 )}
                 <div className={`relative z-10 ${containerClass}`}>
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <span className="text-slate-300">{pageCms?.page_title || 'Projects'}</span>
@@ -50,8 +50,8 @@ export default function Projects({ pageCms, galleryCategory, gallery }) {
                                     onClick={() => setSelectedCategory('all')}
                                     className={`w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                                         selectedCategory === 'all'
-                                            ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                                            : 'text-slate-700 hover:bg-slate-50 hover:text-orange-600'
+                                            ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                                            : 'text-slate-700 hover:bg-slate-50 hover:text-blue-600'
                                     }`}
                                 >
                                     All Projects
@@ -62,8 +62,8 @@ export default function Projects({ pageCms, galleryCategory, gallery }) {
                                         onClick={() => setSelectedCategory(String(cat.id))}
                                         className={`w-full text-left flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                                             String(selectedCategory) === String(cat.id)
-                                                ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
-                                                : 'text-slate-700 hover:bg-slate-50 hover:text-orange-600'
+                                                ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+                                                : 'text-slate-700 hover:bg-slate-50 hover:text-blue-600'
                                         }`}
                                     >
                                         <span>{cat.name}</span>

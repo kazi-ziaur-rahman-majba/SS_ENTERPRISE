@@ -21,7 +21,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                 )}
                 <div className={`relative z-10 ${containerClass}`}>
                     <div className="max-w-3xl">
-                        <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                        <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                             <Link href="/" className="hover:underline">Home</Link>
                             <span>/</span>
                             <span className="text-slate-300">{pageCms?.page_title || 'About Us'}</span>
@@ -38,7 +38,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                 <div className={containerClass}>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         <div className="space-y-6">
-                            <span className="text-orange-600 font-bold text-xs uppercase tracking-widest bg-orange-50 px-3.5 py-1.5 rounded-md">
+                            <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-md">
                                 Who We Are
                             </span>
                             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -78,7 +78,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                 <section className="py-20 bg-slate-50 border-t border-slate-100">
                     <div className={containerClass}>
                         <div className="text-center max-w-2xl mx-auto mb-12">
-                            <span className="text-orange-600 font-bold text-xs uppercase tracking-widest bg-orange-100 px-3 py-1.5 rounded-full">
+                            <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-100 px-3 py-1.5 rounded-full">
                                 Dedicated Leaders
                             </span>
                             <h2 className="text-3xl font-extrabold text-slate-900 mt-3">Our Executive Team</h2>
@@ -91,7 +91,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                                     </div>
                                     <div className="p-5 text-center">
                                         <h3 className="font-bold text-slate-900 text-lg">{member.name}</h3>
-                                        <p className="text-orange-600 text-xs font-semibold uppercase tracking-wider mt-1">{member.destination}</p>
+                                        <p className="text-blue-600 text-xs font-semibold uppercase tracking-wider mt-1">{member.destination}</p>
                                     </div>
                                 </div>
                             ))}

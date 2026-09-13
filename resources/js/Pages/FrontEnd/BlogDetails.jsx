@@ -32,7 +32,7 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
                     />
                 )}
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <Link href="/blog" className="hover:underline">Blog</Link>
@@ -60,7 +60,7 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
 
                                 <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500 border-b border-slate-100 pb-4">
                                     {blog?.category_name && (
-                                        <span className="flex items-center gap-1.5 text-orange-600 font-semibold bg-orange-50 px-3 py-1 rounded-md">
+                                        <span className="flex items-center gap-1.5 text-blue-600 font-semibold bg-blue-50 px-3 py-1 rounded-md">
                                             <FolderOpen className="w-3.5 h-3.5" />
                                             {blog.category_name}
                                         </span>
@@ -127,7 +127,7 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
                                                 {item.image && (
                                                     <img src={`/${item.image}`} alt={item.title} className="w-14 h-14 rounded-xl object-cover shrink-0" />
                                                 )}
-                                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-orange-600 transition-colors line-clamp-2">
+                                                <h4 className="text-xs font-bold text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">
                                                     <Link href={`/blog/${item.slug}`}>{item.title}</Link>
                                                 </h4>
                                             </div>
@@ -144,7 +144,7 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
                                 <ul className="space-y-2">
                                     {blogCategories && blogCategories.map((cat, idx) => (
                                         <li key={idx}>
-                                            <span className="flex items-center justify-between px-3 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-50 hover:text-orange-600 transition-colors">
+                                            <span className="flex items-center justify-between px-3 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors">
                                                 <span>{cat.name}</span>
                                                 <span className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-semibold">
                                                     {cat.blogs_count}

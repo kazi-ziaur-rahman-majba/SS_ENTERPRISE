@@ -21,7 +21,7 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                     />
                 )}
                 <div className={`relative z-10 ${containerClass}`}>
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
                         <span className="text-slate-300">{pageCms?.page_title || 'Journal'}</span>
@@ -53,7 +53,7 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                                         <div className="p-8 space-y-4">
                                             <div className="flex items-center gap-4 text-xs font-medium text-slate-500">
                                                 {post.category_name && (
-                                                    <span className="flex items-center gap-1.5 text-orange-600 font-semibold bg-orange-50 px-2.5 py-1 rounded-md">
+                                                    <span className="flex items-center gap-1.5 text-blue-600 font-semibold bg-blue-50 px-2.5 py-1 rounded-md">
                                                         <FolderOpen className="w-3.5 h-3.5" />
                                                         {post.category_name}
                                                     </span>
@@ -64,7 +64,7 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                                                 </span>
                                             </div>
 
-                                            <h2 className="text-2xl font-bold text-slate-900 group-hover:text-orange-600 transition-colors leading-snug">
+                                            <h2 className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                                                 <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                                             </h2>
 
@@ -75,7 +75,7 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                                             <div className="pt-4 border-t border-slate-100">
                                                 <Link
                                                     href={`/blog/${post.slug}`}
-                                                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-orange-600 hover:text-orange-700"
+                                                    className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-600 hover:text-blue-700"
                                                 >
                                                     <span>Continue Reading</span>
                                                     <ArrowRight className="w-3.5 h-3.5" />
@@ -100,7 +100,7 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                                             dangerouslySetInnerHTML={{ __html: link.label }}
                                             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
                                                 link.active
-                                                    ? 'bg-orange-500 text-white shadow-md shadow-orange-500/20'
+                                                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
                                                     : link.url
                                                     ? 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
                                                     : 'bg-slate-100 text-slate-400 cursor-not-allowed'
@@ -120,7 +120,7 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                                 <ul className="space-y-2">
                                     {blogCategories && blogCategories.map((cat, idx) => (
                                         <li key={idx}>
-                                            <span className="flex items-center justify-between px-3 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-50 hover:text-orange-600 transition-colors">
+                                            <span className="flex items-center justify-between px-3 py-2 rounded-xl text-sm text-slate-700 hover:bg-slate-50 hover:text-blue-600 transition-colors">
                                                 <span>{cat.name}</span>
                                                 <span className="text-xs bg-slate-100 text-slate-500 px-2 py-0.5 rounded-full font-semibold">
                                                     {cat.blogs_count}

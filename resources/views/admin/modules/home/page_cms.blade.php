@@ -100,6 +100,55 @@
                                     <input type="text" class="form-control" id="name" name="news_button_link"
                                         @if (isset($data)) value="{{ $data->news_button_link }}" @endif>
                                 </div>
+
+                                <div class="col-12 mt-4">
+                                    <h6 class="text-primary font-weight-bold">Hero Counter Statistics (Floating Bar)</h6>
+                                    <hr class="mt-1 mb-3">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="stat_1_number" class="form-label">Stat 1 Value</label>
+                                    <input type="text" class="form-control" id="stat_1_number" name="stat_1_number"
+                                        value="{{ old('stat_1_number', $data->stat_1_number ?? '27+') }}" placeholder="e.g. 27+">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="stat_1_label" class="form-label">Stat 1 Label</label>
+                                    <input type="text" class="form-control" id="stat_1_label" name="stat_1_label"
+                                        value="{{ old('stat_1_label', $data->stat_1_label ?? 'Years of Experience') }}" placeholder="e.g. Years of Experience">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="stat_2_number" class="form-label">Stat 2 Value</label>
+                                    <input type="text" class="form-control" id="stat_2_number" name="stat_2_number"
+                                        value="{{ old('stat_2_number', $data->stat_2_number ?? '1170+') }}" placeholder="e.g. 1170+">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="stat_2_label" class="form-label">Stat 2 Label</label>
+                                    <input type="text" class="form-control" id="stat_2_label" name="stat_2_label"
+                                        value="{{ old('stat_2_label', $data->stat_2_label ?? 'Construction Experts') }}" placeholder="e.g. Construction Experts">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="stat_3_number" class="form-label">Stat 3 Value</label>
+                                    <input type="text" class="form-control" id="stat_3_number" name="stat_3_number"
+                                        value="{{ old('stat_3_number', $data->stat_3_number ?? '500+') }}" placeholder="e.g. 500+">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="stat_3_label" class="form-label">Stat 3 Label</label>
+                                    <input type="text" class="form-control" id="stat_3_label" name="stat_3_label"
+                                        value="{{ old('stat_3_label', $data->stat_3_label ?? 'Successful Projects') }}" placeholder="e.g. Successful Projects">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="stat_4_number" class="form-label">Stat 4 Value</label>
+                                    <input type="text" class="form-control" id="stat_4_number" name="stat_4_number"
+                                        value="{{ old('stat_4_number', $data->stat_4_number ?? '100%') }}" placeholder="e.g. 100%">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="stat_4_label" class="form-label">Stat 4 Label</label>
+                                    <input type="text" class="form-control" id="stat_4_label" name="stat_4_label"
+                                        value="{{ old('stat_4_label', $data->stat_4_label ?? 'Client Satisfaction') }}" placeholder="e.g. Client Satisfaction">
+                                </div>
                                 
                                 
                                 <div class="col-md-12">

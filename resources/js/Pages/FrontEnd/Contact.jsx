@@ -44,18 +44,25 @@ export default function Contact({ pageCms, siteSetting }) {
 
     return (
         <FrontEndLayout>
-            <Head title="Contact Us - SS Group" />
+            <Head title={`${pageCms?.banner_title || 'Contact Us'} - SS Group`} />
 
             {/* Banner */}
             <section className="relative bg-slate-900 text-white py-24 overflow-hidden">
+                {pageCms?.banner_image && (
+                    <img
+                        src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}
+                        alt="Contact Banner"
+                        className="absolute inset-0 w-full h-full object-cover opacity-25"
+                    />
+                )}
                 <div className={`relative z-10 ${containerClass}`}>
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-orange-400 mb-3">
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
-                        <span className="text-slate-300">Contact</span>
+                        <span className="text-slate-300">{pageCms?.page_title || 'Contact'}</span>
                     </nav>
                     <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                        Contact Us
+                        {pageCms?.banner_title || 'Contact Us'}
                     </h1>
                 </div>
             </section>
@@ -66,7 +73,7 @@ export default function Contact({ pageCms, siteSetting }) {
                     {/* Contact Info Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm text-center space-y-4 hover:shadow-xl transition-all">
-                            <div className="w-14 h-14 bg-orange-500/10 text-orange-600 rounded-2xl flex items-center justify-center mx-auto shrink-0">
+                            <div className="w-14 h-14 bg-blue-500/10 text-blue-600 rounded-2xl flex items-center justify-center mx-auto shrink-0">
                                 <MapPin className="w-7 h-7" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900">Visit Us</h3>
@@ -82,19 +89,19 @@ export default function Contact({ pageCms, siteSetting }) {
                             </div>
                             <h3 className="text-xl font-bold text-slate-900">Email Us</h3>
                             {siteSetting?.email && (
-                                <a href={`mailto:${siteSetting.email}`} className="text-slate-600 hover:text-orange-600 text-sm font-medium transition-colors">
+                                <a href={`mailto:${siteSetting.email}`} className="text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">
                                     {siteSetting.email}
                                 </a>
                             )}
                         </div>
 
                         <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm text-center space-y-4 hover:shadow-xl transition-all">
-                            <div className="w-14 h-14 bg-emerald-500/10 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto shrink-0">
+                            <div className="w-14 h-14 bg-blue-500/10 text-blue-600 rounded-2xl flex items-center justify-center mx-auto shrink-0">
                                 <Phone className="w-7 h-7" />
                             </div>
                             <h3 className="text-xl font-bold text-slate-900">Call Us</h3>
                             {siteSetting?.phone && (
-                                <a href={`tel:${siteSetting.phone}`} className="text-slate-600 hover:text-orange-600 text-sm font-medium transition-colors">
+                                <a href={`tel:${siteSetting.phone}`} className="text-slate-600 hover:text-blue-600 text-sm font-medium transition-colors">
                                     {siteSetting.phone}
                                 </a>
                             )}
@@ -116,7 +123,7 @@ export default function Contact({ pageCms, siteSetting }) {
                     {/* Contact Form */}
                     <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-100 shadow-sm space-y-8">
                         <div>
-                            <span className="text-orange-600 font-bold text-xs uppercase tracking-widest bg-orange-50 px-3 py-1.5 rounded-md">
+                            <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md">
                                 Get In Touch
                             </span>
                             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
@@ -145,7 +152,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                         value={data.name}
                                         onChange={(e) => setData('name', e.target.value)}
                                         placeholder="Full name"
-                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
                                 <div>
@@ -156,7 +163,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                         value={data.email}
                                         onChange={(e) => setData('email', e.target.value)}
                                         placeholder="Email address"
-                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
                                 <div>
@@ -167,7 +174,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                         value={data.phone}
                                         onChange={(e) => setData('phone', e.target.value)}
                                         placeholder="Phone number"
-                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
                                 <div>
@@ -178,7 +185,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                         value={data.subject}
                                         onChange={(e) => setData('subject', e.target.value)}
                                         placeholder="Subject"
-                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     />
                                 </div>
                             </div>
@@ -191,7 +198,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                     value={data.message}
                                     onChange={(e) => setData('message', e.target.value)}
                                     placeholder="Write your query or message here..."
-                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500"
+                                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                                 />
                             </div>
 
@@ -199,7 +206,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-orange-500/20 transition-all duration-300 disabled:opacity-50"
+                                    className="inline-flex items-center gap-2 bg-[#0066ff] hover:bg-[#0052cc] text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-blue-500/20 transition-all duration-300 disabled:opacity-50"
                                 >
                                     {processing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                                     <span>Send Message</span>
