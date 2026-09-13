@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use App\Models\AboutPageCms;
 use App\Models\AboutQligence;
 use App\Models\BlogCategory;
@@ -46,9 +47,10 @@ class IndexController extends Controller
         $workProcess = WorkProcess::latest()->get();
         $ourClient = OurClient::latest()->get();
         $homePageCms = HomePageCms::latest()->first();
-        $works = json_decode($whatWeDo->works, true);
-        return view(
-            "frontEnd.index",
+        $works = $whatWeDo ? json_decode($whatWeDo->works, true) : [];
+        
+        return Inertia::render(
+            'FrontEnd/Home',
             compact(
                 'sliders',
                 'aboutUs',
@@ -64,47 +66,55 @@ class IndexController extends Controller
             )
         );
     }
+
     public function aboutUs()
     {
         $pageCms = AboutPageCms::latest()->first();
         $homePageCms = HomePageCms::latest()->first();
         $teams = Team::latest()->get();
 
-        return view("frontEnd.aboutUs", compact('pageCms', 'homePageCms', 'teams'));
+        return Inertia::render('FrontEnd/AboutUs', compact('pageCms', 'homePageCms', 'teams'));
     }
+
     public function achievement()
     {
         $membershipCertificate = MembershipCertificate::latest()->first();
-        return view("frontEnd.achievement", compact('membershipCertificate'));
+        return Inertia::render('FrontEnd/Achievement', compact('membershipCertificate'));
     }
+
     public function contactUs()
     {
         $pageCms = HomePageCms::latest()->first();
         $siteSetting = SiteSetting::latest()->first();
-        return view("frontEnd.contact", compact('pageCms', 'siteSetting'));
+        return Inertia::render('FrontEnd/Contact', compact('pageCms', 'siteSetting'));
     }
+
     public function faq()
     {
         $pageCms = FaqPageCms::latest()->first();
         $blogs = Blog::latest()->limit('5')->get();
-        return view('frontEnd.faq', compact('pageCms','blogs'));
+        return Inertia::render('FrontEnd/Faq', compact('pageCms', 'blogs'));
     }
+
     public function missionVision()
     {
         $pageCms = MissionVision::latest()->first();
-        return view('frontEnd.missionVision', compact('pageCms'));
+        return Inertia::render('FrontEnd/MissionVision', compact('pageCms'));
     }
+
     public function projectsDetails()
     {
-        return view("frontEnd.projectsDetails");
+        return Inertia::render('FrontEnd/Projects');
     }
+
     public function projects()
     {
         $pageCms = GalleryPageCms::latest()->first();
         $galleryCategory = GalleryCategory::latest()->get();
         $gallery = Gallery::latest()->get();
-        return view("frontEnd.projects", compact('pageCms', 'galleryCategory', 'gallery'));
+        return Inertia::render('FrontEnd/Projects', compact('pageCms', 'galleryCategory', 'gallery'));
     }
+
     public function services()
     {
         $pageCms = ServicePageCms::latest()->first();
@@ -112,8 +122,9 @@ class IndexController extends Controller
                         ->leftJoin('services', 'services.category_id', '=', 'service_categories.id')
                         ->orderBy('services.id', 'DESC')
                         ->get();
-        return view("frontEnd.services", compact('pageCms','serviceCategory'));
+        return Inertia::render('FrontEnd/Services', compact('pageCms', 'serviceCategory'));
     }
+
     public function servicesDetails($slug)
     {
         $pageCms = ServicePageCms::latest()->first();
@@ -122,8 +133,9 @@ class IndexController extends Controller
                         ->leftJoin('services', 'services.category_id', '=', 'service_categories.id')
                         ->orderBy('service_categories.position', 'ASC')
                         ->get();
-        return view("frontEnd.servicesDetails", compact('pageCms', 'service', 'serviceCategory','slug'));
+        return Inertia::render('FrontEnd/ServiceDetails', compact('pageCms', 'service', 'serviceCategory', 'slug'));
     }
+
     public function blog()
     {
         $cacheKey = 'blog_page_data';
@@ -136,39 +148,45 @@ class IndexController extends Controller
 
             return compact('pageCms', 'blogs', 'blogCategories');
         });
-        return view("frontEnd.blog",$blogData);
+
+        return Inertia::render('FrontEnd/Blog', $blogData);
     }
+
     public function blogDetails($slug)
     {
         $blog = Blog::where('slug', $slug)->first();
         $pageCms = BlogPageCms::latest()->first();
-        $blogs = Blog::whereNotIn('id', [$blog->id])
+        $blogs = Blog::whereNotIn('id', [$blog ? $blog->id : 0])
             ->latest()
             ->paginate(5);
         $blogCategories = BlogCategory::withCount('blogs')->get()->toArray();
-        return view("frontEnd.blogDetails", compact('pageCms', 'blog', 'blogs', 'blogCategories'));
+
+        return Inertia::render('FrontEnd/BlogDetails', compact('pageCms', 'blog', 'blogs', 'blogCategories'));
     }
+
     public function team()
     {
         $pageCms = TeamPageCms::latest()->first();
-        $team = Team::latest()->get();
-        return view("frontEnd.team", compact('pageCms', 'team'));
+        $teams = Team::latest()->get();
+        return Inertia::render('FrontEnd/AboutUs', compact('pageCms', 'teams'));
     }
+
     public function sportsAffiliation()
     {
-        return view("frontEnd.sportsAffiliation");
+        return Inertia::render('FrontEnd/SportsAffiliation');
     }
+
     public function searchData(Request $request)
     {
         $searchQuery = $request->input('query');
 
         if ($searchQuery) {
-            $blogs = Blog::select('id', 'title', 'details', 'image', 'slug', 'created_at') // Selecting only id, title, details, image, and slug columns
+            $blogs = Blog::select('id', 'title', 'details', 'image', 'slug', 'created_at')
                 ->where('title', 'like', '%' . $searchQuery . '%')
                 ->orWhere('details', 'like', '%' . $searchQuery . '%')
                 ->latest()
                 ->get();
-            $services = Service::select('id', 'title', 'detail', 'image', 'slug', 'created_at') // Selecting only id, title, detail, image, and slug columns
+            $services = Service::select('id', 'title', 'detail', 'image', 'slug', 'created_at')
                 ->where('title', 'like', '%' . $searchQuery . '%')
                 ->orWhere('detail', 'like', '%' . $searchQuery . '%')
                 ->latest()
@@ -178,8 +196,9 @@ class IndexController extends Controller
                 'blog' => $blogs,
                 'service' => $services,
             ];
-            return view('frontend.search_result', compact('data'));
+            return Inertia::render('FrontEnd/SearchResult', compact('data'));
         }
+
         return redirect()->back(); 
     }
 }
