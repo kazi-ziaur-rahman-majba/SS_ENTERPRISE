@@ -394,59 +394,150 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
 
             {/* 4. What We Do Section */}
             {whatWeDo && (
-                <section className="py-20 bg-slate-900 text-white relative">
+                <section className="py-16 sm:py-20 lg:py-24 bg-white relative border-y border-slate-100">
                     <div className={containerClass}>
-                        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                            <span className="text-blue-400 font-bold text-xs uppercase tracking-widest bg-blue-500/10 border border-blue-500/20 px-3.5 py-1.5 rounded-full">
-                                {whatWeDo.title || 'What We Do'}
-                            </span>
-                            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                                {whatWeDo.sub_title || 'Services & Business Excellence'}
-                            </h2>
-                        </div>
-
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-                            {/* Column 1: First 3 services */}
-                            <div className="space-y-6">
-                                {firstHalfWorks.map((item, idx) => (
-                                    <div key={idx} className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 hover:border-blue-500/50 transition-all flex items-start gap-4">
-                                        {item.icon && (
-                                            <img src={`/${item.icon}`} alt={item.title} className="w-10 h-10 object-contain shrink-0 mt-1" />
-                                        )}
-                                        <div>
-                                            <h3 className="font-bold text-white text-base mb-1">{item.title}</h3>
-                                            <p className="text-slate-400 text-xs leading-relaxed">{item.detail}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                        {/* Section Header */}
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 mb-8 sm:mb-10">
+                            <div>
+                                <span className="text-[#0066ff] font-bold text-xs uppercase tracking-widest block mb-1.5">
+                                    {whatWeDo.title || 'WHAT WE DO'}
+                                </span>
+                                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
+                                    {whatWeDo.sub_title || 'Our Core Services'}
+                                </h2>
+                                <div className="w-10 h-1 bg-[#0066ff] rounded-full mt-2.5" />
                             </div>
-
-                            {/* Center Image */}
-                            {whatWeDo.image && (
-                                <div className="text-center">
-                                    <img
-                                        src={`/${whatWeDo.image}`}
-                                        alt="What We Do Center"
-                                        className="rounded-3xl shadow-2xl mx-auto max-h-[420px] object-cover border-4 border-slate-800"
-                                    />
-                                </div>
-                            )}
-
-                            {/* Column 3: Remaining services */}
-                            <div className="space-y-6">
-                                {secondHalfWorks.map((item, idx) => (
-                                    <div key={idx} className="bg-slate-800/80 p-5 rounded-2xl border border-slate-700/80 hover:border-blue-500/50 transition-all flex items-start gap-4">
-                                        {item.icon && (
-                                            <img src={`/${item.icon}`} alt={item.title} className="w-10 h-10 object-contain shrink-0 mt-1" />
-                                        )}
-                                        <div>
-                                            <h3 className="font-bold text-white text-base mb-1">{item.title}</h3>
-                                            <p className="text-slate-400 text-xs leading-relaxed">{item.detail}</p>
-                                        </div>
-                                    </div>
-                                ))}
+                            <div className="md:max-w-sm">
+                                <p className="text-slate-500 text-xs sm:text-sm leading-relaxed">
+                                    {whatWeDo.description || 'Collaboratively administrate empowered markets via plug and play networks.'}
+                                </p>
                             </div>
                         </div>
+
+                        {/* Services Grid (Responsive 6 Columns with reduced gap) */}
+                        {works && works.length > 0 && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-3.5 lg:gap-4">
+                                {works.map((item, idx) => {
+                                    const titleLower = (item.title || '').toLowerCase();
+                                    const itemLink = item.link || '/business';
+
+                                    // Dynamic SVG vector icons matching the reference design
+                                    const renderIcon = () => {
+                                        if (item.icon) {
+                                            const imgSrc = item.icon.startsWith('http') || item.icon.startsWith('/') ? item.icon : `/${item.icon}`;
+                                            return <img src={imgSrc} alt={item.title} className="w-14 h-14 sm:w-16 sm:h-16 object-contain group-hover:scale-110 transition-transform duration-300" />;
+                                        }
+
+                                        if (titleLower.includes('construct')) {
+                                            return (
+                                                <svg className="w-10 h-10 text-[#0066ff]" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M12 56V12h20l12-8h8v8H32v44" />
+                                                    <path d="M8 56h48" />
+                                                    <path d="M32 20h24v4" />
+                                                    <path d="M48 24v20" />
+                                                    <path d="M40 32h16v16H40z" fill="currentColor" fillOpacity="0.12" />
+                                                    <path d="M20 28h8v28h-8z" />
+                                                    <path d="M24 36v.01" strokeWidth="4" />
+                                                    <path d="M24 44v.01" strokeWidth="4" />
+                                                </svg>
+                                            );
+                                        }
+                                        if (titleLower.includes('land') || titleLower.includes('develop')) {
+                                            return (
+                                                <svg className="w-10 h-10 text-[#0066ff]" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M8 48c8-4 16 2 24-2s16-2 24-2" />
+                                                    <path d="M8 54c8-4 16 2 24-2s16-2 24-2" />
+                                                    <path d="M20 38c4-8 12-14 20-14 4 0 8 2 10 4" />
+                                                    <path d="M32 24V10" />
+                                                    <path d="M32 10c-4 0-8 4-8 8s8 6 8 6" fill="currentColor" fillOpacity="0.15" />
+                                                    <path d="M32 10c4 0 8 4 8 8s-8 6-8 6" fill="currentColor" fillOpacity="0.15" />
+                                                </svg>
+                                            );
+                                        }
+                                        if (titleLower.includes('dredg') || titleLower.includes('river')) {
+                                            return (
+                                                <svg className="w-10 h-10 text-[#0066ff]" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M12 36l8-12h24l6 12H12z" fill="currentColor" fillOpacity="0.12" />
+                                                    <path d="M24 24V14h12v10" />
+                                                    <path d="M8 44c6 0 10-3 16-3s10 3 16 3 10-3 16-3" />
+                                                    <path d="M8 52c6 0 10-3 16-3s10 3 16 3 10-3 16-3" />
+                                                    <path d="M44 24l8 12" />
+                                                </svg>
+                                            );
+                                        }
+                                        if (titleLower.includes('medic') || titleLower.includes('electro') || titleLower.includes('furniture')) {
+                                            return (
+                                                <svg className="w-10 h-10 text-[#0066ff]" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <rect x="14" y="10" width="36" height="28" rx="4" fill="currentColor" fillOpacity="0.12" />
+                                                    <path d="M22 24h4l3-6 4 12 3-6h6" />
+                                                    <path d="M28 38v10" />
+                                                    <path d="M36 38v10" />
+                                                    <path d="M20 48h24" />
+                                                </svg>
+                                            );
+                                        }
+                                        if (titleLower.includes('import') || titleLower.includes('export')) {
+                                            return (
+                                                <svg className="w-10 h-10 text-[#0066ff]" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                    <circle cx="28" cy="28" r="16" fill="currentColor" fillOpacity="0.12" />
+                                                    <path d="M12 28h32" />
+                                                    <path d="M28 12c4 5 6 11 6 16s-2 11-6 16" />
+                                                    <path d="M28 12c-4 5-6 11-6 16s2 11 6 16" />
+                                                    <path d="M44 40l10-10-10-10" />
+                                                    <path d="M36 30h18" />
+                                                </svg>
+                                            );
+                                        }
+                                        return (
+                                            <svg className="w-10 h-10 text-[#0066ff]" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M16 24l12-8 12 8v16l-12 8-12-8V24z" fill="currentColor" fillOpacity="0.12" />
+                                                <path d="M16 24l12 8 12-8" />
+                                                <path d="M28 32v16" />
+                                                <path d="M36 12l12 8v16" />
+                                            </svg>
+                                        );
+                                    };
+
+                                    return (
+                                        <div
+                                            key={idx}
+                                            className="relative bg-white rounded-2xl p-4 sm:p-5 border border-[#0066ff]/40 shadow-[0_14px_20px_-12px_rgba(15,23,42,0.08)] hover:shadow-[0_16px_24px_-10px_rgba(0,102,255,0.14)] hover:border-[#0066ff]/70 transition-all duration-300 flex flex-col justify-between group overflow-hidden h-full text-left"
+                                        >
+                                            {/* Top Row: Icon & Serial Number */}
+                                            <div className="flex items-center justify-between mb-3">
+                                                <div className="w-12 h-12 flex items-center justify-start text-[#0066ff] shrink-0">
+                                                    {renderIcon()}
+                                                </div>
+                                                <span className="text-slate-300 font-bold text-xs tracking-wider group-hover:text-[#0066ff] transition-colors select-none">
+                                                    0{idx + 1}
+                                                </span>
+                                            </div>
+
+                                            {/* Title */}
+                                            <h3 className="font-bold text-slate-900 text-sm sm:text-[15px] leading-snug mb-2 min-h-[38px] flex items-center group-hover:text-[#0066ff] transition-colors">
+                                                {item.title}
+                                            </h3>
+
+                                            {/* Detail Description */}
+                                            <p className="text-slate-500 text-xs leading-relaxed line-clamp-4 font-normal flex-1 mb-3">
+                                                {item.detail}
+                                            </p>
+
+                                            {/* Action Link Button */}
+                                            <a
+                                                href={itemLink}
+                                                className="inline-flex items-center justify-between w-full pt-2.5 border-t border-slate-100 text-[#0066ff] font-bold text-[11px] sm:text-xs uppercase tracking-wider group-hover:text-blue-700 transition-colors mt-auto group/btn"
+                                            >
+                                                <span>LEARN MORE</span>
+                                                <div className="w-6 h-6 rounded-full bg-blue-50 text-[#0066ff] flex items-center justify-center group-hover:bg-[#0066ff] group-hover:text-white group-hover/btn:translate-x-0.5 transition-all">
+                                                    <ArrowRight className="w-3 h-3" />
+                                                </div>
+                                            </a>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
                 </section>
             )}

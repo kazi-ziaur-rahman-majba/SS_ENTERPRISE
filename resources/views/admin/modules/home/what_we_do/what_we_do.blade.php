@@ -42,25 +42,30 @@
 
 
                                 <div class="col-md-12">
-                                    <label for="title" class="form-label">Title</label>
+                                    <label for="title" class="form-label">Title (Small Upper Label)</label>
                                     <input type="text" class="form-control" id="name" placeholder="Enter title"
                                         name="title" @if (isset($data)) value="{{ $data->title }}" @endif
                                         required>
                                 </div>
                                 <div class="col-md-12">
-                                    <label for="sub_title" class="form-label">Sub title</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Enter sub_title"
+                                    <label for="sub_title" class="form-label">Sub title (Main Heading)</label>
+                                    <input type="text" class="form-control" id="sub_title" placeholder="Enter sub_title"
                                         name="sub_title"
                                         @if (isset($data)) value="{{ $data->sub_title }}" @endif required>
                                 </div>
+                                <div class="col-md-12">
+                                    <label for="description" class="form-label">Section Description (Top Right)</label>
+                                    <textarea class="form-control" id="description" placeholder="Enter section description"
+                                        name="description" rows="2">@if (isset($data)){{ $data->description }}@endif</textarea>
+                                </div>
 
                                 <div class="col-md-6">
-                                    <label for="image" class="form-label">Image: [ Size - 528 X 465, Max Limit 200KB ]
+                                    <label for="image" class="form-label">Image: [ Optional ]
                                     </label>
                                     <input type="file" class="form-control" id="image" name="image">
                                 </div>
                                 <div class="col-md-6">
-                                    @if (isset($data))
+                                    @if (isset($data) && !empty($data->image))
                                         <img src="{{ url($data->image) }}" height="50px"
                                             style="margin-left: 30px; margin-top: 10px;">
                                         <input type="hidden" name="ex_image" value="{{ $data->image }}">
@@ -88,6 +93,7 @@
                                                     <th>Title</th>
                                                     <th>Icon</th>
                                                     <th>Detail</th>
+                                                    <th>Link / URL</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -95,23 +101,27 @@
                                                 @if (isset($works))
                                                     @foreach ($works as $key => $item)
                                                         <tr>
-                                                        <tr>
                                                             <td class="sl">{{ $key + 1 }}</td>
                                                             <td>
                                                                 <input name="work_title[]" placeholder="title.."
                                                                     class="form-control" type="text"
-                                                                    value="{{ $item['title'] }}">
+                                                                    value="{{ $item['title'] ?? '' }}">
                                                             </td>
                                                             <td>
                                                                 <div style="display: flex; align-items: center;">
                                                                     <input name="icon[]" class="form-control" type="file" style="flex-grow: 1;">
-                                                                    <img src="{{ url($item['icon']) }}" height="50px" style="margin-left: 10px; margin-top: 10px;">
-                                                                    <input type="hidden" name="old_icons[]" value="{{ $item['icon'] }}">
+                                                                    @if(!empty($item['icon']))
+                                                                        <img src="{{ url($item['icon']) }}" height="50px" style="margin-left: 10px; margin-top: 10px;">
+                                                                    @endif
+                                                                    <input type="hidden" name="old_icons[]" value="{{ $item['icon'] ?? '' }}">
                                                                 </div>
                                                             </td>
                                                             
                                                             <td>
-                                                                <textarea name="detail[]" placeholder="Detail.." rows="2" class="form-control">{{ $item['detail'] }}</textarea>
+                                                                <textarea name="detail[]" placeholder="Detail.." rows="2" class="form-control">{{ $item['detail'] ?? '' }}</textarea>
+                                                            </td>
+                                                            <td>
+                                                                <input name="link[]" placeholder="Link (e.g. /business)" class="form-control" type="text" value="{{ $item['link'] ?? '' }}">
                                                             </td>
                                                             <td>
                                                                 <button type="button"
@@ -134,6 +144,9 @@
                                                             <textarea name="detail[]" placeholder="Detail.." rows="2" class="form-control"></textarea>
                                                         </td>
                                                         <td>
+                                                            <input name="link[]" placeholder="Link (e.g. /business)" class="form-control" type="text">
+                                                        </td>
+                                                        <td>
                                                             <button type="button"
                                                                 class="btn btn-sm btn-danger delete-feature-row"
                                                                 style="font-weight: bolder;">X</button>
@@ -143,7 +156,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="4">
+                                                    <td colspan="6">
                                                         <button type="button" class="btn btn-sm btn-info add-new-feature"
                                                             style="font-weight: bolder; color:#fff;"> + Add More</button>
                                                     </td>
