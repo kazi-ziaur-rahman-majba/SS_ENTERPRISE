@@ -191,7 +191,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                 };
 
                 return (
-                    <section className="py-16 sm:py-20 bg-white">
+                    <section className="pt-16 sm:pt-20 pb-8 sm:pb-10 bg-white">
                         <div className={containerClass}>
                             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
                                 
@@ -394,7 +394,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
 
             {/* 4. What We Do Section */}
             {whatWeDo && (
-                <section className="py-16 sm:py-20 lg:py-24 bg-white relative border-y border-slate-100">
+                <section className="py-10 sm:py-12 lg:py-14 bg-white relative border-y border-slate-100">
                     <div className={containerClass}>
                         {/* Section Header */}
                         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 md:gap-8 mb-8 sm:mb-10">
