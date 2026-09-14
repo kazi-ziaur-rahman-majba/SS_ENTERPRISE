@@ -172,168 +172,225 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                 );
             })()}
 
-            {/* 2. Call to Action Banner (Original Feature) */}
-            {(homePageCms?.slider_bottom_title || homePageCms?.slider_bottom_link_title || homePageCms?.slider_bottom_link) && (
-                <section className="bg-[#0056c6] text-white py-8 shadow-inner">
-                    <div className={containerClass}>
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                            {homePageCms?.slider_bottom_title && (
-                                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-center md:text-left">
-                                    {homePageCms.slider_bottom_title}
-                                </h3>
-                            )}
-                            {(homePageCms?.slider_bottom_link_title || homePageCms?.slider_bottom_link) && (
-                                <a
-                                    href={homePageCms.slider_bottom_link || '/contact'}
-                                    className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all duration-300 shrink-0 text-sm"
-                                >
-                                    <Send className="w-4 h-4 text-blue-400" />
-                                    <span>{homePageCms.slider_bottom_link_title || 'Get In Touch'}</span>
-                                </a>
-                            )}
-                        </div>
-                    </div>
-                </section>
-            )}
 
-            {/* 3. About Section with Trust/Expertise/Safety Tabs */}
-            {aboutUs && (
-                <section className="py-20 bg-white">
-                    <div className={containerClass}>
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                            {/* Left Text Intro */}
-                            <div className="space-y-6">
-                                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-md">
-                                    About Our Company
-                                </span>
-                                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                                    {aboutUs.title}
-                                </h2>
-                                <div
-                                    className="text-slate-600 leading-relaxed text-sm sm:text-base prose prose-slate"
-                                    dangerouslySetInnerHTML={{ __html: aboutUs.detail }}
-                                />
-                                {aboutUs.button_title && (
-                                    <div className="pt-2">
-                                        <a
-                                            href={aboutUs.button_link || '/about-us'}
-                                            className="inline-flex items-center gap-2 bg-slate-900 hover:bg-blue-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm shadow-md"
-                                        >
-                                            <span>{aboutUs.button_title}</span>
-                                            <ArrowRight className="w-4 h-4" />
-                                        </a>
+
+            {/* 3. About Section with 3-Column Layout & Trust/Expertise/Safety Tabs */}
+            {aboutUs && (() => {
+                const checks = [
+                    aboutUs.check_1 || 'Quality Construction',
+                    aboutUs.check_2 || 'Professional Team',
+                    aboutUs.check_3 || 'On Time Delivery',
+                    aboutUs.check_4 || 'Modern Equipment',
+                    aboutUs.check_5 || 'Certified Engineers',
+                    aboutUs.check_6 || '24/7 Support'
+                ].filter(Boolean);
+
+                const getImgSrc = (path, fallback) => {
+                    if (!path) return fallback;
+                    return path.startsWith('http') || path.startsWith('/') ? path : `/${path}`;
+                };
+
+                return (
+                    <section className="py-16 sm:py-20 bg-white">
+                        <div className={containerClass}>
+                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+                                
+                                {/* Left Column: Intro text, bullet list, and button */}
+                                <div className="lg:col-span-5 flex flex-col justify-start space-y-5">
+                                    <div className="space-y-4">
+                                        <div>
+                                            <span className="inline-block text-[#0066ff] font-bold text-xs uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-xl mb-2">
+                                                {aboutUs.sub_title || 'ABOUT US'}
+                                            </span>
+                                            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                                                {aboutUs.title || 'Building Trust. Delivering Excellence.'}
+                                            </h2>
+                                        </div>
+
+                                        <div
+                                            className="text-slate-600 leading-relaxed text-sm prose prose-slate max-w-none"
+                                            dangerouslySetInnerHTML={{ __html: aboutUs.detail }}
+                                        />
+
+                                        {checks.length > 0 && (
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                                {checks.map((check, idx) => (
+                                                    <div key={idx} className="flex items-center gap-2.5">
+                                                        <CheckCircle2 className="w-5 h-5 text-[#0066ff] shrink-0" />
+                                                        <span className="text-xs sm:text-sm font-bold text-slate-800">{check}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                            </div>
 
-                            {/* Right Interactive Tabs */}
-                            <div className="bg-slate-50 border border-slate-100 rounded-3xl p-6 sm:p-8 space-y-6 shadow-sm">
-                                {/* Tab Navigation */}
-                                <div className="flex border-b border-slate-200 gap-2">
-                                    <button
-                                        onClick={() => setAboutTab('trust')}
-                                        className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 ${
-                                            aboutTab === 'trust' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
-                                        }`}
-                                    >
-                                        Trust
-                                    </button>
-                                    <button
-                                        onClick={() => setAboutTab('expertise')}
-                                        className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 ${
-                                            aboutTab === 'expertise' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
-                                        }`}
-                                    >
-                                        Expertise
-                                    </button>
-                                    <button
-                                        onClick={() => setAboutTab('safety')}
-                                        className={`pb-3 px-4 font-bold text-sm transition-all border-b-2 ${
-                                            aboutTab === 'safety' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-900'
-                                        }`}
-                                    >
-                                        Safety
-                                    </button>
+                                    {aboutUs.button_title && (
+                                        <div className="pt-2">
+                                            <a
+                                                href={aboutUs.button_link || '/about-us'}
+                                                className="inline-flex items-center justify-center gap-2.5 bg-white hover:bg-[#0066ff] text-[#0066ff] hover:text-white border-2 border-[#0066ff] font-semibold px-5 py-2.5 rounded-md shadow-xs transition-all duration-300 uppercase tracking-wider text-xs sm:text-sm group"
+                                            >
+                                                <span>{aboutUs.button_title}</span>
+                                                <ArrowRight className="w-4 h-4 text-[#0066ff] group-hover:text-white transition-colors" />
+                                            </a>
+                                        </div>
+                                    )}
                                 </div>
 
-                                {/* Tab Panels */}
-                                {aboutTab === 'trust' && (
-                                    <div className="space-y-4 animate-in fade-in duration-300">
-                                        {aboutUs.trust_title_one && (
-                                            <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Award className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
-                                                <div>
-                                                    <h4 className="font-bold text-slate-900 text-base">{aboutUs.trust_title_one}</h4>
-                                                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.trust_detail_one}</p>
-                                                </div>
-                                            </div>
-                                        )}
-                                        {aboutUs.trust_title_two && (
-                                            <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Sliders className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
-                                                <div>
-                                                    <h4 className="font-bold text-slate-900 text-base">{aboutUs.trust_title_two}</h4>
-                                                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.trust_detail_two}</p>
-                                                </div>
-                                            </div>
-                                        )}
-                                        {aboutUs.trust_title_three && (
-                                            <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <ThumbsUp className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
-                                                <div>
-                                                    <h4 className="font-bold text-slate-900 text-base">{aboutUs.trust_title_three}</h4>
-                                                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.trust_detail_three}</p>
-                                                </div>
-                                            </div>
-                                        )}
+                                {/* Middle Column: Image with Experience Badge Overlay matching media_1789362502466.png */}
+                                <div className="lg:col-span-3 relative min-h-[380px] lg:min-h-[460px] pb-4 pl-4 sm:pb-5 sm:pl-5">
+                                    <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-md border border-slate-100">
+                                        <img
+                                            src={getImgSrc(aboutUs.first_image, 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80')}
+                                            alt={aboutUs.title || 'About Us Image'}
+                                            className="w-full h-full object-cover"
+                                            onError={(e) => {
+                                                e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80';
+                                            }}
+                                        />
                                     </div>
-                                )}
 
-                                {aboutTab === 'expertise' && (
-                                    <div className="space-y-4 animate-in fade-in duration-300">
-                                        {aboutUs.expertise_detail && (
-                                            <p className="text-xs text-slate-600 leading-relaxed italic bg-white p-3.5 rounded-xl border border-slate-100">
-                                                {aboutUs.expertise_detail}
-                                            </p>
-                                        )}
-                                        {aboutUs.expertise_title_one && (
-                                            <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Users className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
-                                                <div>
-                                                    <h4 className="font-bold text-slate-900 text-base">{aboutUs.expertise_title_one}</h4>
-                                                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.expertise_detail_one}</p>
-                                                </div>
-                                            </div>
-                                        )}
-                                        {aboutUs.expertise_title_two && (
-                                            <div className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 shadow-xs">
-                                                <Hourglass className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
-                                                <div>
-                                                    <h4 className="font-bold text-slate-900 text-base">{aboutUs.expertise_title_two}</h4>
-                                                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">{aboutUs.expertise_detail_two}</p>
-                                                </div>
-                                            </div>
-                                        )}
+                                    {/* Solid Royal Blue Overlapping Badge at Bottom Left */}
+                                    <div className="absolute bottom-0 left-0 bg-[#0066ff] text-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl shadow-xl z-20 min-w-[105px] sm:min-w-[115px]">
+                                        <span className="block text-2xl sm:text-3xl font-semibold text-white leading-none tracking-tight mb-1.5">
+                                            {aboutUs.experience_years || '27+'}
+                                        </span>
+                                        <span className="block text-[11px] sm:text-xs font-semibold text-white leading-tight max-w-[80px]">
+                                            {aboutUs.experience_label || 'Years of Experience'}
+                                        </span>
                                     </div>
-                                )}
+                                </div>
 
-                                {aboutTab === 'safety' && (
-                                    <div className="space-y-4 animate-in fade-in duration-300">
-                                        {aboutUs.safety_image && (
-                                            <img src={`/${aboutUs.safety_image}`} alt="Safety" className="rounded-2xl w-full h-44 object-cover shadow-sm" />
+                                {/* Right Column: Interactive Tabs (Trust, Expertise, Safety) */}
+                                <div className="lg:col-span-4 bg-slate-50 border border-slate-100 rounded-3xl p-6 sm:p-7 space-y-6 shadow-sm flex flex-col justify-between">
+                                    {/* Tab Bar */}
+                                    <div className="flex border-b border-slate-200 gap-1 sm:gap-2">
+                                        <button
+                                            onClick={() => setAboutTab('trust')}
+                                            className={`pb-3 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
+                                                aboutTab === 'trust' ? 'border-[#0066ff] text-[#0066ff]' : 'border-transparent text-slate-500 hover:text-slate-900'
+                                            }`}
+                                        >
+                                            Trust
+                                        </button>
+                                        <button
+                                            onClick={() => setAboutTab('expertise')}
+                                            className={`pb-3 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
+                                                aboutTab === 'expertise' ? 'border-[#0066ff] text-[#0066ff]' : 'border-transparent text-slate-500 hover:text-slate-900'
+                                            }`}
+                                        >
+                                            Expertise
+                                        </button>
+                                        <button
+                                            onClick={() => setAboutTab('safety')}
+                                            className={`pb-3 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
+                                                aboutTab === 'safety' ? 'border-[#0066ff] text-[#0066ff]' : 'border-transparent text-slate-500 hover:text-slate-900'
+                                            }`}
+                                        >
+                                            Safety
+                                        </button>
+                                    </div>
+
+                                    {/* Tab Content */}
+                                    <div className="space-y-4 flex-1 flex flex-col justify-center">
+                                        {aboutTab === 'trust' && (
+                                            <div className="space-y-3.5 animate-in fade-in duration-300">
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <Award className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.trust_title_one || 'Proven Track Record'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.trust_detail_one || 'Delivering top-tier quality across complex infrastructure projects.'}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <Sliders className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.trust_title_two || 'Transparent Process'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.trust_detail_two || 'Clear communication, fair pricing, and full reporting at every phase.'}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <ThumbsUp className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.trust_title_three || 'Client Satisfaction'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.trust_detail_three || 'Long-term client relationships built on dependability and integrity.'}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         )}
-                                        {aboutUs.safety_detail && (
-                                            <p className="text-xs text-slate-600 leading-relaxed bg-white p-4 rounded-xl border border-slate-100">
-                                                {aboutUs.safety_detail}
-                                            </p>
+
+                                        {aboutTab === 'expertise' && (
+                                            <div className="space-y-3.5 animate-in fade-in duration-300">
+                                                {aboutUs.expertise_detail && (
+                                                    <p className="text-xs text-slate-600 leading-relaxed italic bg-white p-3 rounded-xl border border-slate-100">
+                                                        {aboutUs.expertise_detail}
+                                                    </p>
+                                                )}
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <Users className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.expertise_title_one || 'Advanced Engineering'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.expertise_detail_one || 'Utilizing modern structural engineering methodologies.'}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <Hourglass className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.expertise_title_two || 'Skilled Workforce'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.expertise_detail_two || 'Highly trained project managers, site engineers, and specialists.'}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <Sliders className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.expertise_title_three || 'Quality Control'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.expertise_detail_three || 'Strict quality standards and continuous site inspection.'}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {aboutTab === 'safety' && (
+                                            <div className="space-y-3.5 animate-in fade-in duration-300">
+                                                {aboutUs.safety_image && (
+                                                    <img src={getImgSrc(aboutUs.safety_image, '')} alt="Safety" className="rounded-xl w-full h-32 object-cover shadow-xs mb-2" />
+                                                )}
+                                                {aboutUs.safety_detail && (
+                                                    <p className="text-xs text-slate-600 leading-relaxed bg-white p-3 rounded-xl border border-slate-100 mb-2">
+                                                        {aboutUs.safety_detail}
+                                                    </p>
+                                                )}
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <Shield className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.safety_title_one || 'Zero Accident Policy'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.safety_detail_one || 'Enforcing comprehensive health and safety regulations on all job sites.'}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <Award className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.safety_title_two || 'Certified Protective Gear'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.safety_detail_two || 'Equipping all workers with standard PPE and safety equipment.'}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
+                                                    <CheckCircle2 className="w-5 h-5 text-[#0066ff] shrink-0 mt-0.5" />
+                                                    <div>
+                                                        <h4 className="font-bold text-slate-900 text-sm">{aboutUs.safety_title_three || 'Regular Safety Audits'}</h4>
+                                                        <p className="text-xs text-slate-500 mt-0.5 leading-relaxed">{aboutUs.safety_detail_three || 'Conducting routine risk assessments and emergency protocol training.'}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         )}
                                     </div>
-                                )}
+                                </div>
+
                             </div>
                         </div>
-                    </div>
-                </section>
-            )}
+                    </section>
+                );
+            })()}
 
             {/* 4. What We Do Section */}
             {whatWeDo && (

@@ -33,9 +33,18 @@ class AboutQligenceController extends Controller
     // Validate the request data
     $validatedData = $request->validate([
         'title' => 'required|max:255',
+        'sub_title' => 'nullable|string|max:255',
         'detail' => 'required|string',
         'button_title' => 'nullable|string|max:255',
         'button_link' => 'nullable|string',
+        'check_1' => 'nullable|string|max:255',
+        'check_2' => 'nullable|string|max:255',
+        'check_3' => 'nullable|string|max:255',
+        'check_4' => 'nullable|string|max:255',
+        'check_5' => 'nullable|string|max:255',
+        'check_6' => 'nullable|string|max:255',
+        'experience_years' => 'nullable|string|max:255',
+        'experience_label' => 'nullable|string|max:255',
         'trust_title_one' => 'nullable|string|max:255',
         'trust_detail_one' => 'nullable|string',
         'trust_title_two' => 'nullable|string|max:255',
@@ -47,12 +56,25 @@ class AboutQligenceController extends Controller
         'expertise_detail_one' => 'nullable|string',
         'expertise_title_two' => 'nullable|string|max:255',
         'expertise_detail_two' => 'nullable|string',
+        'expertise_title_three' => 'nullable|string|max:255',
+        'expertise_detail_three' => 'nullable|string',
         'image_title' => 'nullable|string|max:255',
         'safety_detail' => 'nullable|string',
-        'first_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
-        'second_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
-        'third_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
-        'safety_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
+        'safety_title_one' => 'nullable|string|max:255',
+        'safety_detail_one' => 'nullable|string',
+        'safety_title_two' => 'nullable|string|max:255',
+        'safety_detail_two' => 'nullable|string',
+        'safety_title_three' => 'nullable|string|max:255',
+        'safety_detail_three' => 'nullable|string',
+        'first_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+        'second_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+        'third_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+        'safety_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+    ], [
+        'first_image.uploaded' => 'The main image failed to upload because it exceeds the server limit of 2MB. Please select an image smaller than 2MB.',
+        'first_image.max' => 'The main image must not exceed 2MB in size.',
+        'safety_image.uploaded' => 'The safety image failed to upload because it exceeds the server limit of 2MB. Please select an image smaller than 2MB.',
+        'safety_image.max' => 'The safety image must not exceed 2MB in size.',
     ]);
 
     // Process file uploads
@@ -63,10 +85,13 @@ class AboutQligenceController extends Controller
             $file = $request->file($field);
             $filename = date('Ymd') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
             $destinationPath = public_path('/uploads/home');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0777, true);
+            }
             $file->move($destinationPath, $filename);
             $validatedData[$field] = 'uploads/home/' . $filename;
         } else {
-            $validatedData[$field] = '';
+            unset($validatedData[$field]);
         }
     }
 
@@ -101,9 +126,18 @@ class AboutQligenceController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|max:255',
+            'sub_title' => 'nullable|string|max:255',
             'detail' => 'required|string',
             'button_title' => 'nullable|string|max:255',
             'button_link' => 'nullable|string',
+            'check_1' => 'nullable|string|max:255',
+            'check_2' => 'nullable|string|max:255',
+            'check_3' => 'nullable|string|max:255',
+            'check_4' => 'nullable|string|max:255',
+            'check_5' => 'nullable|string|max:255',
+            'check_6' => 'nullable|string|max:255',
+            'experience_years' => 'nullable|string|max:255',
+            'experience_label' => 'nullable|string|max:255',
             'trust_title_one' => 'nullable|string|max:255',
             'trust_detail_one' => 'nullable|string',
             'trust_title_two' => 'nullable|string|max:255',
@@ -115,12 +149,25 @@ class AboutQligenceController extends Controller
             'expertise_detail_one' => 'nullable|string',
             'expertise_title_two' => 'nullable|string|max:255',
             'expertise_detail_two' => 'nullable|string',
+            'expertise_title_three' => 'nullable|string|max:255',
+            'expertise_detail_three' => 'nullable|string',
             'image_title' => 'nullable|string|max:255',
             'safety_detail' => 'nullable|string',
-            'first_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
-            'second_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
-            'third_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
-            'safety_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:512',
+            'safety_title_one' => 'nullable|string|max:255',
+            'safety_detail_one' => 'nullable|string',
+            'safety_title_two' => 'nullable|string|max:255',
+            'safety_detail_two' => 'nullable|string',
+            'safety_title_three' => 'nullable|string|max:255',
+            'safety_detail_three' => 'nullable|string',
+            'first_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+            'second_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+            'third_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+            'safety_image' => 'nullable|file|mimes:jpeg,png,jpg,gif,webp,svg,bmp,avif|max:2000',
+        ], [
+            'first_image.uploaded' => 'The main image failed to upload because it exceeds the server limit of 2MB. Please select an image smaller than 2MB.',
+            'first_image.max' => 'The main image must not exceed 2MB in size.',
+            'safety_image.uploaded' => 'The safety image failed to upload because it exceeds the server limit of 2MB. Please select an image smaller than 2MB.',
+            'safety_image.max' => 'The safety image must not exceed 2MB in size.',
         ]);
 
 
@@ -131,17 +178,23 @@ class AboutQligenceController extends Controller
         $filesystem = new Filesystem();
         foreach ($imageFields as $field) {
             if ($request->hasFile($field) && $request->file($field)->isValid()) {
-                $filePath = public_path($work->$field);
-
-                if ($filesystem->exists($filePath)) {
-                    $filesystem->delete($filePath);
+                if (!empty($work->$field)) {
+                    $filePath = public_path($work->$field);
+                    if ($filesystem->exists($filePath)) {
+                        $filesystem->delete($filePath);
+                    }
                 }
 
                 $file = $request->file($field);
                 $filename = date('Ymd') . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
                 $destinationPath = public_path('/uploads/home');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0777, true);
+                }
                 $file->move($destinationPath, $filename);
                 $validatedData[$field] = 'uploads/home/' . $filename;
+            } else {
+                unset($validatedData[$field]);
             }
         }
 
