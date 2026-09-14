@@ -262,12 +262,12 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                 </div>
 
                                 {/* Right Column: Interactive Tabs (Trust, Expertise, Safety) */}
-                                <div className="lg:col-span-4 bg-slate-50 border border-slate-100 rounded-3xl p-6 sm:p-7 space-y-6 shadow-sm flex flex-col justify-between">
+                                <div className="lg:col-span-4 bg-slate-50 border border-slate-100 rounded-3xl p-6 sm:p-7 space-y-3 shadow-sm flex flex-col justify-start">
                                     {/* Tab Bar */}
                                     <div className="flex border-b border-slate-200 gap-1 sm:gap-2">
                                         <button
                                             onClick={() => setAboutTab('trust')}
-                                            className={`pb-3 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
+                                            className={`pb-2 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
                                                 aboutTab === 'trust' ? 'border-[#0066ff] text-[#0066ff]' : 'border-transparent text-slate-500 hover:text-slate-900'
                                             }`}
                                         >
@@ -275,7 +275,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         </button>
                                         <button
                                             onClick={() => setAboutTab('expertise')}
-                                            className={`pb-3 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
+                                            className={`pb-2 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
                                                 aboutTab === 'expertise' ? 'border-[#0066ff] text-[#0066ff]' : 'border-transparent text-slate-500 hover:text-slate-900'
                                             }`}
                                         >
@@ -283,7 +283,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         </button>
                                         <button
                                             onClick={() => setAboutTab('safety')}
-                                            className={`pb-3 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
+                                            className={`pb-2 px-3 sm:px-4 font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border-b-2 ${
                                                 aboutTab === 'safety' ? 'border-[#0066ff] text-[#0066ff]' : 'border-transparent text-slate-500 hover:text-slate-900'
                                             }`}
                                         >
@@ -292,7 +292,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     </div>
 
                                     {/* Tab Content */}
-                                    <div className="space-y-4 flex-1 flex flex-col justify-center">
+                                    <div className="space-y-3 pt-1 flex-1 flex flex-col justify-start">
                                         {aboutTab === 'trust' && (
                                             <div className="space-y-3.5 animate-in fade-in duration-300">
                                                 <div className="flex items-start gap-3 p-3.5 bg-white rounded-2xl border border-slate-100 shadow-2xs">
