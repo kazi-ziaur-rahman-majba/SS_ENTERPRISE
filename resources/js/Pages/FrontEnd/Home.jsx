@@ -542,127 +542,72 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                 </section>
             )}
 
-            {/* 5. Projects Title / Gallery Section */}
-            {gallery && gallery.length > 0 && (
-                <section className="py-20 bg-slate-50">
-                    <div className={containerClass}>
-                        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                            <div>
-                                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md">
-                                    Our Portfolio
-                                </span>
-                                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
-                                    {homePageCms?.project_title || 'Featured Projects'}
-                                </h2>
-                            </div>
-                            <a
-                                href={homePageCms?.project_button_link || '/projects'}
-                                className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 text-sm"
-                            >
-                                <span>{homePageCms?.project_button_title || 'View All Projects'}</span>
-                                <ArrowRight className="w-4 h-4" />
-                            </a>
-                        </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                            {gallery.slice(0, 4).map((item) => (
-                                <div key={item.id} className="group bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 hover:shadow-xl transition-all duration-300">
-                                    <div className="h-56 overflow-hidden relative bg-slate-900">
-                                        {item.image && (
-                                            <img src={`/${item.image}`} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                                        )}
-                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent p-4 flex items-end opacity-90 group-hover:opacity-100 transition-opacity">
-                                            <h3 className="text-white font-bold text-sm">{item.title}</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-            )}
 
             {/* 6. Our Clients Section */}
-            {ourClient && ourClient.length > 0 && (
-                <section className="py-16 bg-white border-t border-slate-100">
-                    <div className={containerClass}>
-                        <div className="text-center">
-                            <span className="text-xs font-bold uppercase tracking-widest text-slate-400 block mb-8">
-                                {homePageCms?.client_title || 'Trusted By Corporate Leaders & Brands'}
-                            </span>
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 items-center">
-                                {ourClient.map((client, idx) => (
-                                    <div key={client.id || idx} className="bg-slate-50 p-4 rounded-xl shadow-xs border border-slate-100 hover:shadow-md transition-shadow flex items-center justify-center h-24">
-                                        <img
-                                            src={`/${client.image}`}
-                                            alt={client.title || 'Client logo'}
-                                            className="max-h-14 max-w-full object-contain grayscale hover:grayscale-0 transition-all duration-300"
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            )}
+            {ourClient && ourClient.length > 0 && (() => {
+                const firstHalf = ourClient.slice(0, 6);
+                const secondHalf = ourClient.slice(6, 12);
 
-            {/* 7. Latest News / Blog Section */}
-            {blog && blog.length > 0 && (
-                <section className="py-20 bg-slate-50">
-                    <div className={containerClass}>
-                        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
-                            <div>
-                                <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md">
-                                    Our Journal
-                                </span>
-                                <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mt-2">
-                                    {homePageCms?.news_title || 'Latest Articles & Insights'}
-                                </h2>
-                                {homePageCms?.news_sub_title && (
-                                    <p className="text-slate-500 text-sm mt-1">{homePageCms.news_sub_title}</p>
+                const renderCard = (client, idx) => {
+                    const imgSrc = client.image
+                        ? (client.image.startsWith('http') || client.image.startsWith('/') ? client.image : `/${client.image}`)
+                        : '';
+                    return (
+                        <div
+                            key={client.id || idx}
+                            className="bg-white p-2.5 sm:p-3 rounded-xl border border-slate-200/90 shadow-2xs hover:shadow-md hover:border-[#0066ff]/40 transition-all duration-300 flex flex-col items-center justify-between text-center h-[135px] sm:h-[145px]"
+                        >
+                            <div className="flex-1 flex items-center justify-center w-full min-h-0 py-1">
+                                {imgSrc && (
+                                    <img
+                                        src={imgSrc}
+                                        alt={client.title || 'Client logo'}
+                                        className="max-h-full max-w-full object-contain"
+                                        onError={(e) => {
+                                            e.currentTarget.style.display = 'none';
+                                        }}
+                                    />
                                 )}
                             </div>
-                            <a
-                                href={homePageCms?.news_button_link || '/blog'}
-                                className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 text-sm"
-                            >
-                                <span>{homePageCms?.news_button_title || 'See All Posts'}</span>
-                                <ArrowRight className="w-4 h-4" />
-                            </a>
+                            {client.title && (
+                                <span className="font-bold text-[#0066ff] text-[11px] sm:text-xs text-center leading-tight line-clamp-1 shrink-0 pt-1">
+                                    {client.title}
+                                </span>
+                            )}
                         </div>
+                    );
+                };
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            {blog.slice(0, 3).map((item) => (
-                                <article key={item.id} className="bg-white rounded-2xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group">
-                                    <div className="relative h-48 overflow-hidden bg-slate-100">
-                                        {item.image && (
-                                            <img
-                                                src={`/${item.image}`}
-                                                alt={item.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                        )}
+                return (
+                    <section className="py-12 sm:py-16 bg-white border-t border-slate-100">
+                        <div className={containerClass}>
+                            <div className="mb-8">
+                                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight uppercase">
+                                    {homePageCms?.client_title || 'OUR ESTEEMED CLIENTS'}
+                                </h2>
+                                <div className="w-14 h-1 bg-[#0066ff] rounded-full mt-2" />
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                                {/* Left Block: First 6 Clients (3 cols x 2 rows) */}
+                                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
+                                    {firstHalf.map((client, idx) => renderCard(client, idx))}
+                                </div>
+
+                                {/* Right Block: Second 6 Clients (3 cols x 2 rows) with X-axis gap */}
+                                {secondHalf.length > 0 && (
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
+                                        {secondHalf.map((client, idx) => renderCard(client, idx + 6))}
                                     </div>
-                                    <div className="p-6 flex flex-col flex-grow">
-                                        <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2 mb-3">
-                                            <Link href={`/blog/${item.slug}`}>{item.title}</Link>
-                                        </h3>
-                                        <p className="text-slate-500 text-sm line-clamp-3 mb-4 leading-relaxed">
-                                            {item.details ? item.details.replace(/(<([^>]+)>)/gi, '') : ''}
-                                        </p>
-                                        <div className="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400">
-                                            <span>{new Date(item.created_at).toLocaleDateString()}</span>
-                                            <Link href={`/blog/${item.slug}`} className="font-semibold text-blue-600 hover:text-blue-700">
-                                                Read More &rarr;
-                                            </Link>
-                                        </div>
-                                    </div>
-                                </article>
-                            ))}
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </section>
-            )}
+                    </section>
+                );
+            })()}
+
+
         </FrontEndLayout>
     );
 }
