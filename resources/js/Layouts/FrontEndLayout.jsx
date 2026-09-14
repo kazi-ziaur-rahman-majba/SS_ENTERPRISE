@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, usePage, router } from '@inertiajs/react';
-import { Phone, Mail, MapPin, Search, ChevronDown, Menu, X, ArrowUp } from 'lucide-react';
+import { Phone, Mail, MapPin, Search, ChevronDown, ChevronRight, Menu, X, ArrowUp } from 'lucide-react';
 
 const FacebookIcon = () => (
     <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -270,85 +270,146 @@ export default function FrontEndLayout({ children }) {
                 {children}
             </main>
 
-            {/* Modern Footer */}
-            <footer className="bg-slate-950 text-slate-300 pt-16 pb-8 border-t border-slate-900">
+            {/* Modern Footer matching design mockup */}
+            <footer className="bg-[#051329] text-slate-300 pt-12 pb-6 border-t border-slate-800/60 relative overflow-hidden">
+                {/* Optional subtle background map effect pattern */}
+                <div className="absolute right-0 top-0 bottom-0 w-1/2 opacity-5 pointer-events-none bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
                 <div className={containerClass}>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                        {/* About Column */}
-                        <div className="space-y-4">
-                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-blue-600 pb-2 inline-block">
-                                About Us
-                            </h3>
-                            <p className="text-sm text-slate-400 leading-relaxed" dangerouslySetInnerHTML={{ __html: siteSetting?.about_us || 'SS Group is a prominent consortium committed to excellence across industries.' }} />
-                            <div className="flex items-center gap-3 pt-2">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8 mb-10 text-xs sm:text-sm">
+                        {/* Column 1: Logo, About, Social Icons */}
+                        <div className="lg:col-span-3 space-y-4 pr-2">
+                            <div className="flex items-center gap-3">
+                                {siteSetting?.logo ? (
+                                    <img src={`/${siteSetting.logo}`} alt={siteSetting?.name || 'SS Group'} className="h-14 w-auto object-contain rounded-full bg-white/10 p-1 border border-white/20 shadow-md" />
+                                ) : (
+                                    <img src="/assets/images/sslogo.png" alt="SS Group" className="h-14 w-14 object-contain rounded-full bg-white/10 p-1 border border-white/20 shadow-md" />
+                                )}
+                            </div>
+                            <p className="text-slate-400 text-xs leading-relaxed" dangerouslySetInnerHTML={{ 
+                                __html: siteSetting?.about_us || 'SS Group is also commonly known as SS Group of Companies is a blending of various corporate houses.' 
+                            }} />
+                            <div className="flex items-center gap-2.5 pt-1">
                                 {siteSetting?.facebook_link && (
-                                    <a href={siteSetting.facebook_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
+                                    <a href={siteSetting.facebook_link} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-[#0d2242] border border-slate-700/50 flex items-center justify-center text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-300 shadow-sm">
                                         <FacebookIcon />
                                     </a>
                                 )}
-                                {siteSetting?.instagram_link && (
-                                    <a href={siteSetting.instagram_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
-                                        <InstagramIcon />
+                                {siteSetting?.linkedin_link && (
+                                    <a href={siteSetting.linkedin_link} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-[#0d2242] border border-slate-700/50 flex items-center justify-center text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-300 shadow-sm">
+                                        <LinkedinIcon />
                                     </a>
                                 )}
-                                {siteSetting?.linkedin_link && (
-                                    <a href={siteSetting.linkedin_link} target="_blank" rel="noreferrer" className="w-9 h-9 rounded-full bg-slate-900 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300">
-                                        <LinkedinIcon />
+                                {siteSetting?.instagram_link && (
+                                    <a href={siteSetting.instagram_link} target="_blank" rel="noreferrer" className="w-8 h-8 rounded-full bg-[#0d2242] border border-slate-700/50 flex items-center justify-center text-slate-300 hover:bg-blue-600 hover:text-white hover:border-blue-500 transition-all duration-300 shadow-sm">
+                                        <InstagramIcon />
                                     </a>
                                 )}
                             </div>
                         </div>
 
-                        {/* Useful Links Column */}
-                        <div className="space-y-4">
-                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-blue-600 pb-2 inline-block">
-                                Useful Links
-                            </h3>
-                            <ul className="space-y-2.5 text-sm">
-                                <li><Link href="/about-us" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> About Us</Link></li>
-                                <li><Link href="/faq" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> FAQ</Link></li>
-                                <li><Link href="/business" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> Our Businesses</Link></li>
-                                <li><Link href="/contact" className="text-slate-400 hover:text-blue-400 transition-colors flex items-center gap-2"><span>&rsaquo;</span> Contact Us</Link></li>
+                        {/* Column 2: Useful Links */}
+                        <div className="lg:col-span-3 space-y-3 lg:border-l border-slate-800/70 lg:pl-8">
+                            <div>
+                                <h3 className="text-white font-bold text-sm tracking-wider uppercase">
+                                    Useful Links
+                                </h3>
+                                <div className="w-8 h-[2px] bg-blue-500 mt-1"></div>
+                            </div>
+                            <ul className="space-y-2 text-xs text-slate-300 pt-1">
+                                <li>
+                                    <Link href="/about-us" className="hover:text-blue-400 transition-colors flex items-center justify-between group py-0.5">
+                                        <span>About Us</span>
+                                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/business" className="hover:text-blue-400 transition-colors flex items-center justify-between group py-0.5">
+                                        <span>Our Businesses</span>
+                                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/certification" className="hover:text-blue-400 transition-colors flex items-center justify-between group py-0.5">
+                                        <span>Certification</span>
+                                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/sports-affiliation" className="hover:text-blue-400 transition-colors flex items-center justify-between group py-0.5">
+                                        <span>Sports Affiliation</span>
+                                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link href="/contact" className="hover:text-blue-400 transition-colors flex items-center justify-between group py-0.5">
+                                        <span>Contact Us</span>
+                                        <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-400 transition-colors" />
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
 
-                        {/* Registered Office Column */}
-                        <div className="space-y-4 lg:col-span-2">
-                            <h3 className="text-white font-bold text-lg tracking-wide border-b-2 border-blue-600 pb-2 inline-block">
-                                Registered Office
-                            </h3>
-                            <ul className="space-y-3 text-sm text-slate-400">
-                                {siteSetting?.phone && (
-                                    <li className="flex items-start gap-3">
-                                        <Phone className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
-                                        <a href={`tel:${siteSetting.phone}`} className="hover:text-blue-400 transition-colors">{siteSetting.phone}</a>
-                                    </li>
-                                )}
-                                {siteSetting?.email && (
-                                    <li className="flex items-start gap-3">
-                                        <Mail className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
-                                        <a href={`mailto:${siteSetting.email}`} className="hover:text-blue-400 transition-colors">{siteSetting.email}</a>
-                                    </li>
-                                )}
-                                {siteSetting?.corporate_office_address && (
-                                    <li className="flex items-start gap-3">
-                                        <MapPin className="w-4 h-4 text-blue-500 shrink-0 mt-1" />
-                                        <span dangerouslySetInnerHTML={{ __html: siteSetting.corporate_office_address }} />
-                                    </li>
-                                )}
+                        {/* Column 3: Registered Address */}
+                        <div className="lg:col-span-3 space-y-3 lg:border-l border-slate-800/70 lg:pl-8">
+                            <div>
+                                <h3 className="text-white font-bold text-sm tracking-wider uppercase">
+                                    Registered Address
+                                </h3>
+                                <div className="w-8 h-[2px] bg-blue-500 mt-1"></div>
+                            </div>
+                            <ul className="space-y-3 text-xs text-slate-300 pt-1">
+                                <li className="flex items-start gap-3">
+                                    <Phone className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                                    <a href={`tel:${siteSetting?.phone || '+880 1714-429777'}`} className="hover:text-blue-400 transition-colors">
+                                        {siteSetting?.phone || '+880 1714-429777'}
+                                    </a>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <Mail className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                                    <a href={`mailto:${siteSetting?.email || siteSetting?.contact_email || 'info@esenterprise.com.bd'}`} className="hover:text-blue-400 transition-colors break-all">
+                                        {siteSetting?.email || siteSetting?.contact_email || 'info@esenterprise.com.bd'}
+                                    </a>
+                                </li>
+                                <li className="flex items-start gap-3">
+                                    <MapPin className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                                    <span className="leading-relaxed" dangerouslySetInnerHTML={{ 
+                                        __html: siteSetting?.registered_office_address || 'House-85, Road-05, Mohammadia Housing Society, Mohammadpur, Dhaka-1207' 
+                                    }} />
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Column 4: Corporate Office */}
+                        <div className="lg:col-span-3 space-y-3 lg:border-l border-slate-800/70 lg:pl-8">
+                            <div>
+                                <h3 className="text-white font-bold text-sm tracking-wider uppercase">
+                                    Corporate Office
+                                </h3>
+                                <div className="w-8 h-[2px] bg-blue-500 mt-1"></div>
+                            </div>
+                            <ul className="space-y-3 text-xs text-slate-300 pt-1">
+                                <li className="flex items-start gap-3">
+                                    <MapPin className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+                                    <span className="leading-relaxed" dangerouslySetInnerHTML={{ 
+                                        __html: siteSetting?.corporate_office_address || '701, Sahlun Green, Satmasjid Road, Dhaka, Bangladesh' 
+                                    }} />
+                                </li>
                             </ul>
                         </div>
                     </div>
 
                     {/* Bottom Copyright */}
-                    <div className="pt-8 border-t border-slate-900 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-                        <p>© {new Date().getFullYear()} SS Group. All Rights Reserved.</p>
+                    <div className="pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+                        <div className="w-full text-center sm:text-center">
+                            <p>© {new Date().getFullYear()} SS Group. All Rights Reserved.</p>
+                        </div>
                         <button
                             onClick={scrollToTop}
-                            className="flex items-center gap-2 bg-slate-900 hover:bg-blue-600 hover:text-white px-3 py-2 rounded-lg transition-all duration-300 text-slate-400"
+                            className="flex items-center gap-1.5 text-blue-400 hover:text-blue-300 transition-colors shrink-0 text-xs font-medium"
                         >
-                            <span>Back to top</span>
                             <ArrowUp className="w-3.5 h-3.5" />
+                            <span>Back to Top</span>
                         </button>
                     </div>
                 </div>
