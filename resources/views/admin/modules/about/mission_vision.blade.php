@@ -74,7 +74,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="mission_details" class="form-label font-weight-bold">Mission Details</label>
-                                    <textarea name="mission_details" rows="4" class="form-control">{{ old('mission_details', $data->mission_details ?? '') }}</textarea>
+                                    <textarea name="mission_details" id="editor1" rows="5" class="form-control tinymce-editor">{!! old('mission_details', $data->mission_details ?? '') !!}</textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="mission_image" class="form-label font-weight-bold">Mission Section Image [Recommended: 800 x 550]</label>
@@ -98,7 +98,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="vision_details" class="form-label font-weight-bold">Vision Details</label>
-                                    <textarea name="vision_details" rows="4" class="form-control">{{ old('vision_details', $data->vision_details ?? '') }}</textarea>
+                                    <textarea name="vision_details" id="editor2" rows="5" class="form-control tinymce-editor">{!! old('vision_details', $data->vision_details ?? '') !!}</textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="vision_image" class="form-label font-weight-bold">Vision Section Image [Recommended: 800 x 550]</label>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="core_values_details" class="form-label font-weight-bold">Core Values Intro / Overview Text</label>
-                                    <textarea name="core_values_details" rows="3" class="form-control">{{ old('core_values_details', $data->core_values_details ?? '') }}</textarea>
+                                    <textarea name="core_values_details" id="editor3" rows="4" class="form-control tinymce-editor">{!! old('core_values_details', $data->core_values_details ?? '') !!}</textarea>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="core_values_image" class="form-label font-weight-bold">Core Values Image [Recommended: 800 x 550]</label>
@@ -205,7 +205,7 @@
                                 </div>
                                 <div class="col-md-12">
                                     <label for="objective_details" class="form-label font-weight-bold">Objective Detail</label>
-                                    <textarea name="objective_details" rows="3" class="form-control">{{ old('objective_details', $data->objective_details ?? '') }}</textarea>
+                                    <textarea name="objective_details" id="mytextarea" rows="4" class="form-control tinymce-editor">{!! old('objective_details', $data->objective_details ?? '') !!}</textarea>
                                 </div>
 
                                 <!-- SEO / Meta -->
@@ -301,6 +301,15 @@
                     }
                 }
             });
+
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function() {
+                    if (typeof tinymce !== 'undefined') {
+                        tinymce.triggerSave();
+                    }
+                });
+            }
         });
     </script>
 @endsection

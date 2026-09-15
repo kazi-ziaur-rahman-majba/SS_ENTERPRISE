@@ -110,7 +110,6 @@ export default function MissionVision({ pageCms }) {
                         className="absolute inset-0 w-full h-full object-cover opacity-30"
                     />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 to-slate-900/40" />
 
                 <div className={`relative z-10 ${containerClass}`}>
                     <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-2">
@@ -137,7 +136,7 @@ export default function MissionVision({ pageCms }) {
                                     <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/25 shrink-0">
                                         <Target className="w-6 h-6" />
                                     </div>
-                                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-black">
                                         Our <span className="text-blue-600">Mission</span>
                                     </h2>
                                 </div>
@@ -153,11 +152,11 @@ export default function MissionVision({ pageCms }) {
                             </div>
 
                             {/* Right: Flush Image (Corner meets Vision Image at 50% center axis) */}
-                            <div className="relative min-h-[280px] lg:min-h-full w-full h-full overflow-hidden bg-slate-100">
+                            <div className="relative min-h-[280px] md:min-h-full w-full h-full overflow-hidden bg-slate-100">
                                 <img 
                                     src={missionImg} 
                                     alt={pageCms?.mission_title || "Our Mission"} 
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full"
                                 />
                             </div>
                         </div>
@@ -169,7 +168,7 @@ export default function MissionVision({ pageCms }) {
                                 <img 
                                     src={visionImg} 
                                     alt={pageCms?.vision_title || "Our Vision"} 
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full"
                                 />
                             </div>
 
@@ -179,7 +178,7 @@ export default function MissionVision({ pageCms }) {
                                     <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/25 shrink-0">
                                         <Eye className="w-6 h-6" />
                                     </div>
-                                    <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                                    <h2 className="text-2xl sm:text-3xl font-bold text-black">
                                         Our <span className="text-blue-600">Vision</span>
                                     </h2>
                                 </div>
@@ -204,7 +203,7 @@ export default function MissionVision({ pageCms }) {
                                         <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/25 shrink-0">
                                             <Gem className="w-6 h-6" />
                                         </div>
-                                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
+                                        <h2 className="text-2xl sm:text-3xl font-bold text-black">
                                             Core <span className="text-blue-600">Values</span>
                                         </h2>
                                     </div>
@@ -226,7 +225,7 @@ export default function MissionVision({ pageCms }) {
                                                     <IconComponent className="w-4 h-4" />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-sm sm:text-base font-semibold text-slate-900 mb-0.5">
+                                                    <h3 className="text-sm sm:text-base font-semibold text-black mb-0.5">
                                                         {val.title}
                                                     </h3>
                                                     <p className="text-slate-500 text-xs font-normal leading-snug">
