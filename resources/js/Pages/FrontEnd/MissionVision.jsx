@@ -129,9 +129,9 @@ export default function MissionVision({ pageCms }) {
                     <div className="bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden divide-y divide-slate-100">
                         
                         {/* 1. OUR MISSION ROW */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[360px] lg:min-h-[400px]">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
                             {/* Left: Text Block */}
-                            <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-center bg-white space-y-4">
+                            <div className="p-6 sm:p-10 lg:p-12 flex flex-col justify-center bg-white space-y-4">
                                 <div className="flex items-center gap-3.5">
                                     <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/25 shrink-0">
                                         <Target className="w-6 h-6" />
@@ -151,29 +151,29 @@ export default function MissionVision({ pageCms }) {
                                 />
                             </div>
 
-                            {/* Right: Flush Image (Corner meets Vision Image at 50% center axis) */}
-                            <div className="relative min-h-[280px] md:min-h-full w-full h-full overflow-hidden bg-slate-100">
+                            {/* Right: Image Block (Constrained height on lg devices) */}
+                            <div className="relative h-[240px] sm:h-[280px] lg:h-[300px] w-full overflow-hidden bg-slate-100">
                                 <img 
                                     src={missionImg} 
                                     alt={pageCms?.mission_title || "Our Mission"} 
-                                    className="w-full h-full"
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
                         </div>
 
                         {/* 2. OUR VISION ROW */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[360px] lg:min-h-[400px]">
-                            {/* Left: Flush Image (Corner meets Mission Image top-right & Core Values Image bottom-right) */}
-                            <div className="relative min-h-[280px] lg:min-h-full w-full h-full overflow-hidden bg-slate-100 order-2 lg:order-1">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
+                            {/* Left: Image Block (Constrained height on lg devices) */}
+                            <div className="relative h-[240px] sm:h-[280px] lg:h-[300px] w-full overflow-hidden bg-slate-100 order-2 lg:order-1">
                                 <img 
                                     src={visionImg} 
                                     alt={pageCms?.vision_title || "Our Vision"} 
-                                    className="w-full h-full"
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
 
                             {/* Right: Text Block */}
-                            <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-center bg-slate-50/40 order-1 lg:order-2 space-y-4">
+                            <div className="p-6 sm:p-10 lg:p-12 flex flex-col justify-center bg-slate-50/40 order-1 lg:order-2 space-y-4">
                                 <div className="flex items-center gap-3.5">
                                     <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/25 shrink-0">
                                         <Eye className="w-6 h-6" />
@@ -195,9 +195,9 @@ export default function MissionVision({ pageCms }) {
                         </div>
 
                         {/* 3. CORE VALUES ROW */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 min-h-[380px] lg:min-h-[440px]">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
                             {/* Left: Text & 2-Column Values Grid Block */}
-                            <div className="p-8 sm:p-12 lg:p-14 flex flex-col justify-center bg-white space-y-6">
+                            <div className="p-6 sm:p-10 lg:p-12 flex flex-col justify-center bg-white space-y-6">
                                 <div>
                                     <div className="flex items-center gap-3.5 mb-2">
                                         <div className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/25 shrink-0">
@@ -238,8 +238,8 @@ export default function MissionVision({ pageCms }) {
                                 </div>
                             </div>
 
-                            {/* Right: Flush Image (Corner meets Vision Image bottom-left) */}
-                            <div className="relative min-h-[280px] lg:min-h-full w-full h-full overflow-hidden bg-slate-100">
+                            {/* Right: Image Block (Constrained height on lg devices) */}
+                            <div className="relative h-[260px] sm:h-[300px] lg:h-[330px] w-full overflow-hidden bg-slate-100">
                                 <img 
                                     src={coreValuesImg} 
                                     alt={pageCms?.core_values_title || "Core Values"} 
