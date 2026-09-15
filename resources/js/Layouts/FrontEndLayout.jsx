@@ -188,10 +188,13 @@ export default function FrontEndLayout({ children }) {
                                 Contact
                             </Link>
 
+                            {/* Gray Vertical Divider */}
+                            <div className="h-5 w-px bg-slate-300 mx-2 self-center" />
+
                             {/* Search Button */}
                             <button
                                 onClick={() => setSearchOpen(!searchOpen)}
-                                className="p-2.5 rounded-full text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors ml-2"
+                                className="p-2.5 rounded-full text-slate-600 hover:text-blue-600 hover:bg-slate-100 transition-colors"
                                 title="Search"
                             >
                                 <Search className="w-4 h-4" />

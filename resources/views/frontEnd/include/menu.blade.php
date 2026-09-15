@@ -73,6 +73,10 @@
                             <a href="{{ url('contact') }}">Contact</a>
                         </li>
 
+                        <li style="display: flex; align-items: center; justify-content: center; padding: 15px 5px;">
+                            <span style="border-right: 1px solid #cbd5e1; height: 16px; display: inline-block;"></span>
+                        </li>
+
                         <li class="nav-search">
                             <span id="search"><i class="fa fa-search"></i></span>
                         </li>

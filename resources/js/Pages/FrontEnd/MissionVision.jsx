@@ -102,13 +102,16 @@ export default function MissionVision({ pageCms }) {
             <Head title={`${pageCms?.page_title || 'Mission & Vision'} - SS Group`} />
 
             {/* Top Banner */}
-            <section className="relative bg-slate-900 text-white py-12 sm:py-16 overflow-hidden">
+            <section className="relative bg-slate-900 text-white py-20 sm:py-28 overflow-hidden">
                 {pageCms?.banner_image && (
-                    <img
-                        src={getImagePath(pageCms.banner_image, '')}
-                        alt="Banner"
-                        className="absolute inset-0 w-full h-full object-cover opacity-30"
-                    />
+                    <>
+                        <img
+                            src={getImagePath(pageCms.banner_image, '')}
+                            alt="Banner"
+                            className="absolute inset-0 w-full h-full object-cover opacity-90"
+                        />
+                        <div className="absolute inset-0 bg-black/40" />
+                    </>
                 )}
 
                 <div className={`relative z-10 ${containerClass}`}>
@@ -124,9 +127,9 @@ export default function MissionVision({ pageCms }) {
             </section>
 
             {/* Main Content Section - Seamless Flush Checkerboard Grid */}
-            <section className="py-12 sm:py-16 bg-slate-50/60">
+            <section className="py-12 sm:py-16 bg-white">
                 <div className={containerClass}>
-                    <div className="bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden divide-y divide-slate-100">
+                    <div className="bg-white rounded-lg shadow-lg overflow-hidden divide-y divide-slate-100">
                         
                         {/* 1. OUR MISSION ROW */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center">
@@ -184,7 +187,7 @@ export default function MissionVision({ pageCms }) {
                                 </div>
 
                                 <div 
-                                    className="text-black leading-relaxed text-sm sm:text-base font-normal prose prose-slate max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
+                                    className="text-black leading-relaxed text-sm sm:text-base font-normal max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
                                     dangerouslySetInnerHTML={{ 
                                         __html: (pageCms?.vision_details && pageCms.vision_details.trim() !== '')
                                             ? pageCms.vision_details
@@ -209,7 +212,7 @@ export default function MissionVision({ pageCms }) {
                                     </div>
                                     {pageCms?.core_values_details && pageCms.core_values_details.trim() !== '' && (
                                         <div 
-                                            className="text-black text-xs sm:text-sm font-normal mt-1 prose prose-slate max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
+                                            className="text-black text-xs sm:text-sm font-normal mt-1 max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
                                             dangerouslySetInnerHTML={{ __html: pageCms.core_values_details }}
                                         />
                                     )}
@@ -228,7 +231,7 @@ export default function MissionVision({ pageCms }) {
                                                     <h3 className="text-sm sm:text-base font-semibold text-black mb-0.5">
                                                         {val.title}
                                                     </h3>
-                                                    <p className="text-slate-500 text-xs font-normal leading-snug">
+                                                    <p className="text-black text-xs font-normal leading-snug">
                                                         {val.description}
                                                     </p>
                                                 </div>
