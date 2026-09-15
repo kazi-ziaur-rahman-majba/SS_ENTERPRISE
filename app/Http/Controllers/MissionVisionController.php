@@ -31,23 +31,27 @@ class MissionVisionController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'banner_title' => 'required|string|max:255',
-            'page_title' => 'required|max:2048',
-            'banner_image' => 'required|image',
-            'objective_title' => 'required|string|max:255',
-            'objective_details' => 'required',
-            'mission_title' => 'required|string',
-            'mission_details' => 'required|string',
-            'vision_title' => 'required|string',
-            'vision_details' => 'required|string',
-            'core_values_title' => 'required|string',
-            'core_values_details' => 'required|string',
+            'banner_title' => 'nullable|string|max:255',
+            'page_title' => 'nullable|string|max:2048',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'mission_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'vision_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'core_values_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'objective_title' => 'nullable|string|max:255',
+            'objective_details' => 'nullable|string',
+            'mission_title' => 'nullable|string',
+            'mission_details' => 'nullable|string',
+            'vision_title' => 'nullable|string',
+            'vision_details' => 'nullable|string',
+            'core_values_title' => 'nullable|string',
+            'core_values_details' => 'nullable|string',
+            'core_values_items' => 'nullable|array',
             'meta' => 'nullable|string',
             'meta_description' => 'nullable|string',
         ]);
 
         // Process file uploads
-        $imageFields = ['banner_image'];
+        $imageFields = ['banner_image', 'mission_image', 'vision_image', 'core_values_image'];
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field) && $request->file($field)->isValid()) {
@@ -57,8 +61,25 @@ class MissionVisionController extends Controller
                 $file->move($destinationPath, $filename);
                 $validatedData[$field] = 'uploads/about/' . $filename;
             } else {
-                $validatedData[$field] = '';
+                $validatedData[$field] = null;
             }
+        }
+
+        $stringFields = [
+            'banner_title', 'page_title', 'objective_title', 'objective_details',
+            'mission_title', 'mission_details', 'vision_title', 'vision_details',
+            'core_values_title', 'core_values_details', 'meta', 'meta_description'
+        ];
+        foreach ($stringFields as $sField) {
+            if (!isset($validatedData[$sField]) || is_null($validatedData[$sField])) {
+                $validatedData[$sField] = '';
+            }
+        }
+
+        if (isset($validatedData['core_values_items'])) {
+            $validatedData['core_values_items'] = array_values(array_filter($validatedData['core_values_items'], function ($item) {
+                return !empty($item['title']);
+            }));
         }
 
         MissionVision::create($validatedData);
@@ -75,7 +96,7 @@ class MissionVisionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for creating a new resource.
      */
     public function edit(MissionVision $missionVision)
     {
@@ -88,31 +109,36 @@ class MissionVisionController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'banner_title' => 'required|string|max:255',
-            'page_title' => 'required|max:2048',
-            'banner_image' => 'image',
-            'objective_title' => 'required|string',
-            'objective_details' => 'required',
-            'mission_title' => 'required|string',
-            'mission_details' => 'required|string',
-            'vision_title' => 'required|string',
-            'vision_details' => 'required|string',
-            'core_values_title' => 'required|string',
-            'core_values_details' => 'required|string',
+            'banner_title' => 'nullable|string|max:255',
+            'page_title' => 'nullable|string|max:2048',
+            'banner_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'mission_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'vision_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'core_values_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:5120',
+            'objective_title' => 'nullable|string',
+            'objective_details' => 'nullable|string',
+            'mission_title' => 'nullable|string',
+            'mission_details' => 'nullable|string',
+            'vision_title' => 'nullable|string',
+            'vision_details' => 'nullable|string',
+            'core_values_title' => 'nullable|string',
+            'core_values_details' => 'nullable|string',
+            'core_values_items' => 'nullable|array',
             'meta' => 'nullable|string',
             'meta_description' => 'nullable|string',
         ]);
         $missionVision = MissionVision::findOrFail($id);
 
-        $imageFields = ['banner_image'];
+        $imageFields = ['banner_image', 'mission_image', 'vision_image', 'core_values_image'];
         $filesystem = new Filesystem();
 
         foreach ($imageFields as $field) {
             if ($request->hasFile($field) && $request->file($field)->isValid()) {
-                $filePath = public_path($missionVision->$field);
-
-                if ($filesystem->exists($filePath)) {
-                    $filesystem->delete($filePath);
+                if ($missionVision->$field) {
+                    $filePath = public_path($missionVision->$field);
+                    if ($filesystem->exists($filePath)) {
+                        $filesystem->delete($filePath);
+                    }
                 }
 
                 $file = $request->file($field);
@@ -123,8 +149,23 @@ class MissionVisionController extends Controller
             }
         }
 
-        
-        // dd($validatedData);
+        $stringFields = [
+            'banner_title', 'page_title', 'objective_title', 'objective_details',
+            'mission_title', 'mission_details', 'vision_title', 'vision_details',
+            'core_values_title', 'core_values_details', 'meta', 'meta_description'
+        ];
+        foreach ($stringFields as $sField) {
+            if (!isset($validatedData[$sField]) || is_null($validatedData[$sField])) {
+                $validatedData[$sField] = '';
+            }
+        }
+
+        if (isset($validatedData['core_values_items'])) {
+            $validatedData['core_values_items'] = array_values(array_filter($validatedData['core_values_items'], function ($item) {
+                return !empty($item['title']);
+            }));
+        }
+
         $missionVision->update($validatedData);
 
         return redirect()->route('mission-vision.index')->with('success', 'Mission vision updated successfully.');
