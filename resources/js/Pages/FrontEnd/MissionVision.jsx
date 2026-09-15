@@ -142,7 +142,7 @@ export default function MissionVision({ pageCms }) {
                                 </div>
 
                                 <div 
-                                    className="text-slate-600 leading-relaxed text-sm sm:text-base font-normal prose prose-slate max-w-none"
+                                    className="text-black leading-relaxed text-sm sm:text-base font-normal prose prose-slate max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
                                     dangerouslySetInnerHTML={{ 
                                         __html: (pageCms?.mission_details && pageCms.mission_details.trim() !== '')
                                             ? pageCms.mission_details
@@ -184,7 +184,7 @@ export default function MissionVision({ pageCms }) {
                                 </div>
 
                                 <div 
-                                    className="text-slate-600 leading-relaxed text-sm sm:text-base font-normal prose prose-slate max-w-none"
+                                    className="text-black leading-relaxed text-sm sm:text-base font-normal prose prose-slate max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
                                     dangerouslySetInnerHTML={{ 
                                         __html: (pageCms?.vision_details && pageCms.vision_details.trim() !== '')
                                             ? pageCms.vision_details
@@ -209,7 +209,7 @@ export default function MissionVision({ pageCms }) {
                                     </div>
                                     {pageCms?.core_values_details && pageCms.core_values_details.trim() !== '' && (
                                         <div 
-                                            className="text-slate-600 text-xs sm:text-sm font-normal mt-1"
+                                            className="text-black text-xs sm:text-sm font-normal mt-1 prose prose-slate max-w-none [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:my-2 [&_li]:my-1"
                                             dangerouslySetInnerHTML={{ __html: pageCms.core_values_details }}
                                         />
                                     )}

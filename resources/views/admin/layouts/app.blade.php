@@ -218,7 +218,7 @@
             contextmenu: 'link image table',
             skin: useDarkMode ? 'oxide-dark' : 'oxide',
             content_css: useDarkMode ? 'dark' : 'default',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px } ul { list-style-type: disc !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } ol { list-style-type: decimal !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } li { display: list-item !important; }'
         });      
         tinymce.init({
             selector: '#editor1',
@@ -309,7 +309,7 @@
             contextmenu: 'link image table',
             skin: useDarkMode ? 'oxide-dark' : 'oxide',
             content_css: useDarkMode ? 'dark' : 'default',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px } ul { list-style-type: disc !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } ol { list-style-type: decimal !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } li { display: list-item !important; }'
         });
         tinymce.init({
             selector: '#editor2',
@@ -400,7 +400,7 @@
             contextmenu: 'link image table',
             skin: useDarkMode ? 'oxide-dark' : 'oxide',
             content_css: useDarkMode ? 'dark' : 'default',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px } ul { list-style-type: disc !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } ol { list-style-type: decimal !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } li { display: list-item !important; }'
         });
         tinymce.init({
             selector: '#editor3',
@@ -491,7 +491,7 @@
             contextmenu: 'link image table',
             skin: useDarkMode ? 'oxide-dark' : 'oxide',
             content_css: useDarkMode ? 'dark' : 'default',
-            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px } ul { list-style-type: disc !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } ol { list-style-type: decimal !important; margin-left: 1.25rem !important; padding-left: 0.5rem !important; } li { display: list-item !important; }'
         });
 
   
