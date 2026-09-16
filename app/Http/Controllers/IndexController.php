@@ -102,19 +102,6 @@ class IndexController extends Controller
         return Inertia::render('FrontEnd/MissionVision', compact('pageCms'));
     }
 
-    public function projectsDetails()
-    {
-        return Inertia::render('FrontEnd/Projects');
-    }
-
-    public function projects()
-    {
-        $pageCms = GalleryPageCms::latest()->first();
-        $galleryCategory = GalleryCategory::latest()->get();
-        $gallery = Gallery::latest()->get();
-        return Inertia::render('FrontEnd/Projects', compact('pageCms', 'galleryCategory', 'gallery'));
-    }
-
     public function services()
     {
         $pageCms = ServicePageCms::latest()->first();

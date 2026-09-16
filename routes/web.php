@@ -67,8 +67,6 @@ Route::controller(IndexController::class)->group(function () {
     Route::get('/contact', 'contactUs');
     Route::get('/faq', 'faq');
     Route::get('/mission-vision', 'missionVision');
-    Route::get('/projects', 'projects');
-    // Route::get('/projects-details', 'projectsDetails');
     Route::get('/business', 'services');
     Route::get('/service/{slug}', 'servicesDetails');
     Route::get('/blog', 'blog');

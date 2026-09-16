@@ -58,10 +58,6 @@
                             </ul>
                         </li>
 
-                        <li class="{{ Request::is('projects') ? 'active' : '' }}">
-                            <a href="{{ url('projects') }}">Projects</a>
-                        </li>
-
                         <li class="{{ Request::is('certification') ? 'active' : '' }}">
                             <a href="{{ url('certification') }}">Certification</a>
                         </li>

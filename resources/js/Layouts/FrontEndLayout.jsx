@@ -153,15 +153,6 @@ export default function FrontEndLayout({ children }) {
                             </div>
 
                             <Link
-                                href="/projects"
-                                className={`px-3.5 py-2 rounded-lg transition-colors ${
-                                    window.location.pathname === '/projects' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
-                                }`}
-                            >
-                                Projects
-                            </Link>
-
-                            <Link
                                 href="/certification"
                                 className={`px-3.5 py-2 rounded-lg transition-colors ${
                                     window.location.pathname === '/certification' ? 'text-blue-600 bg-blue-50 font-semibold' : 'text-slate-700 hover:text-blue-600 hover:bg-slate-50'
@@ -260,7 +251,6 @@ export default function FrontEndLayout({ children }) {
                             ))}
                         </div>
 
-                        <Link href="/projects" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Projects</Link>
                         <Link href="/certification" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Certification</Link>
                         <Link href="/sports-affiliation" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Sports Affiliation</Link>
                         <Link href="/contact" className="block px-3 py-2.5 rounded-lg text-slate-800 hover:bg-blue-50 font-medium">Contact</Link>

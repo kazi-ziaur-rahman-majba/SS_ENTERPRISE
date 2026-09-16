@@ -171,23 +171,31 @@
                                                 </tr>
                                             </thead>
                                             <tbody class="clonetable">
-                                                @if (isset($certifications))
+                                                @if (isset($certifications) && is_array($certifications) && count($certifications) > 0)
                                                     @foreach ($certifications as $key => $item)
+                                                        @php
+                                                            $certImg = is_array($item) ? ($item['image'] ?? '') : $item;
+                                                            $certTitle = is_array($item) ? ($item['title'] ?? '') : '';
+                                                        @endphp
                                                         <tr>
                                                             <td class="sl">{{ $key + 1 }}</td>
                                                             <td>
                                                                 <input name="certification_image[]" class="form-control"
-                                                                    type="file" accept=".jpg, .png, .jpeg, .svg">
+                                                                    type="file" accept=".jpg, .png, .jpeg, .svg, .webp">
                                                             </td>
                                                             <td>
                                                                 <input name="certification_title[]" class="form-control"
-                                                                    type="text" value="{{ $item['title'] }}" >
+                                                                    type="text" value="{{ $certTitle }}" placeholder="e.g. ISO 9001:2015">
                                                             </td>
                                                             <td>
-                                                                <img src="{{ url($item['image']) }}" height="50px"
-                                                                    style="margin-left: 30px; margin-top: 10px;">
-                                                                <input type="hidden" name="ex_certifications_image[]"
-                                                                    value="{{ $item['image'] }}">
+                                                                @if(!empty($certImg))
+                                                                    <img src="{{ url($certImg) }}" height="50px"
+                                                                        style="margin-left: 10px; margin-top: 5px;">
+                                                                    <input type="hidden" name="ex_certifications_image[]"
+                                                                        value="{{ $certImg }}">
+                                                                @else
+                                                                    <input type="hidden" name="ex_certifications_image[]" value="">
+                                                                @endif
                                                             </td>
                                                             <td>
                                                                 <button type="button"
@@ -201,10 +209,14 @@
                                                         <td class="sl">1</td>
                                                         <td>
                                                             <input name="certification_image[]" class="form-control"
-                                                                type="file" accept=".jpg, .png, .jpeg, .svg">
+                                                                type="file" accept=".jpg, .png, .jpeg, .svg, .webp">
                                                         </td>
                                                         <td>
-                                                            &nbsp;
+                                                            <input name="certification_title[]" class="form-control"
+                                                                type="text" placeholder="e.g. ISO 9001:2015">
+                                                        </td>
+                                                        <td>
+                                                            <input type="hidden" name="ex_certifications_image[]" value="">
                                                         </td>
                                                         <td>
                                                             <button type="button"
@@ -216,7 +228,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="4">
+                                                    <td colspan="5">
                                                         <button type="button" class="btn btn-sm btn-info add-new-feature"
                                                             style="font-weight: bolder; color:#fff;"> + Add More</button>
                                                     </td>
@@ -255,24 +267,25 @@
                     $(this).find('.sl').text(index + 1);
                 });
                 rows.find('.delete-feature-row').show();
-                //rows.first().find('.delete-feature-row').hide();
             }
 
             $(".add-new-feature").click(function() {
                 var formGroup = $(this).closest('.form-group');
                 var clone = formGroup.find('.clonetable tr').last().clone();
-                clone.find('input[name="member_image[]"]').val(''); // Empty the image field value
-                clone.find('img').attr('src', ''); // Clear the src attribute of the cloned image, if any
+                clone.find('input[type="file"]').val('');
+                clone.find('input[type="text"]').val('');
+                clone.find('input[type="hidden"]').val('');
+                clone.find('img').remove();
                 formGroup.find('.clonetable').append(clone);
                 updateSerialNumbers(formGroup);
             });
 
-
-
             $('body').on('click', '.delete-feature-row', function() {
                 var formGroup = $(this).closest('.form-group');
-                $(this).closest('tr').remove();
-                updateSerialNumbers(formGroup);
+                if (formGroup.find('.clonetable tr').length > 1) {
+                    $(this).closest('tr').remove();
+                    updateSerialNumbers(formGroup);
+                }
             });
 
             $('.form-group').each(function() {
@@ -295,3 +308,4 @@
     </script>
 
 @endsection
+

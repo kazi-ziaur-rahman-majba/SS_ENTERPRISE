@@ -1,60 +1,141 @@
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
 import FrontEndLayout from '@/Layouts/FrontEndLayout';
-import { Award, ShieldCheck } from 'lucide-react';
+
+const parseJsonData = (data) => {
+    if (!data) return [];
+    if (Array.isArray(data)) return data;
+    if (typeof data === 'string') {
+        try {
+            return JSON.parse(data);
+        } catch (e) {
+            return [];
+        }
+    }
+    return [];
+};
 
 export default function Achievement({ membershipCertificate }) {
+    const containerClass = "max-w-screen-sm sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8";
+
+    const bannerTitle = membershipCertificate?.banner_title || 'Certification';
+    const pageTitle = membershipCertificate?.page_title || 'Certification';
+    const memberTitle = membershipCertificate?.member_title || 'Our Businesses';
+    const certificatesTitle = membershipCertificate?.certificates_title || 'ISO certificate';
+
+    const memberImages = parseJsonData(membershipCertificate?.member_image);
+    const rawCertifications = parseJsonData(membershipCertificate?.certificates_image);
+
+    // Normalize certifications items to array of { image, title }
+    const certifications = rawCertifications.map((item) => {
+        if (typeof item === 'string') {
+            return { image: item, title: '' };
+        }
+        return {
+            image: item?.image || '',
+            title: item?.title || '',
+        };
+    });
+
+    const getImageUrl = (path) => {
+        if (!path) return '';
+        return path.startsWith('/') ? path : `/${path}`;
+    };
+
     return (
         <FrontEndLayout>
-            <Head title="Certification & Achievements - SS Group" />
+            <Head title={`${bannerTitle} - SS Group`} />
 
-            {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
-                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
+            {/* Banner Section */}
+            <section className="relative text-white py-12 sm:py-20 overflow-hidden bg-slate-900">
+                {membershipCertificate?.banner_image && (
+                    <img
+                        src={getImageUrl(membershipCertificate.banner_image)}
+                        alt="Banner Background"
+                        className="absolute inset-0 w-full h-full object-cover opacity-30"
+                    />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/60 to-slate-950/80 pointer-events-none" />
+
+                <div className={`relative z-10 ${containerClass}`}>
+                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-2.5">
                         <Link href="/" className="hover:underline">Home</Link>
                         <span>/</span>
-                        <span className="text-slate-300">Certification</span>
+                        <span className="text-slate-300">{pageTitle}</span>
                     </nav>
-                    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                        Membership & Certification
+                    <h1 className="text-3xl sm:text-5xl font-bold tracking-tight">
+                        {bannerTitle}
                     </h1>
                 </div>
             </section>
 
-            {/* Content */}
-            <section className="py-20 bg-slate-50">
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-                    {membershipCertificate ? (
-                        <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-slate-100 space-y-8">
-                            <div className="flex items-center gap-4 border-b border-slate-100 pb-6">
-                                <div className="w-14 h-14 bg-blue-500/10 text-blue-600 rounded-2xl flex items-center justify-center shrink-0">
-                                    <Award className="w-7 h-7" />
-                                </div>
-                                <div>
-                                    <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
-                                        {membershipCertificate.title || 'Official Certifications'}
-                                    </h2>
-                                </div>
-                            </div>
+            {/* Section 1: Member / Business Logos (Pure White Background) */}
+            <section className="bg-white py-12 sm:py-20 border-b border-slate-100">
+                <div className={containerClass}>
+                    <div className="text-center mb-10">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
+                            {memberTitle}
+                        </h2>
+                        <div className="w-12 h-1 bg-blue-500 mx-auto rounded-full mt-2" />
+                    </div>
 
-                            {membershipCertificate.image && (
-                                <div className="rounded-2xl overflow-hidden shadow-lg max-w-2xl mx-auto">
-                                    <img src={`/${membershipCertificate.image}`} alt="Certificate" className="w-full h-auto object-contain" />
-                                </div>
-                            )}
-
-                            {membershipCertificate.details && (
+                    {memberImages && memberImages.length > 0 ? (
+                        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+                            {memberImages.map((imgSrc, idx) => (
                                 <div
-                                    className="text-slate-600 leading-relaxed text-base prose prose-slate max-w-none"
-                                    dangerouslySetInnerHTML={{ __html: membershipCertificate.details }}
-                                />
-                            )}
+                                    key={idx}
+                                    className="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center w-48 sm:w-60 h-28 sm:h-32"
+                                >
+                                    <img
+                                        src={getImageUrl(imgSrc)}
+                                        alt={`Member logo ${idx + 1}`}
+                                        className="max-h-full max-w-full object-contain"
+                                    />
+                                </div>
+                            ))}
                         </div>
                     ) : (
-                        <div className="bg-white rounded-3xl p-12 text-center text-slate-500">
-                            No membership certificate data available.
+                        <p className="text-center text-slate-400 text-sm">No member logos configured.</p>
+                    )}
+                </div>
+            </section>
+
+            {/* Section 2: Certifications (Soft Light Blue Gradient Background) */}
+            <section className="relative bg-gradient-to-b from-sky-50/80 via-blue-50/40 to-sky-100/70 py-12 sm:py-20 overflow-hidden">
+                {/* Decorative background glow spots */}
+                <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-200/40 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-10 -right-32 w-96 h-96 bg-sky-200/50 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none" />
+
+                <div className={`relative z-10 ${containerClass}`}>
+                    <div className="text-center mb-10">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
+                            {certificatesTitle}
+                        </h2>
+                        <div className="w-12 h-1 bg-blue-500 mx-auto rounded-full mt-2" />
+                    </div>
+
+                    {certifications && certifications.length > 0 ? (
+                        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+                            {certifications.map((item, idx) => (
+                                <div key={idx} className="flex flex-col items-center">
+                                    <div className="bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-xs flex items-center justify-center w-44 sm:w-52 h-44 sm:h-52 mb-2.5 hover:shadow-md transition-shadow">
+                                        <img
+                                            src={getImageUrl(item.image)}
+                                            alt={item.title || `Certificate ${idx + 1}`}
+                                            className="max-h-full max-w-full object-contain"
+                                        />
+                                    </div>
+                                    {item.title && (
+                                        <span className="text-slate-700 font-semibold text-sm sm:text-base text-center max-w-xs mt-0.5">
+                                            {item.title}
+                                        </span>
+                                    )}
+                                </div>
+                            ))}
                         </div>
+                    ) : (
+                        <p className="text-center text-slate-400 text-sm">No certificate data configured.</p>
                     )}
                 </div>
             </section>

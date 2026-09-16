@@ -144,32 +144,6 @@
     </ul>
     </li>
     @endif
-    @if (in_array('gallery', $permissions) ||
-            in_array('gallery-category', $permissions) ||
-            in_array('gallery-page-cms', $permissions))
-        <li> <a class="has-arrow" href="javascript:;">
-            <div class="parent-icon"><i class="bx bx-spreadsheet"></i>
-            </div>
-            <div class="menu-title">Project Page</div>
-        </a>
-            <ul>
-                @if (in_array('gallery', $permissions))
-                    <li><a href="{{ route('gallery.index') }}"> <i class="bx bx-right-arrow-alt"></i>Project</a>
-                    </li>
-                @endif
-                @if (in_array('gallery-category', $permissions))
-                    <li><a href="{{ route('gallery-category.index') }}"> <i class="bx bx-right-arrow-alt"></i>Project
-                            Category</a>
-                    </li>
-                @endif
-                @if (in_array('gallery-page-cms', $permissions))
-                    <li><a href="{{ route('gallery-page-cms.index') }}"> <i class="bx bx-right-arrow-alt"></i>Project
-                            Page CMS</a>
-                    </li>
-                @endif
-            </ul>
-        </li>
-    @endif
     @if (in_array('blog', $permissions) ||
             in_array('blog-category', $permissions) ||
             in_array('blog-page-cms', $permissions) ||
