@@ -102,16 +102,13 @@ export default function MissionVision({ pageCms }) {
             <Head title={`${pageCms?.page_title || 'Mission & Vision'} - SS Group`} />
 
             {/* Top Banner */}
-            <section className="relative bg-slate-900 text-white py-20 sm:py-28 overflow-hidden">
+            <section className="relative text-white py-20 sm:py-28 overflow-hidden">
                 {pageCms?.banner_image && (
-                    <>
-                        <img
-                            src={getImagePath(pageCms.banner_image, '')}
-                            alt="Banner"
-                            className="absolute inset-0 w-full h-full object-cover opacity-90"
-                        />
-                        <div className="absolute inset-0 bg-black/40" />
-                    </>
+                    <img
+                        src={getImagePath(pageCms.banner_image, '')}
+                        alt="Banner"
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
                 )}
 
                 <div className={`relative z-10 ${containerClass}`}>

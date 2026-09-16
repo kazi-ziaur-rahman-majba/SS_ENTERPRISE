@@ -12,12 +12,12 @@ export default function ServiceDetails({ pageCms, service, serviceCategory, slug
             <Head title={`${service?.title || service?.category_name || 'Business Detail'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
+            <section className="relative text-white py-12 sm:py-24 overflow-hidden">
                 {pageCms?.detail_page_banner_image && (
                     <img
-                        src={`/${pageCms.detail_page_banner_image}`}
+                        src={pageCms.detail_page_banner_image.startsWith('/') ? pageCms.detail_page_banner_image : `/${pageCms.detail_page_banner_image}`}
                         alt="Banner"
-                        className="absolute inset-0 w-full h-full object-cover opacity-25"
+                        className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}
                 <div className={`relative z-10 ${containerClass}`}>

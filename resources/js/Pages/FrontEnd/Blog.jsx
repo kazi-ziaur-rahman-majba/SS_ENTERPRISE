@@ -12,12 +12,12 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
             <Head title={`${pageCms?.banner_title || 'Blog'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative bg-slate-900 text-white py-12 sm:py-24 overflow-hidden">
+            <section className="relative text-white py-12 sm:py-24 overflow-hidden">
                 {pageCms?.banner_image && (
                     <img
-                        src={`/${pageCms.banner_image}`}
+                        src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}
                         alt="Banner"
-                        className="absolute inset-0 w-full h-full object-cover opacity-25"
+                        className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}
                 <div className={`relative z-10 ${containerClass}`}>
