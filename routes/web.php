@@ -33,6 +33,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\GalleryPageCmsController;
 use App\Http\Controllers\ContactMailController;
 use App\Http\Controllers\MembershipCertificateController;
+use App\Http\Controllers\SportsAffiliationCmsController;
 
 
 
@@ -139,5 +140,6 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     Route::resource('what-we-do', WhatWeDoController::class);
     Route::resource('why-work-us', WorkProcessController::class);
     Route::resource('membership-certificate', MembershipCertificateController::class);
+    Route::resource('sports-affiliation-cms', SportsAffiliationCmsController::class);
 });
 

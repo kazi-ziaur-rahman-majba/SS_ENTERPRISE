@@ -201,6 +201,11 @@
             </a>
         </li>
     @endif
+    <li><a href="{{ route('sports-affiliation-cms.index') }}">
+            <div class="parent-icon"><i class="fadeIn animated bx bx-football"></i></div>
+            <div class="menu-title">Sports Affiliation CMS</div>
+        </a>
+    </li>
     @if (in_array('contact-list', $permissions) || in_array('admins', $permissions) || in_array('admin-role', $permissions))
         <li>
             <a href="javascript:;" class="has-arrow">

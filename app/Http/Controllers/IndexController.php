@@ -30,6 +30,7 @@ use App\Models\TeamPageCms;
 use App\Models\TermsConditionsCms;
 use App\Models\WhatWeDo;
 use App\Models\WorkProcess;
+use App\Models\SportsAffiliationCms;
 use Cache;
 use Log;
 
@@ -160,7 +161,8 @@ class IndexController extends Controller
 
     public function sportsAffiliation()
     {
-        return Inertia::render('FrontEnd/SportsAffiliation');
+        $pageCms = SportsAffiliationCms::latest()->first();
+        return Inertia::render('FrontEnd/SportsAffiliation', compact('pageCms'));
     }
 
     public function searchData(Request $request)
