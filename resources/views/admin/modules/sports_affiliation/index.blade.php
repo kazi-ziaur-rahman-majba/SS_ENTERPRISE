@@ -1,5 +1,10 @@
 @extends('admin.layouts.app')
 @section('title', 'Sports Affiliation CMS')
+
+@section('header-css')
+<script src="https://cdn.tailwindcss.com"></script>
+@endsection
+
 @section('content')
 <div class="page-wrapper">
     <div class="page-content">
@@ -33,307 +38,324 @@
                 @method('PUT')
             @endif
 
-            <!-- Hero Section Card -->
-            <div class="card border-top border-0 border-4 border-primary mb-4">
-                <div class="card-body p-4">
-                    <div class="card-title d-flex align-items-center mb-3">
-                        <i class="bx bxs-carousel me-2 font-22 text-primary"></i>
-                        <h5 class="mb-0 text-primary">1. Hero Section</h5>
+            <!-- 1. HERO SECTION CARD -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+                <div class="p-5 bg-gradient-to-r from-blue-50 to-indigo-50/50 border-b border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-blue-500/20">
+                            <i class="bx bxs-carousel"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-slate-900 text-base m-0">1. Hero Section</h5>
+                            <p class="text-xs text-slate-500 m-0">Manage main hero banner titles, statistics, and carousel slides</p>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label font-weight-bold">Hero Title</label>
-                            <input type="text" class="form-control" name="hero_title" value="{{ old('hero_title', $data->hero_title ?? '') }}" placeholder="SS Group × 10-12 Sports">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label font-weight-bold">Hero Subtitle</label>
-                            <textarea class="form-control" name="hero_subtitle" rows="2" placeholder="Empowering Bangladesh Cricket Excellence...">{{ old('hero_subtitle', $data->hero_subtitle ?? '') }}</textarea>
-                        </div>
+                </div>
 
-                        <!-- Hero Stats -->
-                        <div class="col-md-12">
-                            <label class="form-label font-weight-bold d-flex justify-content-between align-items-center">
-                                Hero Stat Counters
-                                <button type="button" class="btn btn-sm btn-outline-primary" id="add-hero-stat"><i class="bx bx-plus"></i> Add Stat</button>
-                            </label>
-                            <div id="hero-stats-container">
-                                @if(!empty($heroStats))
-                                    @foreach($heroStats as $idx => $stat)
-                                        <div class="row g-2 mb-2 hero-stat-row">
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control" name="hero_stat_number[]" value="{{ $stat['number'] ?? '' }}" placeholder="Stat Number (e.g. 7+)">
-                                            </div>
-                                            <div class="col-md-7">
-                                                <input type="text" class="form-control" name="hero_stat_label[]" value="{{ $stat['label'] ?? '' }}" placeholder="Stat Label (e.g. Years Partnership)">
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button type="button" class="btn btn-outline-danger w-100 remove-row"><i class="bx bx-trash"></i></button>
-                                            </div>
+                <div class="p-6 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Hero Main Title</label>
+                            <input type="text" class="w-full text-sm px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all font-semibold text-slate-800" name="hero_title" value="{{ old('hero_title', $data->hero_title ?? '') }}" placeholder="e.g. SS Group × 10-12 Sports">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Hero Subtitle</label>
+                            <textarea class="w-full text-sm px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition-all text-slate-600" name="hero_subtitle" rows="2" placeholder="Empowering Bangladesh Cricket Excellence...">{{ old('hero_subtitle', $data->hero_subtitle ?? '') }}</textarea>
+                        </div>
+                    </div>
+
+                    <!-- Hero Stats -->
+                    <div class="border-t border-slate-100 pt-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Hero Stat Counters</label>
+                            <button type="button" id="add-hero-stat" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs rounded-lg transition-all flex items-center gap-1 cursor-pointer">
+                                <i class="bx bx-plus text-base"></i> Add Stat
+                            </button>
+                        </div>
+                        <div id="hero-stats-container" class="space-y-2">
+                            @if(!empty($heroStats))
+                                @foreach($heroStats as $idx => $stat)
+                                    <div class="flex items-center gap-3 p-2 bg-slate-50 rounded-xl border border-slate-200/80 hero-stat-row">
+                                        <div class="w-1/3">
+                                            <input type="text" class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg outline-none font-bold text-blue-600" name="hero_stat_number[]" value="{{ $stat['number'] ?? '' }}" placeholder="Number (e.g. 7+)">
                                         </div>
-                                    @endforeach
-                                @else
-                                    <div class="row g-2 mb-2 hero-stat-row">
-                                        <div class="col-md-4"><input type="text" class="form-control" name="hero_stat_number[]" placeholder="e.g. 7+"></div>
-                                        <div class="col-md-7"><input type="text" class="form-control" name="hero_stat_label[]" placeholder="e.g. Years Partnership"></div>
-                                        <div class="col-md-1"><button type="button" class="btn btn-outline-danger w-100 remove-row"><i class="bx bx-trash"></i></button></div>
+                                        <div class="flex-1">
+                                            <input type="text" class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg outline-none text-slate-700" name="hero_stat_label[]" value="{{ $stat['label'] ?? '' }}" placeholder="Label (e.g. Years Partnership)">
+                                        </div>
+                                        <button type="button" class="w-9 h-9 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row shrink-0" title="Delete Stat"><i class="bx bx-trash text-base"></i></button>
                                     </div>
-                                @endif
-                            </div>
+                                @endforeach
+                            @else
+                                <div class="flex items-center gap-3 p-2 bg-slate-50 rounded-xl border border-slate-200/80 hero-stat-row">
+                                    <div class="w-1/3"><input type="text" class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg outline-none font-bold text-blue-600" name="hero_stat_number[]" placeholder="e.g. 7+"></div>
+                                    <div class="flex-1"><input type="text" class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg outline-none text-slate-700" name="hero_stat_label[]" placeholder="e.g. Years Partnership"></div>
+                                    <button type="button" class="w-9 h-9 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row shrink-0" title="Delete Stat"><i class="bx bx-trash text-base"></i></button>
+                                </div>
+                            @endif
                         </div>
+                    </div>
 
-                        <!-- Hero Slides -->
-                        <div class="col-md-12">
-                            <label class="form-label font-weight-bold d-flex justify-content-between align-items-center">
-                                Hero Image Slider / Carousel
-                                <button type="button" class="btn btn-sm btn-outline-primary" id="add-hero-slide"><i class="bx bx-plus"></i> Add Slide</button>
-                            </label>
-                            <div id="hero-slides-container">
-                                @if(!empty($heroSlides))
-                                    @foreach($heroSlides as $idx => $slide)
-                                        <div class="card p-3 mb-2 bg-light hero-slide-row">
-                                            <div class="row g-2 align-items-center">
-                                                <div class="col-md-3">
+                    <!-- Hero Slides -->
+                    <div class="border-t border-slate-100 pt-5">
+                        <div class="flex items-center justify-between mb-3">
+                            <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Hero Carousel Slides</label>
+                            <button type="button" id="add-hero-slide" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition-all shadow-xs flex items-center gap-1 cursor-pointer">
+                                <i class="bx bx-plus text-base"></i> Add Slide
+                            </button>
+                        </div>
+                        <div id="hero-slides-container" class="space-y-3">
+                            @if(!empty($heroSlides))
+                                @foreach($heroSlides as $idx => $slide)
+                                    <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 hover:border-blue-300 transition-all hero-slide-row">
+                                        <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+                                            <div class="flex items-center gap-3 w-full md:w-64 shrink-0">
+                                                <div class="w-16 h-14 rounded-lg bg-white border border-slate-200 overflow-hidden flex items-center justify-center shrink-0 shadow-2xs">
                                                     @if(!empty($slide['image']))
-                                                        <img src="{{ asset($slide['image']) }}" style="height: 60px; object-fit: cover;" class="rounded mb-1 d-block">
+                                                        <img src="{{ asset($slide['image']) }}" class="w-full h-full object-cover">
+                                                    @else
+                                                        <i class="bx bx-image text-slate-400 text-2xl"></i>
                                                     @endif
+                                                </div>
+                                                <div class="flex-1">
+                                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Image File</label>
                                                     <input type="hidden" name="existing_slide_image[{{ $idx }}]" value="{{ $slide['image'] ?? '' }}">
-                                                    <input type="file" class="form-control form-control-sm" name="slide_image[{{ $idx }}]">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control form-control-sm mb-1" name="slide_title[{{ $idx }}]" value="{{ $slide['title'] ?? '' }}" placeholder="Slide Overlay Title">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <input type="text" class="form-control form-control-sm" name="slide_subtitle[{{ $idx }}]" value="{{ $slide['subtitle'] ?? '' }}" placeholder="Slide Overlay Subtitle">
-                                                </div>
-                                                <div class="col-md-1 text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                                                    <input type="file" class="block w-full text-[11px] text-slate-500 file:mr-2 file:py-0.5 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 cursor-pointer" name="slide_image[{{ $idx }}]">
                                                 </div>
                                             </div>
+
+                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 w-full">
+                                                <div>
+                                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Overlay Title</label>
+                                                    <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 outline-none" name="slide_title[{{ $idx }}]" value="{{ $slide['title'] ?? '' }}" placeholder="Slide Overlay Title">
+                                                </div>
+                                                <div>
+                                                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Overlay Subtitle</label>
+                                                    <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600 outline-none" name="slide_subtitle[{{ $idx }}]" value="{{ $slide['subtitle'] ?? '' }}" placeholder="Slide Overlay Subtitle">
+                                                </div>
+                                            </div>
+
+                                            <div class="shrink-0 flex items-center justify-end w-full md:w-auto">
+                                                <button type="button" class="w-9 h-9 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row" title="Delete Slide"><i class="bx bx-trash text-base"></i></button>
+                                            </div>
                                         </div>
-                                    @endforeach
-                                @else
-                                    <div class="card p-3 mb-2 bg-light hero-slide-row">
-                                        <div class="row g-2 align-items-center">
-                                            <div class="col-md-3">
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 hover:border-blue-300 transition-all hero-slide-row">
+                                    <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+                                        <div class="flex items-center gap-3 w-full md:w-64 shrink-0">
+                                            <div class="w-16 h-14 rounded-lg bg-white border border-slate-200 overflow-hidden flex items-center justify-center shrink-0 shadow-2xs">
+                                                <i class="bx bx-image text-slate-400 text-2xl"></i>
+                                            </div>
+                                            <div class="flex-1">
+                                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Image File</label>
                                                 <input type="hidden" name="existing_slide_image[0]" value="">
-                                                <input type="file" class="form-control form-control-sm" name="slide_image[0]">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control form-control-sm mb-1" name="slide_title[0]" placeholder="Slide Overlay Title">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control form-control-sm" name="slide_subtitle[0]" placeholder="Slide Overlay Subtitle">
-                                            </div>
-                                            <div class="col-md-1 text-end">
-                                                <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                                                <input type="file" class="block w-full text-[11px] text-slate-500 file:mr-2 file:py-0.5 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 cursor-pointer" name="slide_image[0]">
                                             </div>
                                         </div>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 w-full">
+                                            <div>
+                                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Overlay Title</label>
+                                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 outline-none" name="slide_title[0]" placeholder="Slide Overlay Title">
+                                            </div>
+                                            <div>
+                                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Overlay Subtitle</label>
+                                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600 outline-none" name="slide_subtitle[0]" placeholder="Slide Overlay Subtitle">
+                                            </div>
+                                        </div>
+                                        <div class="shrink-0 flex items-center justify-end w-full md:w-auto">
+                                            <button type="button" class="w-9 h-9 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row" title="Delete Slide"><i class="bx bx-trash text-base"></i></button>
+                                        </div>
                                     </div>
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Strategic Partnership Section Card -->
-            <div class="card border-top border-0 border-4 border-success mb-4">
-                <div class="card-body p-4">
-                    <div class="card-title d-flex align-items-center mb-3">
-                        <i class="bx bx-handshake me-2 font-22 text-success"></i>
-                        <h5 class="mb-0 text-success">2. Strategic Partnership Section</h5>
+            <!-- 2. STRATEGIC PARTNERSHIP CARD -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+                <div class="p-5 bg-gradient-to-r from-emerald-50 to-teal-50/50 border-b border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-emerald-500/20">
+                            <i class="bx bx-handshake"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-slate-900 text-base m-0">2. Strategic Partnership Section</h5>
+                            <p class="text-xs text-slate-500 m-0">Edit strategic partnership text blocks, highlights checklist, and dynamic logos</p>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Kicker / Small Tagline</label>
-                            <input type="text" class="form-control" name="partnership_kicker" value="{{ old('partnership_kicker', $data->partnership_kicker ?? '') }}" placeholder="STRATEGIC PARTNERSHIP">
-                        </div>
-                        <div class="col-md-8">
-                            <label class="form-label">Section Main Title</label>
-                            <input type="text" class="form-control" name="partnership_title" value="{{ old('partnership_title', $data->partnership_title ?? '') }}" placeholder="Building Cricket Excellence Together">
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Section Subtitle</label>
-                            <textarea class="form-control" name="partnership_subtitle" rows="2">{{ old('partnership_subtitle', $data->partnership_subtitle ?? '') }}</textarea>
-                        </div>
+                </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Journey Sub-heading</label>
-                            <input type="text" class="form-control" name="journey_title" value="{{ old('journey_title', $data->journey_title ?? '') }}" placeholder="Our Seven-Year Journey">
+                <div class="p-6 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Kicker</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none font-bold text-emerald-600 uppercase" name="partnership_kicker" value="{{ old('partnership_kicker', $data->partnership_kicker ?? '') }}" placeholder="STRATEGIC PARTNERSHIP">
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Highlight Box Title</label>
-                            <input type="text" class="form-control" name="highlight_title" value="{{ old('highlight_title', $data->highlight_title ?? '') }}" placeholder="Partnership Highlights (2018-current)">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Main Title</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none font-extrabold text-slate-800" name="partnership_title" value="{{ old('partnership_title', $data->partnership_title ?? '') }}" placeholder="Building Cricket Excellence Together">
                         </div>
+                        <div class="md:col-span-3">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Subtitle</label>
+                            <textarea class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none text-slate-600" name="partnership_subtitle" rows="2">{{ old('partnership_subtitle', $data->partnership_subtitle ?? '') }}</textarea>
+                        </div>
+                    </div>
 
-                        <div class="col-md-6">
-                            <label class="form-label">Paragraph 1 (Before Highlight Box)</label>
-                            <textarea class="form-control" name="journey_text_1" rows="3">{{ old('journey_text_1', $data->journey_text_1 ?? '') }}</textarea>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Journey Sub-heading</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none font-bold text-slate-800" name="journey_title" value="{{ old('journey_title', $data->journey_title ?? '') }}" placeholder="Our Seven-Year Journey">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mt-3 mb-1.5">Paragraph 1 (Before Highlight Box)</label>
+                            <textarea class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none text-slate-600" name="journey_text_1" rows="3">{{ old('journey_text_1', $data->journey_text_1 ?? '') }}</textarea>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Paragraph 2 (After Highlight Box)</label>
-                            <textarea class="form-control" name="journey_text_2" rows="3">{{ old('journey_text_2', $data->journey_text_2 ?? '') }}</textarea>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Highlight Box Title</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none font-bold text-emerald-700" name="highlight_title" value="{{ old('highlight_title', $data->highlight_title ?? '') }}" placeholder="Partnership Highlights (2018-current)">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mt-3 mb-1.5">Paragraph 2 (After Highlight Box)</label>
+                            <textarea class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none text-slate-600" name="journey_text_2" rows="3">{{ old('journey_text_2', $data->journey_text_2 ?? '') }}</textarea>
                         </div>
+                    </div>
 
-                        <div class="col-md-12">
-                            <label class="form-label font-weight-bold d-flex justify-content-between align-items-center">
-                                Partnership Highlight Points (Checklist)
-                                <button type="button" class="btn btn-sm btn-outline-success" id="add-highlight-item"><i class="bx bx-plus"></i> Add Highlight</button>
-                            </label>
-                            <div id="highlight-items-container">
-                                @if(!empty($highlightList))
-                                    @foreach($highlightList as $hItem)
-                                        <div class="input-group mb-2 highlight-row">
-                                            <span class="input-group-text"><i class="bx bx-check text-success"></i></span>
-                                            <input type="text" class="form-control" name="highlight_items[]" value="{{ $hItem }}">
-                                            <button type="button" class="btn btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="input-group mb-2 highlight-row">
-                                        <span class="input-group-text"><i class="bx bx-check text-success"></i></span>
-                                        <input type="text" class="form-control" name="highlight_items[]" placeholder="Highlight point...">
-                                        <button type="button" class="btn btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                    <!-- Highlight List -->
+                    <div class="border-t border-slate-100 pt-4">
+                        <div class="flex items-center justify-between mb-3">
+                            <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Highlight Checklist Points</label>
+                            <button type="button" id="add-highlight-item" class="px-3 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-lg transition-all flex items-center gap-1 cursor-pointer">
+                                <i class="bx bx-plus text-base"></i> Add Highlight
+                            </button>
+                        </div>
+                        <div id="highlight-items-container" class="space-y-2">
+                            @if(!empty($highlightList))
+                                @foreach($highlightList as $hItem)
+                                    <div class="flex items-center gap-2 highlight-row">
+                                        <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold text-sm">✓</div>
+                                        <input type="text" class="flex-1 text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none text-slate-700 focus:bg-white focus:border-emerald-500" name="highlight_items[]" value="{{ $hItem }}">
+                                        <button type="button" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row shrink-0" title="Delete Point"><i class="bx bx-trash text-base"></i></button>
                                     </div>
-                                @endif
+                                @endforeach
+                            @else
+                                <div class="flex items-center gap-2 highlight-row">
+                                    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold text-sm">✓</div>
+                                    <input type="text" class="flex-1 text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none text-slate-700 focus:bg-white focus:border-emerald-500" name="highlight_items[]" placeholder="Highlight point...">
+                                    <button type="button" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row shrink-0" title="Delete Point"><i class="bx bx-trash text-base"></i></button>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- Logo Showcase Card Fields -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-t border-slate-100 pt-4">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+                            <h6 class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2">Company Logo Showcase (Left)</h6>
+                            <div class="space-y-2">
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-blue-700" name="company_logo_text" value="{{ old('company_logo_text', $data->company_logo_text ?? '') }}" placeholder="Company Name (e.g. SS GROUP)">
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-500" name="company_logo_subtitle" value="{{ old('company_logo_subtitle', $data->company_logo_subtitle ?? '') }}" placeholder="Subtitle (e.g. Since 2004)">
                             </div>
                         </div>
 
-                        <!-- Company vs Sports Logo Display -->
-                        <div class="col-md-6">
-                            <div class="border p-3 rounded">
-                                <h6>Company Logo Box (Left Side)</h6>
-                                <div class="mb-2">
-                                    <label class="form-label">Company Name</label>
-                                    <input type="text" class="form-control" name="company_logo_text" value="{{ old('company_logo_text', $data->company_logo_text ?? '') }}" placeholder="SS GROUP">
-                                </div>
-                                <div>
-                                    <label class="form-label">Company Subtitle / Year</label>
-                                    <input type="text" class="form-control" name="company_logo_subtitle" value="{{ old('company_logo_subtitle', $data->company_logo_subtitle ?? '') }}" placeholder="Since 2004">
-                                </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200/80">
+                            <h6 class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">Sports Logo Showcase (Right)</h6>
+                            <div class="grid grid-cols-2 gap-2 mb-2">
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-extrabold text-emerald-600" name="sports_logo_badge" value="{{ old('sports_logo_badge', $data->sports_logo_badge ?? '') }}" placeholder="Badge Text (e.g. 10-12)">
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800" name="sports_logo_text" value="{{ old('sports_logo_text', $data->sports_logo_text ?? '') }}" placeholder="Sports Title (e.g. SPORTS)">
                             </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="border p-3 rounded">
-                                <h6>Sports Logo Box (Right Side)</h6>
-                                <div class="mb-2">
-                                    <label class="form-label">Sports Badge Text</label>
-                                    <input type="text" class="form-control" name="sports_logo_badge" value="{{ old('sports_logo_badge', $data->sports_logo_badge ?? '') }}" placeholder="10-12">
-                                </div>
-                                <div class="mb-2">
-                                    <label class="form-label">Sports Title</label>
-                                    <input type="text" class="form-control" name="sports_logo_text" value="{{ old('sports_logo_text', $data->sports_logo_text ?? '') }}" placeholder="SPORTS">
-                                </div>
-                                <div>
-                                    <label class="form-label">Tagline</label>
-                                    <input type="text" class="form-control" name="sports_logo_tagline" value="{{ old('sports_logo_tagline', $data->sports_logo_tagline ?? '') }}" placeholder="Grassroots to Glory">
-                                </div>
-                            </div>
+                            <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-500" name="sports_logo_tagline" value="{{ old('sports_logo_tagline', $data->sports_logo_tagline ?? '') }}" placeholder="Tagline (e.g. Grassroots to Glory)">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Shared Vision & Mission Section Card -->
-            <div class="card border-top border-0 border-4 border-info mb-4">
-                <div class="card-body p-4">
-                    <div class="card-title d-flex align-items-center mb-3">
-                        <i class="bx bx-target-lock me-2 font-22 text-info"></i>
-                        <h5 class="mb-0 text-info">3. Shared Vision & Mission Section</h5>
+            <!-- 3. SHARED VISION & MISSION CARD -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+                <div class="p-5 bg-gradient-to-r from-sky-50 to-indigo-50/50 border-b border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-sky-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-sky-500/20">
+                            <i class="bx bx-target-lock"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-slate-900 text-base m-0">3. Shared Vision & Mission Section</h5>
+                            <p class="text-xs text-slate-500 m-0">Manage 3-card foundation grid (Vision, Mission points, and Tournament Success)</p>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Kicker</label>
-                            <input type="text" class="form-control" name="vision_kicker" value="{{ old('vision_kicker', $data->vision_kicker ?? '') }}" placeholder="OUR FOUNDATION">
+                </div>
+
+                <div class="p-6 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Kicker</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-sky-600 uppercase" name="vision_kicker" value="{{ old('vision_kicker', $data->vision_kicker ?? '') }}" placeholder="OUR FOUNDATION">
                         </div>
-                        <div class="col-md-8">
-                            <label class="form-label">Title</label>
-                            <input type="text" class="form-control" name="vision_title" value="{{ old('vision_title', $data->vision_title ?? '') }}" placeholder="Shared Vision & Mission">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Title</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-extrabold text-slate-800" name="vision_title" value="{{ old('vision_title', $data->vision_title ?? '') }}" placeholder="Shared Vision & Mission">
                         </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Subtitle</label>
-                            <textarea class="form-control" name="vision_subtitle" rows="2">{{ old('vision_subtitle', $data->vision_subtitle ?? '') }}</textarea>
+                        <div class="md:col-span-3">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Subtitle</label>
+                            <textarea class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-600" name="vision_subtitle" rows="2">{{ old('vision_subtitle', $data->vision_subtitle ?? '') }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 border-t border-slate-100 pt-4">
+                        <!-- Vision Card -->
+                        <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/80 flex flex-col justify-between">
+                            <div>
+                                <h6 class="text-xs font-bold text-blue-600 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="bx bx-show text-base"></i> Card 1: Our Vision</h6>
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 mb-2" name="vision_card_title" value="{{ old('vision_card_title', $data->vision_card_title ?? '') }}" placeholder="Card Title">
+                                <textarea class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg text-slate-600" name="vision_card_text" rows="5" placeholder="Vision description text...">{{ old('vision_card_text', $data->vision_card_text ?? '') }}</textarea>
+                            </div>
                         </div>
 
-                        <!-- 3 Cards -->
-                        <div class="col-md-4">
-                            <div class="border p-3 rounded h-100">
-                                <h6 class="text-primary"><i class="bx bx-show me-1"></i> Card 1: Vision</h6>
-                                <div class="mb-2">
-                                    <label class="form-label">Card Title</label>
-                                    <input type="text" class="form-control" name="vision_card_title" value="{{ old('vision_card_title', $data->vision_card_title ?? '') }}" placeholder="Our Vision">
+                        <!-- Mission Card -->
+                        <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/80 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <h6 class="text-xs font-bold text-emerald-600 uppercase tracking-wider flex items-center gap-1.5 m-0"><i class="bx bx-target-lock text-base"></i> Card 2: Our Mission</h6>
+                                    <button type="button" id="add-mission-item" class="px-2 py-0.5 bg-emerald-100 text-emerald-700 font-bold text-[10px] rounded hover:bg-emerald-200 cursor-pointer">+ Add</button>
                                 </div>
-                                <div>
-                                    <label class="form-label">Vision Description</label>
-                                    <textarea class="form-control" name="vision_card_text" rows="5">{{ old('vision_card_text', $data->vision_card_text ?? '') }}</textarea>
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 mb-2" name="mission_card_title" value="{{ old('mission_card_title', $data->mission_card_title ?? '') }}" placeholder="Card Title">
+                                <div id="mission-items-container" class="space-y-1.5">
+                                    @if(!empty($missionList))
+                                        @foreach($missionList as $mItem)
+                                            <div class="flex items-center gap-1.5 mission-row">
+                                                <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600" name="mission_items[]" value="{{ $mItem }}">
+                                                <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
+                                            </div>
+                                        @endforeach
+                                    @else
+                                        <div class="flex items-center gap-1.5 mission-row">
+                                            <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600" name="mission_items[]" placeholder="Mission point...">
+                                            <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-md-4">
-                            <div class="border p-3 rounded h-100">
-                                <h6 class="text-success"><i class="bx bx-target-lock me-1"></i> Card 2: Mission</h6>
-                                <div class="mb-2">
-                                    <label class="form-label">Card Title</label>
-                                    <input type="text" class="form-control" name="mission_card_title" value="{{ old('mission_card_title', $data->mission_card_title ?? '') }}" placeholder="Our Mission">
+                        <!-- Tournament Card -->
+                        <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/80 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <h6 class="text-xs font-bold text-amber-600 uppercase tracking-wider flex items-center gap-1.5 m-0"><i class="bx bx-trophy text-base"></i> Card 3: Success</h6>
+                                    <button type="button" id="add-tournament-item" class="px-2 py-0.5 bg-amber-100 text-amber-800 font-bold text-[10px] rounded hover:bg-amber-200 cursor-pointer">+ Add</button>
                                 </div>
-                                <div>
-                                    <label class="form-label d-flex justify-content-between align-items-center">
-                                        Mission Bullet Points
-                                        <button type="button" class="btn btn-sm btn-outline-success" id="add-mission-item"><i class="bx bx-plus"></i> Add</button>
-                                    </label>
-                                    <div id="mission-items-container">
-                                        @if(!empty($missionList))
-                                            @foreach($missionList as $mItem)
-                                                <div class="input-group mb-2 mission-row">
-                                                    <input type="text" class="form-control form-control-sm" name="mission_items[]" value="{{ $mItem }}">
-                                                    <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
-                                                </div>
-                                            @endforeach
-                                        @else
-                                            <div class="input-group mb-2 mission-row">
-                                                <input type="text" class="form-control form-control-sm" name="mission_items[]" placeholder="Mission point...">
-                                                <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 mb-2" name="tournament_card_title" value="{{ old('tournament_card_title', $data->tournament_card_title ?? '') }}" placeholder="Card Title">
+                                <div id="tournament-items-container" class="space-y-1.5">
+                                    @if(!empty($tournamentList))
+                                        @foreach($tournamentList as $tItem)
+                                            <div class="flex items-center gap-1.5 tournament-row">
+                                                <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 font-medium" name="tournament_items[]" value="{{ $tItem }}">
+                                                <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                                             </div>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="border p-3 rounded h-100">
-                                <h6 class="text-warning"><i class="bx bx-trophy me-1"></i> Card 3: Tournament Success</h6>
-                                <div class="mb-2">
-                                    <label class="form-label">Card Title</label>
-                                    <input type="text" class="form-control" name="tournament_card_title" value="{{ old('tournament_card_title', $data->tournament_card_title ?? '') }}" placeholder="Tournament Success">
-                                </div>
-                                <div>
-                                    <label class="form-label d-flex justify-content-between align-items-center">
-                                        Tournament Achievements
-                                        <button type="button" class="btn btn-sm btn-outline-warning" id="add-tournament-item"><i class="bx bx-plus"></i> Add</button>
-                                    </label>
-                                    <div id="tournament-items-container">
-                                        @if(!empty($tournamentList))
-                                            @foreach($tournamentList as $tItem)
-                                                <div class="input-group mb-2 tournament-row">
-                                                    <span class="input-group-text"><i class="bx bx-trophy text-warning"></i></span>
-                                                    <input type="text" class="form-control form-control-sm" name="tournament_items[]" value="{{ $tItem }}">
-                                                    <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
-                                                </div>
-                                            @endforeach
-                                        @else
-                                            <div class="input-group mb-2 tournament-row">
-                                                <span class="input-group-text"><i class="bx bx-trophy text-warning"></i></span>
-                                                <input type="text" class="form-control form-control-sm" name="tournament_items[]" placeholder="Achievement name...">
-                                                <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
-                                            </div>
-                                        @endif
-                                    </div>
+                                        @endforeach
+                                    @else
+                                        <div class="flex items-center gap-1.5 tournament-row">
+                                            <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 font-medium" name="tournament_items[]" placeholder="Achievement name...">
+                                            <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -341,221 +363,232 @@
                 </div>
             </div>
 
-            <!-- Notable Players Section Card -->
-            <div class="card border-top border-0 border-4 border-warning mb-4">
-                <div class="card-body p-4">
-                    <div class="card-title d-flex align-items-center mb-3">
-                        <i class="bx bx-user-pin me-2 font-22 text-warning"></i>
-                        <h5 class="mb-0 text-warning">4. Notable Players Section</h5>
+            <!-- 4. NOTABLE PLAYERS CARD -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+                <div class="p-5 bg-gradient-to-r from-amber-50 to-orange-50/50 border-b border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-amber-500/20">
+                            <i class="bx bx-user-pin"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-slate-900 text-base m-0">4. Notable Players Section</h5>
+                            <p class="text-xs text-slate-500 m-0">Add & edit player profile cards, achievements, category tags, and optional photos</p>
+                        </div>
                     </div>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Kicker</label>
-                            <input type="text" class="form-control" name="players_kicker" value="{{ old('players_kicker', $data->players_kicker ?? '') }}" placeholder="SUCCESS STORIES">
-                        </div>
-                        <div class="col-md-8">
-                            <label class="form-label">Title</label>
-                            <input type="text" class="form-control" name="players_title" value="{{ old('players_title', $data->players_title ?? '') }}" placeholder="Notable Players">
-                        </div>
-                        <div class="col-md-12">
-                            <label class="form-label">Subtitle</label>
-                            <textarea class="form-control" name="players_subtitle" rows="2">{{ old('players_subtitle', $data->players_subtitle ?? '') }}</textarea>
-                        </div>
+                    <button type="button" id="add-player-row" class="px-3.5 py-1.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-xs rounded-lg transition-all shadow-xs flex items-center gap-1 cursor-pointer">
+                        <i class="bx bx-plus text-base"></i> Add Player
+                    </button>
+                </div>
 
-                        <div class="col-md-12">
-                            <label class="form-label font-weight-bold d-flex justify-content-between align-items-center">
-                                Players List
-                                <button type="button" class="btn btn-sm btn-outline-warning" id="add-player-row"><i class="bx bx-plus"></i> Add Player</button>
-                            </label>
-                            <div id="players-container">
-                                @if(!empty($playersList))
-                                    @foreach($playersList as $pIdx => $player)
-                                        <div class="card p-3 mb-2 bg-light player-row">
-                                            <div class="row g-2 align-items-center">
-                                                <div class="col-md-3">
-                                                    <label class="form-label form-label-sm mb-1">Player Name</label>
-                                                    <input type="text" class="form-control form-control-sm" name="player_name[{{ $pIdx }}]" value="{{ $player['name'] ?? '' }}" placeholder="Player Full Name">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label class="form-label form-label-sm mb-1">Achievement / Teams</label>
-                                                    <input type="text" class="form-control form-control-sm" name="player_achievement[{{ $pIdx }}]" value="{{ $player['achievement'] ?? '' }}" placeholder="e.g. BPL, DPL, HP Squad">
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="form-label form-label-sm mb-1">Level Tag</label>
-                                                    <select class="form-select form-select-sm" name="player_level[{{ $pIdx }}]">
-                                                        <option value="National" {{ ($player['level'] ?? '') == 'National' ? 'selected' : '' }}>National</option>
-                                                        <option value="Youth" {{ ($player['level'] ?? '') == 'Youth' ? 'selected' : '' }}>Youth</option>
-                                                        <option value="Emerging" {{ ($player['level'] ?? '') == 'Emerging' ? 'selected' : '' }}>Emerging</option>
-                                                        <option value="Professional" {{ ($player['level'] ?? '') == 'Professional' ? 'selected' : '' }}>Professional</option>
-                                                        <option value="Specialist" {{ ($player['level'] ?? '') == 'Specialist' ? 'selected' : '' }}>Specialist</option>
-                                                        <option value="Champion" {{ ($player['level'] ?? '') == 'Champion' ? 'selected' : '' }}>Champion</option>
-                                                        <option value="T20" {{ ($player['level'] ?? '') == 'T20' ? 'selected' : '' }}>T20</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <label class="form-label form-label-sm mb-1">Photo (Optional)</label>
-                                                    <input type="hidden" name="existing_player_image[{{ $pIdx }}]" value="{{ $player['image'] ?? '' }}">
-                                                    <input type="file" class="form-control form-control-sm" name="player_image[{{ $pIdx }}]">
-                                                </div>
-                                                <div class="col-md-1 text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-danger remove-row mt-4"><i class="bx bx-trash"></i></button>
-                                                </div>
-                                            </div>
+                <div class="p-6 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Kicker</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-amber-600 uppercase" name="players_kicker" value="{{ old('players_kicker', $data->players_kicker ?? '') }}" placeholder="SUCCESS STORIES">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Title</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-extrabold text-slate-800" name="players_title" value="{{ old('players_title', $data->players_title ?? '') }}" placeholder="Notable Players">
+                        </div>
+                        <div class="md:col-span-3">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Subtitle</label>
+                            <textarea class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-600" name="players_subtitle" rows="2">{{ old('players_subtitle', $data->players_subtitle ?? '') }}</textarea>
+                        </div>
+                    </div>
+
+                    <div id="players-container" class="space-y-3 border-t border-slate-100 pt-4">
+                        @if(!empty($playersList))
+                            @foreach($playersList as $pIdx => $player)
+                                <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 hover:border-amber-300 transition-all player-row">
+                                    <div class="flex flex-col md:flex-row items-center gap-3">
+                                        <div class="w-full md:w-1/4">
+                                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Player Name</label>
+                                            <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 outline-none" name="player_name[{{ $pIdx }}]" value="{{ $player['name'] ?? '' }}" placeholder="Player Full Name">
                                         </div>
-                                    @endforeach
-                                @else
-                                    <div class="card p-3 mb-2 bg-light player-row">
-                                        <div class="row g-2 align-items-center">
-                                            <div class="col-md-3">
-                                                <label class="form-label form-label-sm mb-1">Player Name</label>
-                                                <input type="text" class="form-control form-control-sm" name="player_name[0]" placeholder="Player Full Name">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label class="form-label form-label-sm mb-1">Achievement / Teams</label>
-                                                <input type="text" class="form-control form-control-sm" name="player_achievement[0]" placeholder="e.g. BPL, DPL, HP Squad">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label form-label-sm mb-1">Level Tag</label>
-                                                <select class="form-select form-select-sm" name="player_level[0]">
-                                                    <option value="National">National</option>
-                                                    <option value="Youth">Youth</option>
-                                                    <option value="Emerging">Emerging</option>
-                                                    <option value="Professional">Professional</option>
-                                                    <option value="Specialist">Specialist</option>
-                                                    <option value="Champion">Champion</option>
-                                                    <option value="T20">T20</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <label class="form-label form-label-sm mb-1">Photo (Optional)</label>
-                                                <input type="hidden" name="existing_player_image[0]" value="">
-                                                <input type="file" class="form-control form-control-sm" name="player_image[0]">
-                                            </div>
-                                            <div class="col-md-1 text-end">
-                                                <button type="button" class="btn btn-sm btn-outline-danger remove-row mt-4"><i class="bx bx-trash"></i></button>
-                                            </div>
+                                        <div class="w-full md:w-1/3">
+                                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Achievement / Teams</label>
+                                            <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600 outline-none" name="player_achievement[{{ $pIdx }}]" value="{{ $player['achievement'] ?? '' }}" placeholder="e.g. BPL, DPL, HP Squad">
+                                        </div>
+                                        <div class="w-full md:w-1/6">
+                                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Level Tag</label>
+                                            <select class="w-full text-xs px-2 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-700 outline-none" name="player_level[{{ $pIdx }}]">
+                                                <option value="National" {{ ($player['level'] ?? '') == 'National' ? 'selected' : '' }}>National</option>
+                                                <option value="Youth" {{ ($player['level'] ?? '') == 'Youth' ? 'selected' : '' }}>Youth</option>
+                                                <option value="Emerging" {{ ($player['level'] ?? '') == 'Emerging' ? 'selected' : '' }}>Emerging</option>
+                                                <option value="Professional" {{ ($player['level'] ?? '') == 'Professional' ? 'selected' : '' }}>Professional</option>
+                                                <option value="Specialist" {{ ($player['level'] ?? '') == 'Specialist' ? 'selected' : '' }}>Specialist</option>
+                                                <option value="Champion" {{ ($player['level'] ?? '') == 'Champion' ? 'selected' : '' }}>Champion</option>
+                                                <option value="T20" {{ ($player['level'] ?? '') == 'T20' ? 'selected' : '' }}>T20</option>
+                                            </select>
+                                        </div>
+                                        <div class="w-full md:w-1/5">
+                                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Photo (Optional)</label>
+                                            <input type="hidden" name="existing_player_image[{{ $pIdx }}]" value="{{ $player['image'] ?? '' }}">
+                                            <input type="file" class="block w-full text-[11px] text-slate-500 file:mr-2 file:py-0.5 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200 cursor-pointer" name="player_image[{{ $pIdx }}]">
+                                        </div>
+                                        <div class="shrink-0 flex items-center justify-end w-full md:w-auto self-end pb-0.5">
+                                            <button type="button" class="w-9 h-9 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row" title="Delete Player"><i class="bx bx-trash text-base"></i></button>
                                         </div>
                                     </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Partnership Impact Section Card -->
-            <div class="card border-top border-0 border-4 border-danger mb-4">
-                <div class="card-body p-4">
-                    <div class="card-title d-flex align-items-center mb-3">
-                        <i class="bx bx-bar-chart-alt-2 me-2 font-22 text-danger"></i>
-                        <h5 class="mb-0 text-danger">5. Partnership Impact Section</h5>
-                    </div>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label class="form-label">Kicker</label>
-                            <input type="text" class="form-control" name="impact_kicker" value="{{ old('impact_kicker', $data->impact_kicker ?? '') }}" placeholder="OUR IMPACT">
-                        </div>
-                        <div class="col-md-8">
-                            <label class="form-label">Title</label>
-                            <input type="text" class="form-control" name="impact_title" value="{{ old('impact_title', $data->impact_title ?? '') }}" placeholder="Partnership Impact">
-                        </div>
-
-                        <div class="col-md-12">
-                            <label class="form-label font-weight-bold d-flex justify-content-between align-items-center">
-                                Impact Counters (4 Items Recommended)
-                                <button type="button" class="btn btn-sm btn-outline-danger" id="add-impact-row"><i class="bx bx-plus"></i> Add Impact Stat</button>
-                            </label>
-                            <div id="impact-container">
-                                @if(!empty($impactStats))
-                                    @foreach($impactStats as $imp)
-                                        <div class="row g-2 mb-2 impact-row align-items-center">
-                                            <div class="col-md-2">
-                                                <input type="text" class="form-control form-control-sm" name="impact_icon[]" value="{{ $imp['icon'] ?? 'trophy' }}" placeholder="Icon (e.g. users, trophy, calendar, star)">
-                                            </div>
-                                            <div class="col-md-2">
-                                                <input type="number" class="form-control form-control-sm" name="impact_count[]" value="{{ $imp['count'] ?? 0 }}" placeholder="Count (e.g. 100)">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="text" class="form-control form-control-sm" name="impact_text[]" value="{{ $imp['text'] ?? '' }}" placeholder="Stat Title (e.g. Active Players)">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="text" class="form-control form-control-sm" name="impact_desc[]" value="{{ $imp['desc'] ?? '' }}" placeholder="Description (e.g. Across DPL...)">
-                                            </div>
-                                            <div class="col-md-1">
-                                                <button type="button" class="btn btn-sm btn-outline-danger remove-row w-100"><i class="bx bx-trash"></i></button>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="row g-2 mb-2 impact-row align-items-center">
-                                        <div class="col-md-2"><input type="text" class="form-control form-control-sm" name="impact_icon[]" value="users" placeholder="Icon"></div>
-                                        <div class="col-md-2"><input type="number" class="form-control form-control-sm" name="impact_count[]" value="100" placeholder="Count"></div>
-                                        <div class="col-md-3"><input type="text" class="form-control form-control-sm" name="impact_text[]" placeholder="Title"></div>
-                                        <div class="col-md-4"><input type="text" class="form-control form-control-sm" name="impact_desc[]" placeholder="Description"></div>
-                                        <div class="col-md-1"><button type="button" class="btn btn-sm btn-outline-danger remove-row w-100"><i class="bx bx-trash"></i></button></div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Coordination & Excellence Section Card -->
-            <div class="card border-top border-0 border-4 border-secondary mb-4">
-                <div class="card-body p-4">
-                    <div class="card-title d-flex align-items-center mb-3">
-                        <i class="bx bx-phone-call me-2 font-22 text-secondary"></i>
-                        <h5 class="mb-0 text-secondary">6. Coordination & Excellence Section</h5>
-                    </div>
-                    <hr>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="border p-3 rounded h-100">
-                                <h6>Left Box: Partnership Coordination</h6>
-                                <div class="mb-3">
-                                    <label class="form-label">Section Title</label>
-                                    <input type="text" class="form-control" name="contact_section_title" value="{{ old('contact_section_title', $data->contact_section_title ?? '') }}" placeholder="Partnership Coordination">
                                 </div>
-                                <label class="form-label font-weight-bold d-flex justify-content-between align-items-center">
-                                    Contact Persons
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" id="add-contact-row"><i class="bx bx-plus"></i> Add Contact</button>
-                                </label>
-                                <div id="contacts-container">
+                            @endforeach
+                        @else
+                            <div class="bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 hover:border-amber-300 transition-all player-row">
+                                <div class="flex flex-col md:flex-row items-center gap-3">
+                                    <div class="w-full md:w-1/4">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Player Name</label>
+                                        <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 outline-none" name="player_name[0]" placeholder="Player Full Name">
+                                    </div>
+                                    <div class="w-full md:w-1/3">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Achievement / Teams</label>
+                                        <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600 outline-none" name="player_achievement[0]" placeholder="e.g. BPL, DPL, HP Squad">
+                                    </div>
+                                    <div class="w-full md:w-1/6">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Level Tag</label>
+                                        <select class="w-full text-xs px-2 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-700 outline-none" name="player_level[0]">
+                                            <option value="National">National</option>
+                                            <option value="Youth">Youth</option>
+                                            <option value="Emerging">Emerging</option>
+                                            <option value="Professional">Professional</option>
+                                            <option value="Specialist">Specialist</option>
+                                            <option value="Champion">Champion</option>
+                                            <option value="T20">T20</option>
+                                        </select>
+                                    </div>
+                                    <div class="w-full md:w-1/5">
+                                        <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Photo (Optional)</label>
+                                        <input type="hidden" name="existing_player_image[0]" value="">
+                                        <input type="file" class="block w-full text-[11px] text-slate-500 file:mr-2 file:py-0.5 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200 cursor-pointer" name="player_image[0]">
+                                    </div>
+                                    <div class="shrink-0 flex items-center justify-end w-full md:w-auto self-end pb-0.5">
+                                        <button type="button" class="w-9 h-9 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row" title="Delete Player"><i class="bx bx-trash text-base"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. PARTNERSHIP IMPACT CARD -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+                <div class="p-5 bg-gradient-to-r from-red-50 to-rose-50/50 border-b border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-red-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-red-500/20">
+                            <i class="bx bx-bar-chart-alt-2"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-slate-900 text-base m-0">5. Partnership Impact Section</h5>
+                            <p class="text-xs text-slate-500 m-0">Edit bottom impact metrics counters, titles, icons, and descriptions</p>
+                        </div>
+                    </div>
+                    <button type="button" id="add-impact-row" class="px-3.5 py-1.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs rounded-lg transition-all shadow-xs flex items-center gap-1 cursor-pointer">
+                        <i class="bx bx-plus text-base"></i> Add Impact Stat
+                    </button>
+                </div>
+
+                <div class="p-6 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Kicker</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-red-600 uppercase" name="impact_kicker" value="{{ old('impact_kicker', $data->impact_kicker ?? '') }}" placeholder="OUR IMPACT">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Title</label>
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-extrabold text-slate-800" name="impact_title" value="{{ old('impact_title', $data->impact_title ?? '') }}" placeholder="Partnership Impact">
+                        </div>
+                    </div>
+
+                    <div id="impact-container" class="space-y-2 border-t border-slate-100 pt-4">
+                        @if(!empty($impactStats))
+                            @foreach($impactStats as $imp)
+                                <div class="flex flex-col md:flex-row items-center gap-2.5 p-2.5 bg-slate-50/80 rounded-xl border border-slate-200/80 impact-row">
+                                    <div class="w-full md:w-1/6">
+                                        <input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-semibold text-slate-700" name="impact_icon[]" value="{{ $imp['icon'] ?? 'trophy' }}" placeholder="Icon">
+                                    </div>
+                                    <div class="w-full md:w-1/6">
+                                        <input type="number" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-bold text-red-600" name="impact_count[]" value="{{ $imp['count'] ?? 0 }}" placeholder="Count">
+                                    </div>
+                                    <div class="w-full md:w-1/3">
+                                        <input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-bold text-slate-800" name="impact_text[]" value="{{ $imp['text'] ?? '' }}" placeholder="Title">
+                                    </div>
+                                    <div class="w-full md:w-1/3">
+                                        <input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none text-slate-500" name="impact_desc[]" value="{{ $imp['desc'] ?? '' }}" placeholder="Description">
+                                    </div>
+                                    <button type="button" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete Stat"><i class="bx bx-trash text-sm"></i></button>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="flex flex-col md:flex-row items-center gap-2.5 p-2.5 bg-slate-50/80 rounded-xl border border-slate-200/80 impact-row">
+                                <div class="w-full md:w-1/6"><input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-semibold text-slate-700" name="impact_icon[]" value="users" placeholder="Icon"></div>
+                                <div class="w-full md:w-1/6"><input type="number" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-bold text-red-600" name="impact_count[]" value="100" placeholder="Count"></div>
+                                <div class="w-full md:w-1/3"><input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-bold text-slate-800" name="impact_text[]" placeholder="Title"></div>
+                                <div class="w-full md:w-1/3"><input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none text-slate-500" name="impact_desc[]" placeholder="Description"></div>
+                                <button type="button" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete Stat"><i class="bx bx-trash text-sm"></i></button>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. COORDINATION & EXCELLENCE CARD -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 mb-6 overflow-hidden">
+                <div class="p-5 bg-gradient-to-r from-purple-50 to-slate-50/50 border-b border-slate-200 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-purple-500/20">
+                            <i class="bx bx-phone-call"></i>
+                        </div>
+                        <div>
+                            <h5 class="font-extrabold text-slate-900 text-base m-0">6. Coordination & Excellence Section</h5>
+                            <p class="text-xs text-slate-500 m-0">Manage contact person details and bottom partnership excellence tags</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Left Box: Contacts -->
+                        <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/80 flex flex-col justify-between">
+                            <div>
+                                <div class="flex items-center justify-between mb-3">
+                                    <h6 class="text-xs font-bold text-purple-700 uppercase tracking-wider flex items-center gap-1.5 m-0"><i class="bx bx-user text-base"></i> Partnership Coordination</h6>
+                                    <button type="button" id="add-contact-row" class="px-2.5 py-1 bg-purple-100 text-purple-700 font-bold text-[11px] rounded-md hover:bg-purple-200 cursor-pointer">+ Add Contact</button>
+                                </div>
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 mb-3" name="contact_section_title" value="{{ old('contact_section_title', $data->contact_section_title ?? '') }}" placeholder="Section Title">
+
+                                <div id="contacts-container" class="space-y-2">
                                     @if(!empty($contactCards))
                                         @foreach($contactCards as $cIdx => $cCard)
-                                            <div class="card p-2 mb-2 bg-light contact-row">
-                                                <div class="row g-2">
-                                                    <div class="col-md-6">
-                                                        <input type="text" class="form-control form-control-sm mb-1" name="contact_name[]" value="{{ $cCard['name'] ?? '' }}" placeholder="Name">
-                                                        <input type="text" class="form-control form-control-sm" name="contact_title[]" value="{{ $cCard['title'] ?? '' }}" placeholder="Designation / Title">
+                                            <div class="p-3 bg-white rounded-lg border border-slate-200 contact-row">
+                                                <div class="flex items-center gap-2">
+                                                    <div class="flex-1 space-y-1.5">
+                                                        <div class="grid grid-cols-2 gap-1.5">
+                                                            <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded font-bold text-slate-800" name="contact_name[]" value="{{ $cCard['name'] ?? '' }}" placeholder="Name">
+                                                            <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-emerald-600 font-semibold" name="contact_title[]" value="{{ $cCard['title'] ?? '' }}" placeholder="Title">
+                                                        </div>
+                                                        <div class="grid grid-cols-2 gap-1.5">
+                                                            <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-slate-600" name="contact_phone[]" value="{{ $cCard['phone'] ?? '' }}" placeholder="Phone">
+                                                            <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-slate-500 italic" name="contact_role[]" value="{{ $cCard['role'] ?? '' }}" placeholder="Role">
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-5">
-                                                        <input type="text" class="form-control form-control-sm mb-1" name="contact_phone[]" value="{{ $cCard['phone'] ?? '' }}" placeholder="Phone Number">
-                                                        <input type="text" class="form-control form-control-sm" name="contact_role[]" value="{{ $cCard['role'] ?? '' }}" placeholder="Role / Governance">
-                                                    </div>
-                                                    <div class="col-md-1 text-end">
-                                                        <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
-                                                    </div>
+                                                    <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                                                 </div>
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="card p-2 mb-2 bg-light contact-row">
-                                            <div class="row g-2">
-                                                <div class="col-md-6">
-                                                    <input type="text" class="form-control form-control-sm mb-1" name="contact_name[]" placeholder="Name">
-                                                    <input type="text" class="form-control form-control-sm" name="contact_title[]" placeholder="Title">
+                                        <div class="p-3 bg-white rounded-lg border border-slate-200 contact-row">
+                                            <div class="flex items-center gap-2">
+                                                <div class="flex-1 space-y-1.5">
+                                                    <div class="grid grid-cols-2 gap-1.5">
+                                                        <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded font-bold text-slate-800" name="contact_name[]" placeholder="Name">
+                                                        <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-emerald-600 font-semibold" name="contact_title[]" placeholder="Title">
+                                                    </div>
+                                                    <div class="grid grid-cols-2 gap-1.5">
+                                                        <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-slate-600" name="contact_phone[]" placeholder="Phone">
+                                                        <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-slate-500 italic" name="contact_role[]" placeholder="Role">
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-5">
-                                                    <input type="text" class="form-control form-control-sm mb-1" name="contact_phone[]" placeholder="Phone">
-                                                    <input type="text" class="form-control form-control-sm" name="contact_role[]" placeholder="Role">
-                                                </div>
-                                                <div class="col-md-1 text-end">
-                                                    <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
-                                                </div>
+                                                <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                                             </div>
                                         </div>
                                     @endif
@@ -563,33 +596,29 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="border p-3 rounded h-100">
-                                <h6>Right Box: Partnership Excellence</h6>
-                                <div class="mb-2">
-                                    <label class="form-label">Title</label>
-                                    <input type="text" class="form-control" name="excellence_title" value="{{ old('excellence_title', $data->excellence_title ?? '') }}" placeholder="Partnership Excellence">
+                        <!-- Right Box: Badges -->
+                        <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-200/80 flex flex-col justify-between">
+                            <div>
+                                <h6 class="text-xs font-bold text-purple-700 uppercase tracking-wider mb-2 flex items-center gap-1.5"><i class="bx bx-star text-base"></i> Partnership Excellence</h6>
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 mb-2" name="excellence_title" value="{{ old('excellence_title', $data->excellence_title ?? '') }}" placeholder="Title">
+                                <textarea class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg text-slate-600 mb-3" name="excellence_text" rows="3" placeholder="Paragraph text...">{{ old('excellence_text', $data->excellence_text ?? '') }}</textarea>
+
+                                <div class="flex items-center justify-between mb-2">
+                                    <label class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Feature Tag Badges</label>
+                                    <button type="button" id="add-badge-item" class="px-2 py-0.5 bg-purple-100 text-purple-700 font-bold text-[10px] rounded hover:bg-purple-200 cursor-pointer">+ Add Tag</button>
                                 </div>
-                                <div class="mb-3">
-                                    <label class="form-label">Paragraph Text</label>
-                                    <textarea class="form-control" name="excellence_text" rows="3">{{ old('excellence_text', $data->excellence_text ?? '') }}</textarea>
-                                </div>
-                                <label class="form-label font-weight-bold d-flex justify-content-between align-items-center">
-                                    Feature Badges (Tags)
-                                    <button type="button" class="btn btn-sm btn-outline-secondary" id="add-badge-item"><i class="bx bx-plus"></i> Add Tag</button>
-                                </label>
-                                <div id="badges-container">
+                                <div id="badges-container" class="space-y-1.5">
                                     @if(!empty($excellenceBadges))
                                         @foreach($excellenceBadges as $bItem)
-                                            <div class="input-group mb-2 badge-row">
-                                                <input type="text" class="form-control form-control-sm" name="excellence_badges[]" value="{{ $bItem }}">
-                                                <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                                            <div class="flex items-center gap-1.5 badge-row">
+                                                <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold" name="excellence_badges[]" value="{{ $bItem }}">
+                                                <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                                             </div>
                                         @endforeach
                                     @else
-                                        <div class="input-group mb-2 badge-row">
-                                            <input type="text" class="form-control form-control-sm" name="excellence_badges[]" placeholder="Tag name (e.g. Grassroots Development)">
-                                            <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                                        <div class="flex items-center gap-1.5 badge-row">
+                                            <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold" name="excellence_badges[]" placeholder="Tag name (e.g. Grassroots Development)">
+                                            <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                                         </div>
                                     @endif
                                 </div>
@@ -599,22 +628,22 @@
                 </div>
             </div>
 
-            <!-- Meta & Save Button -->
-            <div class="card mb-4">
-                <div class="card-body p-4">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Meta Title</label>
-                            <input type="text" class="form-control" name="meta" value="{{ old('meta', $data->meta ?? '') }}">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Meta Description</label>
-                            <input type="text" class="form-control" name="meta_description" value="{{ old('meta_description', $data->meta_description ?? '') }}">
-                        </div>
-                        <div class="col-md-12 text-end mt-4">
-                            <button type="submit" class="btn btn-primary btn-lg px-5"><i class="bx bx-save me-1"></i> Save Changes</button>
-                        </div>
+            <!-- SEO META & SAVE ACTION CARD -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 mb-8 p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Meta Title (SEO)</label>
+                        <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800" name="meta" value="{{ old('meta', $data->meta ?? '') }}">
                     </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Meta Description (SEO)</label>
+                        <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-800" name="meta_description" value="{{ old('meta_description', $data->meta_description ?? '') }}">
+                    </div>
+                </div>
+                <div class="flex justify-end pt-2">
+                    <button type="submit" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2 cursor-pointer hover:scale-[1.02]">
+                        <i class="bx bx-save text-lg"></i> Save All Changes
+                    </button>
                 </div>
             </div>
         </form>
@@ -633,6 +662,8 @@
             }
         });
 
+        const deleteBtnClasses = "w-9 h-9 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row";
+
         // Add Hero Stat
         const addHeroStatBtn = document.getElementById('add-hero-stat');
         if (addHeroStatBtn) {
@@ -640,11 +671,11 @@
                 const container = document.getElementById('hero-stats-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'row g-2 mb-2 hero-stat-row';
+                div.className = 'flex items-center gap-3 p-2 bg-slate-50 rounded-xl border border-slate-200/80 hero-stat-row';
                 div.innerHTML = `
-                    <div class="col-md-4"><input type="text" class="form-control" name="hero_stat_number[]" placeholder="e.g. 7+"></div>
-                    <div class="col-md-7"><input type="text" class="form-control" name="hero_stat_label[]" placeholder="e.g. Years Partnership"></div>
-                    <div class="col-md-1"><button type="button" class="btn btn-outline-danger w-100 remove-row"><i class="bx bx-trash"></i></button></div>
+                    <div class="w-1/3"><input type="text" class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg outline-none font-bold text-blue-600" name="hero_stat_number[]" placeholder="e.g. 7+"></div>
+                    <div class="flex-1"><input type="text" class="w-full text-xs px-3 py-2 bg-white border border-slate-200 rounded-lg outline-none text-slate-700" name="hero_stat_label[]" placeholder="e.g. Years Partnership"></div>
+                    <button type="button" class="${deleteBtnClasses} shrink-0" title="Delete Stat"><i class="bx bx-trash text-base"></i></button>
                 `;
                 container.appendChild(div);
             });
@@ -658,21 +689,31 @@
                 const container = document.getElementById('hero-slides-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'card p-3 mb-2 bg-light hero-slide-row';
+                div.className = 'bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 hover:border-blue-300 transition-all hero-slide-row';
                 div.innerHTML = `
-                    <div class="row g-2 align-items-center">
-                        <div class="col-md-3">
-                            <input type="hidden" name="existing_slide_image[${slideIndex}]" value="">
-                            <input type="file" class="form-control form-control-sm" name="slide_image[${slideIndex}]">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-3">
+                        <div class="flex items-center gap-3 w-full md:w-64 shrink-0">
+                            <div class="w-16 h-14 rounded-lg bg-white border border-slate-200 overflow-hidden flex items-center justify-center shrink-0 shadow-2xs">
+                                <i class="bx bx-image text-slate-400 text-2xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Image File</label>
+                                <input type="hidden" name="existing_slide_image[${slideIndex}]" value="">
+                                <input type="file" class="block w-full text-[11px] text-slate-500 file:mr-2 file:py-0.5 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-blue-100 file:text-blue-700 hover:file:bg-blue-200 cursor-pointer" name="slide_image[${slideIndex}]">
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control form-control-sm mb-1" name="slide_title[${slideIndex}]" placeholder="Slide Overlay Title">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2 flex-1 w-full">
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Overlay Title</label>
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 outline-none" name="slide_title[${slideIndex}]" placeholder="Slide Overlay Title">
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Overlay Subtitle</label>
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600 outline-none" name="slide_subtitle[${slideIndex}]" placeholder="Slide Overlay Subtitle">
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control form-control-sm" name="slide_subtitle[${slideIndex}]" placeholder="Slide Overlay Subtitle">
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                        <div class="shrink-0 flex items-center justify-end w-full md:w-auto">
+                            <button type="button" class="${deleteBtnClasses}" title="Delete Slide"><i class="bx bx-trash text-base"></i></button>
                         </div>
                     </div>
                 `;
@@ -688,11 +729,11 @@
                 const container = document.getElementById('highlight-items-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'input-group mb-2 highlight-row';
+                div.className = 'flex items-center gap-2 highlight-row';
                 div.innerHTML = `
-                    <span class="input-group-text"><i class="bx bx-check text-success"></i></span>
-                    <input type="text" class="form-control" name="highlight_items[]" placeholder="Highlight point...">
-                    <button type="button" class="btn btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                    <div class="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold text-sm">✓</div>
+                    <input type="text" class="flex-1 text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg outline-none text-slate-700 focus:bg-white focus:border-emerald-500" name="highlight_items[]" placeholder="Highlight point...">
+                    <button type="button" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:border-red-600 hover:text-white transition-all duration-200 hover:scale-105 shadow-xs cursor-pointer remove-row shrink-0" title="Delete Point"><i class="bx bx-trash text-base"></i></button>
                 `;
                 container.appendChild(div);
             });
@@ -705,10 +746,10 @@
                 const container = document.getElementById('mission-items-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'input-group mb-2 mission-row';
+                div.className = 'flex items-center gap-1.5 mission-row';
                 div.innerHTML = `
-                    <input type="text" class="form-control form-control-sm" name="mission_items[]" placeholder="Mission point...">
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                    <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600" name="mission_items[]" placeholder="Mission point...">
+                    <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                 `;
                 container.appendChild(div);
             });
@@ -721,11 +762,10 @@
                 const container = document.getElementById('tournament-items-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'input-group mb-2 tournament-row';
+                div.className = 'flex items-center gap-1.5 tournament-row';
                 div.innerHTML = `
-                    <span class="input-group-text"><i class="bx bx-trophy text-warning"></i></span>
-                    <input type="text" class="form-control form-control-sm" name="tournament_items[]" placeholder="Achievement name...">
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                    <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 font-medium" name="tournament_items[]" placeholder="Achievement name...">
+                    <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                 `;
                 container.appendChild(div);
             });
@@ -739,20 +779,20 @@
                 const container = document.getElementById('players-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'card p-3 mb-2 bg-light player-row';
+                div.className = 'bg-slate-50/80 rounded-xl p-3.5 border border-slate-200/80 hover:border-amber-300 transition-all player-row';
                 div.innerHTML = `
-                    <div class="row g-2 align-items-center">
-                        <div class="col-md-3">
-                            <label class="form-label form-label-sm mb-1">Player Name</label>
-                            <input type="text" class="form-control form-control-sm" name="player_name[${playerIndex}]" placeholder="Player Full Name">
+                    <div class="flex flex-col md:flex-row items-center gap-3">
+                        <div class="w-full md:w-1/4">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Player Name</label>
+                            <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800 outline-none" name="player_name[${playerIndex}]" placeholder="Player Full Name">
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label form-label-sm mb-1">Achievement / Teams</label>
-                            <input type="text" class="form-control form-control-sm" name="player_achievement[${playerIndex}]" placeholder="e.g. BPL, DPL, HP Squad">
+                        <div class="w-full md:w-1/3">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Achievement / Teams</label>
+                            <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-600 outline-none" name="player_achievement[${playerIndex}]" placeholder="e.g. BPL, DPL, HP Squad">
                         </div>
-                        <div class="col-md-2">
-                            <label class="form-label form-label-sm mb-1">Level Tag</label>
-                            <select class="form-select form-select-sm" name="player_level[${playerIndex}]">
+                        <div class="w-full md:w-1/6">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Level Tag</label>
+                            <select class="w-full text-xs px-2 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-700 outline-none" name="player_level[${playerIndex}]">
                                 <option value="National">National</option>
                                 <option value="Youth">Youth</option>
                                 <option value="Emerging">Emerging</option>
@@ -762,13 +802,13 @@
                                 <option value="T20">T20</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
-                            <label class="form-label form-label-sm mb-1">Photo (Optional)</label>
+                        <div class="w-full md:w-1/5">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Photo (Optional)</label>
                             <input type="hidden" name="existing_player_image[${playerIndex}]" value="">
-                            <input type="file" class="form-control form-control-sm" name="player_image[${playerIndex}]">
+                            <input type="file" class="block w-full text-[11px] text-slate-500 file:mr-2 file:py-0.5 file:px-2 file:rounded-md file:border-0 file:text-[10px] file:font-bold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200 cursor-pointer" name="player_image[${playerIndex}]">
                         </div>
-                        <div class="col-md-1 text-end">
-                            <button type="button" class="btn btn-sm btn-outline-danger remove-row mt-4"><i class="bx bx-trash"></i></button>
+                        <div class="shrink-0 flex items-center justify-end w-full md:w-auto self-end pb-0.5">
+                            <button type="button" class="${deleteBtnClasses}" title="Delete Player"><i class="bx bx-trash text-base"></i></button>
                         </div>
                     </div>
                 `;
@@ -784,13 +824,13 @@
                 const container = document.getElementById('impact-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'row g-2 mb-2 impact-row align-items-center';
+                div.className = 'flex flex-col md:flex-row items-center gap-2.5 p-2.5 bg-slate-50/80 rounded-xl border border-slate-200/80 impact-row';
                 div.innerHTML = `
-                    <div class="col-md-2"><input type="text" class="form-control form-control-sm" name="impact_icon[]" value="trophy" placeholder="Icon"></div>
-                    <div class="col-md-2"><input type="number" class="form-control form-control-sm" name="impact_count[]" value="0" placeholder="Count"></div>
-                    <div class="col-md-3"><input type="text" class="form-control form-control-sm" name="impact_text[]" placeholder="Title"></div>
-                    <div class="col-md-4"><input type="text" class="form-control form-control-sm" name="impact_desc[]" placeholder="Description"></div>
-                    <div class="col-md-1"><button type="button" class="btn btn-sm btn-outline-danger remove-row w-100"><i class="bx bx-trash"></i></button></div>
+                    <div class="w-full md:w-1/6"><input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-semibold text-slate-700" name="impact_icon[]" value="trophy" placeholder="Icon"></div>
+                    <div class="w-full md:w-1/6"><input type="number" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-bold text-red-600" name="impact_count[]" value="0" placeholder="Count"></div>
+                    <div class="w-full md:w-1/3"><input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none font-bold text-slate-800" name="impact_text[]" placeholder="Title"></div>
+                    <div class="w-full md:w-1/3"><input type="text" class="w-full text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg outline-none text-slate-500" name="impact_desc[]" placeholder="Description"></div>
+                    <button type="button" class="w-8 h-8 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete Stat"><i class="bx bx-trash text-sm"></i></button>
                 `;
                 container.appendChild(div);
             });
@@ -803,20 +843,20 @@
                 const container = document.getElementById('contacts-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'card p-2 mb-2 bg-light contact-row';
+                div.className = 'p-3 bg-white rounded-lg border border-slate-200 contact-row';
                 div.innerHTML = `
-                    <div class="row g-2">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control form-control-sm mb-1" name="contact_name[]" placeholder="Name">
-                            <input type="text" class="form-control form-control-sm" name="contact_title[]" placeholder="Title">
+                    <div class="flex items-center gap-2">
+                        <div class="flex-1 space-y-1.5">
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded font-bold text-slate-800" name="contact_name[]" placeholder="Name">
+                                <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-emerald-600 font-semibold" name="contact_title[]" placeholder="Title">
+                            </div>
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-slate-600" name="contact_phone[]" placeholder="Phone">
+                                <input type="text" class="w-full text-xs px-2.5 py-1 bg-slate-50 border border-slate-200 rounded text-slate-500 italic" name="contact_role[]" placeholder="Role">
+                            </div>
                         </div>
-                        <div class="col-md-5">
-                            <input type="text" class="form-control form-control-sm mb-1" name="contact_phone[]" placeholder="Phone">
-                            <input type="text" class="form-control form-control-sm" name="contact_role[]" placeholder="Role">
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
-                        </div>
+                        <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                     </div>
                 `;
                 container.appendChild(div);
@@ -830,14 +870,15 @@
                 const container = document.getElementById('badges-container');
                 if (!container) return;
                 const div = document.createElement('div');
-                div.className = 'input-group mb-2 badge-row';
+                div.className = 'flex items-center gap-1.5 badge-row';
                 div.innerHTML = `
-                    <input type="text" class="form-control form-control-sm" name="excellence_badges[]" placeholder="Tag name...">
-                    <button type="button" class="btn btn-sm btn-outline-danger remove-row"><i class="bx bx-trash"></i></button>
+                    <input type="text" class="flex-1 text-xs px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-700 font-bold" name="excellence_badges[]" placeholder="Tag name...">
+                    <button type="button" class="w-7 h-7 inline-flex items-center justify-center rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-600 hover:text-white transition-all remove-row shrink-0" title="Delete"><i class="bx bx-trash text-xs"></i></button>
                 `;
                 container.appendChild(div);
             });
         }
     });
 </script>
+@endsection
 @endsection
