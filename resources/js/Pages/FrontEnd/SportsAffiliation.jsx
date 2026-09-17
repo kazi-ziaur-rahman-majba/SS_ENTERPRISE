@@ -145,12 +145,12 @@ export default function SportsAffiliation({ pageCms }) {
                         {/* Left Column Text & Stats */}
                         <div className="lg:col-span-6 space-y-6">
                             <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-blue-100 mb-2">
-                                <Link href="/" className="hover:underline text-white font-extrabold">Home</Link>
+                                <Link href="/" className="hover:underline text-white font-bold">Home</Link>
                                 <span className="text-blue-200 font-bold">/</span>
                                 <span className="text-white font-bold">Sports Affiliation</span>
                             </nav>
 
-                            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+                            <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
                                 {pageCms?.hero_title || 'SS Group × 10-12 Sports'}
                             </h1>
 
@@ -162,7 +162,7 @@ export default function SportsAffiliation({ pageCms }) {
                             <div className="grid grid-cols-3 gap-3 pt-4 max-w-lg">
                                 {heroStats.map((stat, idx) => (
                                     <div key={idx} className="bg-white/10 backdrop-blur-md rounded-2xl p-4 text-center border border-white/20 shadow-sm">
-                                        <div className="text-2xl sm:text-3xl font-extrabold text-amber-300">
+                                        <div className="text-2xl sm:text-3xl font-bold text-amber-300">
                                             {stat.number}
                                         </div>
                                         <div className="text-[11px] sm:text-xs text-white/90 font-medium mt-1">
@@ -195,10 +195,10 @@ export default function SportsAffiliation({ pageCms }) {
                                                 className="w-full h-full object-cover"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
-                                                <h3 className="text-xl sm:text-2xl font-black text-amber-300 mb-1">
+                                                <h3 className="text-xl sm:text-2xl font-bold text-amber-300 mb-1">
                                                     {slide.title}
                                                 </h3>
-                                                <p className="text-xs sm:text-sm text-slate-200 font-medium">
+                                                <p className="text-xs sm:text-sm text-slate-200 line-clamp-2">
                                                     {slide.subtitle}
                                                 </p>
                                             </div>
@@ -206,13 +206,13 @@ export default function SportsAffiliation({ pageCms }) {
                                     );
                                 })}
 
-                                {/* Dots Indicator */}
-                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+                                {/* Slide controls */}
+                                <div className="absolute bottom-4 right-4 z-20 flex items-center gap-2">
                                     {heroSlides.map((_, idx) => (
                                         <button
                                             key={idx}
                                             onClick={() => setActiveSlide(idx)}
-                                            className={`h-2.5 rounded-full transition-all duration-300 ${idx === activeSlide ? 'w-8 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'}`}
+                                            className={`h-2 rounded-full transition-all duration-300 ${idx === activeSlide ? 'w-6 bg-amber-400' : 'w-2 bg-white/50 hover:bg-white'}`}
                                             aria-label={`Go to slide ${idx + 1}`}
                                         />
                                     ))}
@@ -228,10 +228,10 @@ export default function SportsAffiliation({ pageCms }) {
                 <div className={containerClass}>
                     {/* Header */}
                     <div className="max-w-3xl mb-12">
-                        <span className="text-emerald-600 font-extrabold text-xs uppercase tracking-widest block mb-2">
+                        <span className="text-emerald-600 font-semibold text-xs uppercase tracking-widest block mb-2">
                             {pageCms?.partnership_kicker || 'STRATEGIC PARTNERSHIP'}
                         </span>
-                        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug">
+                        <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-snug">
                             {pageCms?.partnership_title || 'Building Cricket Excellence Together'}
                         </h2>
                         <p className="text-slate-600 text-sm sm:text-base mt-3 leading-relaxed">
@@ -242,7 +242,7 @@ export default function SportsAffiliation({ pageCms }) {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                         {/* Left narrative & highlights */}
                         <div className="lg:col-span-7 space-y-6">
-                            <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">
+                            <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
                                 {pageCms?.journey_title || 'Our Seven-Year Journey'}
                             </h3>
 
@@ -252,7 +252,7 @@ export default function SportsAffiliation({ pageCms }) {
 
                             {/* Highlight Green Box */}
                             <div className="relative p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg border border-emerald-400/30">
-                                <div className="flex items-center gap-2 font-black text-base sm:text-lg text-amber-300 mb-4">
+                                <div className="flex items-center gap-2 font-bold text-base sm:text-lg text-amber-300 mb-4">
                                     <Handshake className="w-5 h-5" />
                                     <span>{pageCms?.highlight_title || 'Partnership Highlights (2018-current)'}</span>
                                 </div>
@@ -279,7 +279,7 @@ export default function SportsAffiliation({ pageCms }) {
                                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
                                     {/* Company Logo Box */}
                                     <div className="flex-1">
-                                        <div className="text-2xl sm:text-3xl font-black text-blue-600 tracking-tight">
+                                        <div className="text-2xl sm:text-3xl font-bold text-blue-600 tracking-tight">
                                             {pageCms?.company_logo_text || 'SS GROUP'}
                                         </div>
                                         <div className="text-xs font-semibold text-slate-400 mt-1">
@@ -288,16 +288,16 @@ export default function SportsAffiliation({ pageCms }) {
                                     </div>
 
                                     {/* Plus Divider */}
-                                    <div className="w-12 h-12 rounded-full bg-slate-100 text-emerald-500 font-black text-xl flex items-center justify-center shrink-0">
+                                    <div className="w-12 h-12 rounded-full bg-slate-100 text-emerald-500 font-bold text-xl flex items-center justify-center shrink-0">
                                         +
                                     </div>
 
                                     {/* Sports Logo Box */}
                                     <div className="flex-1 flex flex-col items-center">
-                                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white font-black text-xl flex items-center justify-center shadow-lg shadow-emerald-500/20 mb-2">
+                                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white font-bold text-xl flex items-center justify-center shadow-lg shadow-emerald-500/20 mb-2">
                                             {pageCms?.sports_logo_badge || '10-12'}
                                         </div>
-                                        <div className="text-xl font-black text-slate-900">
+                                        <div className="text-xl font-bold text-slate-900">
                                             {pageCms?.sports_logo_text || 'SPORTS'}
                                         </div>
                                         <div className="text-[11px] italic text-slate-500 mt-0.5">
@@ -315,10 +315,10 @@ export default function SportsAffiliation({ pageCms }) {
             <section className="py-16 sm:py-24 bg-white relative">
                 <div className={containerClass}>
                     <div className="text-center max-w-2xl mx-auto mb-14">
-                        <span className="text-emerald-600 font-extrabold text-xs uppercase tracking-widest block mb-2">
+                        <span className="text-emerald-600 font-semibold text-xs uppercase tracking-widest block mb-2">
                             {pageCms?.vision_kicker || 'OUR FOUNDATION'}
                         </span>
-                        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                        <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
                             {pageCms?.vision_title || 'Shared Vision & Mission'}
                         </h2>
                         <p className="text-slate-600 text-sm sm:text-base mt-2">
@@ -333,7 +333,7 @@ export default function SportsAffiliation({ pageCms }) {
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-600 to-emerald-500 text-white flex items-center justify-center font-bold mb-6 shadow-md shadow-blue-500/20">
                                 <Eye className="w-7 h-7" />
                             </div>
-                            <h3 className="text-xl font-extrabold text-slate-900 mb-3">
+                            <h3 className="text-xl font-bold text-slate-900 mb-3">
                                 {pageCms?.vision_card_title || 'Our Vision'}
                             </h3>
                             <p className="text-slate-600 text-sm leading-relaxed">
@@ -347,7 +347,7 @@ export default function SportsAffiliation({ pageCms }) {
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 text-white flex items-center justify-center font-bold mb-6 shadow-md shadow-emerald-500/20">
                                 <Target className="w-7 h-7" />
                             </div>
-                            <h3 className="text-xl font-extrabold text-slate-900 mb-4">
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">
                                 {pageCms?.mission_card_title || 'Our Mission'}
                             </h3>
                             <ul className="space-y-2.5">
@@ -366,7 +366,7 @@ export default function SportsAffiliation({ pageCms }) {
                             <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center font-bold mb-6 shadow-md shadow-amber-500/20">
                                 <Trophy className="w-7 h-7" />
                             </div>
-                            <h3 className="text-xl font-extrabold text-slate-900 mb-4">
+                            <h3 className="text-xl font-bold text-slate-900 mb-4">
                                 {pageCms?.tournament_card_title || 'Tournament Success'}
                             </h3>
                             <ul className="space-y-3">
@@ -386,10 +386,10 @@ export default function SportsAffiliation({ pageCms }) {
             <section className="py-16 sm:py-24 bg-slate-50 relative">
                 <div className={containerClass}>
                     <div className="text-center max-w-2xl mx-auto mb-14">
-                        <span className="text-emerald-600 font-extrabold text-xs uppercase tracking-widest block mb-2">
+                        <span className="text-emerald-600 font-semibold text-xs uppercase tracking-widest block mb-2">
                             {pageCms?.players_kicker || 'SUCCESS STORIES'}
                         </span>
-                        <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
+                        <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight">
                             {pageCms?.players_title || 'Notable Players'}
                         </h2>
                         <p className="text-slate-600 text-sm sm:text-base mt-2">
@@ -425,7 +425,7 @@ export default function SportsAffiliation({ pageCms }) {
                                                 className="w-14 h-14 rounded-full object-cover border-2 border-emerald-400"
                                             />
                                         ) : (
-                                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black text-base flex items-center justify-center shadow-sm">
+                                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-bold text-base flex items-center justify-center shadow-sm">
                                                 {initials}
                                             </div>
                                         )}
@@ -437,7 +437,7 @@ export default function SportsAffiliation({ pageCms }) {
 
                                     {/* Info */}
                                     <div className="flex-1 min-w-0">
-                                        <h4 className="font-extrabold text-slate-900 text-base truncate">
+                                        <h4 className="font-bold text-slate-900 text-base truncate">
                                             {player.name}
                                         </h4>
                                         <p className="text-xs text-slate-500 mt-1 font-medium leading-tight line-clamp-2">
@@ -459,10 +459,10 @@ export default function SportsAffiliation({ pageCms }) {
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.05),transparent_70%)] pointer-events-none" />
                 <div className={`${containerClass} relative z-10`}>
                     <div className="text-center max-w-2xl mx-auto mb-14">
-                        <span className="text-emerald-400 font-extrabold text-xs uppercase tracking-widest block mb-2">
+                        <span className="text-emerald-400 font-semibold text-xs uppercase tracking-widest block mb-2">
                             {pageCms?.impact_kicker || 'OUR IMPACT'}
                         </span>
-                        <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+                        <h2 className="text-2xl sm:text-4xl font-bold text-white tracking-tight">
                             {pageCms?.impact_title || 'Partnership Impact'}
                         </h2>
                     </div>
@@ -476,7 +476,7 @@ export default function SportsAffiliation({ pageCms }) {
                                 <div className="flex justify-center mb-4">
                                     {renderImpactIcon(stat.icon)}
                                 </div>
-                                <div className="text-4xl sm:text-5xl font-black text-white mb-2">
+                                <div className="text-4xl sm:text-5xl font-bold text-white mb-2">
                                     {stat.count}+
                                 </div>
                                 <div className="text-sm font-bold text-amber-300 mb-1">
@@ -497,7 +497,7 @@ export default function SportsAffiliation({ pageCms }) {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
                         {/* Left Box: Partnership Coordination */}
                         <div className="lg:col-span-6 space-y-6">
-                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
+                            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 flex items-center gap-2">
                                 <Handshake className="w-6 h-6 text-emerald-500" />
                                 <span>{pageCms?.contact_section_title || 'Partnership Coordination'}</span>
                             </h3>
@@ -512,7 +512,7 @@ export default function SportsAffiliation({ pageCms }) {
                                             {contact.icon === 'crown' ? <Crown className="w-7 h-7" /> : <UserCheck className="w-7 h-7" />}
                                         </div>
                                         <div className="space-y-1">
-                                            <h4 className="font-extrabold text-slate-900 text-base">
+                                            <h4 className="font-bold text-slate-900 text-base">
                                                 {contact.name}
                                             </h4>
                                             {contact.title && (
@@ -541,7 +541,7 @@ export default function SportsAffiliation({ pageCms }) {
                         <div className="lg:col-span-6">
                             <div className="bg-white p-8 sm:p-10 rounded-3xl shadow-sm border-t-4 border-t-amber-400 border-r border-b border-l border-slate-100 space-y-6 h-full flex flex-col justify-between">
                                 <div className="space-y-4">
-                                    <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+                                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
                                         {pageCms?.excellence_title || 'Partnership Excellence'}
                                     </h3>
                                     <p className="text-slate-600 text-sm sm:text-base leading-relaxed">

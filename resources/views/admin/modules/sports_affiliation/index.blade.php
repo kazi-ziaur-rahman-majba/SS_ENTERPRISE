@@ -46,7 +46,7 @@
                             <i class="bx bxs-carousel"></i>
                         </div>
                         <div>
-                            <h5 class="font-extrabold text-slate-900 text-base m-0">1. Hero Section</h5>
+                            <h5 class="font-bold text-slate-900 text-base m-0">1. Hero Section</h5>
                             <p class="text-xs text-slate-500 m-0">Manage main hero banner titles, statistics, and carousel slides</p>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                     <!-- Hero Stats -->
                     <div class="border-t border-slate-100 pt-5">
                         <div class="flex items-center justify-between mb-3">
-                            <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Hero Stat Counters</label>
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Hero Stat Counters</label>
                             <button type="button" id="add-hero-stat" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs rounded-lg transition-all flex items-center gap-1 cursor-pointer">
                                 <i class="bx bx-plus text-base"></i> Add Stat
                             </button>
@@ -98,7 +98,7 @@
                     <!-- Hero Slides -->
                     <div class="border-t border-slate-100 pt-5">
                         <div class="flex items-center justify-between mb-3">
-                            <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Hero Carousel Slides</label>
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Hero Carousel Slides</label>
                             <button type="button" id="add-hero-slide" class="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-lg transition-all shadow-xs flex items-center gap-1 cursor-pointer">
                                 <i class="bx bx-plus text-base"></i> Add Slide
                             </button>
@@ -182,7 +182,7 @@
                             <i class="bx bx-handshake"></i>
                         </div>
                         <div>
-                            <h5 class="font-extrabold text-slate-900 text-base m-0">2. Strategic Partnership Section</h5>
+                            <h5 class="font-bold text-slate-900 text-base m-0">2. Strategic Partnership Section</h5>
                             <p class="text-xs text-slate-500 m-0">Edit strategic partnership text blocks, highlights checklist, and dynamic logos</p>
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Main Title</label>
-                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none font-extrabold text-slate-800" name="partnership_title" value="{{ old('partnership_title', $data->partnership_title ?? '') }}" placeholder="Building Cricket Excellence Together">
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:border-emerald-500 outline-none font-bold text-slate-800" name="partnership_title" value="{{ old('partnership_title', $data->partnership_title ?? '') }}" placeholder="Building Cricket Excellence Together">
                         </div>
                         <div class="md:col-span-3">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Subtitle</label>
@@ -222,7 +222,7 @@
                     <!-- Highlight List -->
                     <div class="border-t border-slate-100 pt-4">
                         <div class="flex items-center justify-between mb-3">
-                            <label class="text-xs font-extrabold text-slate-700 uppercase tracking-wider">Highlight Checklist Points</label>
+                            <label class="text-xs font-bold text-slate-700 uppercase tracking-wider">Highlight Checklist Points</label>
                             <button type="button" id="add-highlight-item" class="px-3 py-1 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-bold text-xs rounded-lg transition-all flex items-center gap-1 cursor-pointer">
                                 <i class="bx bx-plus text-base"></i> Add Highlight
                             </button>
@@ -259,7 +259,7 @@
                         <div class="p-4 bg-slate-50 rounded-xl border border-slate-200/80">
                             <h6 class="text-xs font-bold text-emerald-600 uppercase tracking-wider mb-2">Sports Logo Showcase (Right)</h6>
                             <div class="grid grid-cols-2 gap-2 mb-2">
-                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-extrabold text-emerald-600" name="sports_logo_badge" value="{{ old('sports_logo_badge', $data->sports_logo_badge ?? '') }}" placeholder="Badge Text (e.g. 10-12)">
+                                <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-emerald-600" name="sports_logo_badge" value="{{ old('sports_logo_badge', $data->sports_logo_badge ?? '') }}" placeholder="Badge Text (e.g. 10-12)">
                                 <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg font-bold text-slate-800" name="sports_logo_text" value="{{ old('sports_logo_text', $data->sports_logo_text ?? '') }}" placeholder="Sports Title (e.g. SPORTS)">
                             </div>
                             <input type="text" class="w-full text-xs px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-slate-500" name="sports_logo_tagline" value="{{ old('sports_logo_tagline', $data->sports_logo_tagline ?? '') }}" placeholder="Tagline (e.g. Grassroots to Glory)">
@@ -276,7 +276,7 @@
                             <i class="bx bx-target-lock"></i>
                         </div>
                         <div>
-                            <h5 class="font-extrabold text-slate-900 text-base m-0">3. Shared Vision & Mission Section</h5>
+                            <h5 class="font-bold text-slate-900 text-base m-0">3. Shared Vision & Mission Section</h5>
                             <p class="text-xs text-slate-500 m-0">Manage 3-card foundation grid (Vision, Mission points, and Tournament Success)</p>
                         </div>
                     </div>
@@ -290,7 +290,7 @@
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Title</label>
-                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-extrabold text-slate-800" name="vision_title" value="{{ old('vision_title', $data->vision_title ?? '') }}" placeholder="Shared Vision & Mission">
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800" name="vision_title" value="{{ old('vision_title', $data->vision_title ?? '') }}" placeholder="Shared Vision & Mission">
                         </div>
                         <div class="md:col-span-3">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Section Subtitle</label>
@@ -371,7 +371,7 @@
                             <i class="bx bx-user-pin"></i>
                         </div>
                         <div>
-                            <h5 class="font-extrabold text-slate-900 text-base m-0">4. Notable Players Section</h5>
+                            <h5 class="font-bold text-slate-900 text-base m-0">4. Notable Players Section</h5>
                             <p class="text-xs text-slate-500 m-0">Add & edit player profile cards, achievements, category tags, and optional photos</p>
                         </div>
                     </div>
@@ -388,7 +388,7 @@
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Title</label>
-                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-extrabold text-slate-800" name="players_title" value="{{ old('players_title', $data->players_title ?? '') }}" placeholder="Notable Players">
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800" name="players_title" value="{{ old('players_title', $data->players_title ?? '') }}" placeholder="Notable Players">
                         </div>
                         <div class="md:col-span-3">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Subtitle</label>
@@ -478,7 +478,7 @@
                             <i class="bx bx-bar-chart-alt-2"></i>
                         </div>
                         <div>
-                            <h5 class="font-extrabold text-slate-900 text-base m-0">5. Partnership Impact Section</h5>
+                            <h5 class="font-bold text-slate-900 text-base m-0">5. Partnership Impact Section</h5>
                             <p class="text-xs text-slate-500 m-0">Edit bottom impact metrics counters, titles, icons, and descriptions</p>
                         </div>
                     </div>
@@ -495,7 +495,7 @@
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-1.5">Title</label>
-                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-extrabold text-slate-800" name="impact_title" value="{{ old('impact_title', $data->impact_title ?? '') }}" placeholder="Partnership Impact">
+                            <input type="text" class="w-full text-xs px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl font-bold text-slate-800" name="impact_title" value="{{ old('impact_title', $data->impact_title ?? '') }}" placeholder="Partnership Impact">
                         </div>
                     </div>
 
@@ -539,7 +539,7 @@
                             <i class="bx bx-phone-call"></i>
                         </div>
                         <div>
-                            <h5 class="font-extrabold text-slate-900 text-base m-0">6. Coordination & Excellence Section</h5>
+                            <h5 class="font-bold text-slate-900 text-base m-0">6. Coordination & Excellence Section</h5>
                             <p class="text-xs text-slate-500 m-0">Manage contact person details and bottom partnership excellence tags</p>
                         </div>
                     </div>
@@ -641,7 +641,7 @@
                     </div>
                 </div>
                 <div class="flex justify-end pt-2">
-                    <button type="submit" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2 cursor-pointer hover:scale-[1.02]">
+                    <button type="submit" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-blue-500/25 flex items-center gap-2 cursor-pointer hover:scale-[1.02]">
                         <i class="bx bx-save text-lg"></i> Save All Changes
                     </button>
                 </div>
