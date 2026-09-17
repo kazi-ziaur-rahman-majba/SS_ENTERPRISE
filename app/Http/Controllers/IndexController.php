@@ -49,7 +49,7 @@ class IndexController extends Controller
         $workProcess = WorkProcess::latest()->get();
         $ourClient = OurClient::latest()->get();
         $homePageCms = HomePageCms::latest()->first();
-        $works = $whatWeDo ? json_decode($whatWeDo->works, true) : [];
+        $works = $whatWeDo ? (is_array($whatWeDo->works) ? $whatWeDo->works : json_decode($whatWeDo->works ?? '[]', true)) : [];
         
         return Inertia::render(
             'FrontEnd/Home',

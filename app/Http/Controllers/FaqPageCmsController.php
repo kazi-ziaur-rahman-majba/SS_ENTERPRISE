@@ -50,7 +50,7 @@ class FaqPageCmsController extends Controller
             ];
         }
 
-        $validatedData['faq'] = json_encode($faq);
+        $validatedData['faq'] = $faq;
 
 
         // Process file uploads
@@ -67,7 +67,6 @@ class FaqPageCmsController extends Controller
                 $validatedData[$field] = '';
             }
         }
-        // dd($validatedData);
         FaqPageCms::create($validatedData);
 
         return redirect()->route('faq.index')->with('success', 'Faq created successfully.');
@@ -114,7 +113,7 @@ class FaqPageCmsController extends Controller
             ];
         }
 
-        $validatedData['faq'] = json_encode($faq);
+        $validatedData['faq'] = $faq;
 
 
         // Process file uploads
@@ -138,8 +137,6 @@ class FaqPageCmsController extends Controller
             }
         }
 
-        
-        // dd($validatedData);
         $data->update($validatedData);
 
         return redirect()->route('faq.index')->with('success', 'Faq updated successfully.');

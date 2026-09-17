@@ -83,7 +83,7 @@
                                     <div class="form-group">
                                         @if (isset($data))
                                             @php
-                                                $works = json_decode($data->works, true);
+                                                $works = !empty($data->works) ? (is_array($data->works) ? $data->works : json_decode($data->works, true)) : [];
                                             @endphp
                                         @endif
                                         <table class="table table-bordered">

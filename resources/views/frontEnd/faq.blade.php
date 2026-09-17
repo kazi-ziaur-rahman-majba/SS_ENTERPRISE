@@ -36,7 +36,7 @@
 
                     <div class="panel-group panel-classic" id="accordionA">
                         @php
-                            $faq = json_decode($pageCms->faq, true);
+                            $faq = !empty($pageCms->faq) ? (is_array($pageCms->faq) ? $pageCms->faq : json_decode($pageCms->faq, true)) : [];
                         @endphp
                         @if (isset($faq))
                             @foreach ($faq as $key => $value)

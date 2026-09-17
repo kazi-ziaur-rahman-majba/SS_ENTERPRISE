@@ -117,26 +117,26 @@ class SportsAffiliationCmsController extends Controller
                     'subtitle' => $request->slide_subtitle[$key] ?? ''
                 ];
             }
-        }
-        $validatedData['hero_slides'] = json_encode($heroSlides);
+        $validatedData['hero_stats'] = $heroStats;
+        $validatedData['hero_slides'] = $heroSlides;
 
         // Process Highlight List
         $highlightList = array_values(array_filter($request->highlight_items ?? [], function($val) {
             return !empty(trim($val));
         }));
-        $validatedData['highlight_list'] = json_encode($highlightList);
+        $validatedData['highlight_list'] = $highlightList;
 
         // Process Mission List
         $missionList = array_values(array_filter($request->mission_items ?? [], function($val) {
             return !empty(trim($val));
         }));
-        $validatedData['mission_list'] = json_encode($missionList);
+        $validatedData['mission_list'] = $missionList;
 
         // Process Tournament List
         $tournamentList = array_values(array_filter($request->tournament_items ?? [], function($val) {
             return !empty(trim($val));
         }));
-        $validatedData['tournament_list'] = json_encode($tournamentList);
+        $validatedData['tournament_list'] = $tournamentList;
 
         // Process Players List
         $playersList = [];
@@ -161,7 +161,7 @@ class SportsAffiliationCmsController extends Controller
                 }
             }
         }
-        $validatedData['players_list'] = json_encode($playersList);
+        $validatedData['players_list'] = $playersList;
 
         // Process Impact Stats
         $impactStats = [];
@@ -177,7 +177,7 @@ class SportsAffiliationCmsController extends Controller
                 }
             }
         }
-        $validatedData['impact_stats'] = json_encode($impactStats);
+        $validatedData['impact_stats'] = $impactStats;
 
         // Process Contact Cards
         $contactCards = [];
@@ -194,19 +194,21 @@ class SportsAffiliationCmsController extends Controller
                 }
             }
         }
-        $validatedData['contact_cards'] = json_encode($contactCards);
+        $validatedData['contact_cards'] = $contactCards;
 
         // Process Excellence Badges
         $excellenceBadges = array_values(array_filter($request->excellence_badges ?? [], function($val) {
             return !empty(trim($val));
         }));
-        $validatedData['excellence_badges'] = json_encode($excellenceBadges);
+        $validatedData['excellence_badges'] = $excellenceBadges;
 
         if ($sportsCms->exists) {
             $sportsCms->update($validatedData);
         } else {
             SportsAffiliationCms::create($validatedData);
         }
+
+        \Illuminate\Support\Facades\Cache::forget('sports_affiliation_cms_data');
 
         return redirect()->back()->with('success', 'Sports Affiliation CMS updated successfully.');
     }

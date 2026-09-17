@@ -53,4 +53,16 @@ class SportsAffiliationCms extends Model
         'meta',
         'meta_description',
     ];
+
+    protected $casts = [
+        'hero_stats' => 'array',
+        'hero_slides' => 'array',
+        'highlight_list' => 'array',
+        'mission_list' => 'array',
+        'tournament_list' => 'array',
+        'players_list' => 'array',
+        'impact_stats' => 'array',
+        'contact_cards' => 'array',
+        'excellence_badges' => 'array',
+    ];
 }

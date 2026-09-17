@@ -17,4 +17,8 @@ class FaqPageCms extends Model
         'meta',
         'meta_description',
     ];
+
+    protected $casts = [
+        'faq' => 'array',
+    ];
 }

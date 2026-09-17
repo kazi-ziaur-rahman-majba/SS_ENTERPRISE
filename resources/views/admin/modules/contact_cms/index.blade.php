@@ -1,8 +1,11 @@
 @extends('admin.layouts.app')
 @section('title', 'Contact Page CMS')
 
-@section('content')
+@section('header-css')
 <script src="https://cdn.tailwindcss.com"></script>
+@endsection
+
+@section('content')
 <div class="page-wrapper p-4 sm:p-6 bg-slate-50 min-h-screen">
     <!-- Breadcrumb -->
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

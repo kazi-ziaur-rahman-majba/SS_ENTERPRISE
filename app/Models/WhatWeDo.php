@@ -15,4 +15,8 @@ class WhatWeDo extends Model
         'image',
         'works',
     ];
+
+    protected $casts = [
+        'works' => 'array',
+    ];
 }

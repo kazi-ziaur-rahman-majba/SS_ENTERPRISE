@@ -79,7 +79,7 @@
                                     <div class="form-group">
                                         @if (isset($data))
                                             @php
-                                                $faq = json_decode($data->faq, true);
+                                                $faq = !empty($data->faq) ? (is_array($data->faq) ? $data->faq : json_decode($data->faq, true)) : [];
                                             @endphp
                                         @endif
 

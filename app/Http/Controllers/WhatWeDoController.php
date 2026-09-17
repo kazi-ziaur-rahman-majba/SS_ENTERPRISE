@@ -59,7 +59,7 @@ class WhatWeDoController extends Controller
             }
         }
 
-        $validatedData['works'] = json_encode($how_it_works_detail);
+        $validatedData['works'] = $how_it_works_detail;
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $file = $request->file('image');
@@ -131,7 +131,7 @@ class WhatWeDoController extends Controller
             }
         }
 
-        $validatedData['works'] = json_encode($how_it_works_detail);
+        $validatedData['works'] = $how_it_works_detail;
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $file = $request->file('image');
