@@ -114,7 +114,7 @@ export default function MissionVision({ pageCms }) {
                 <div className={`relative z-10 ${containerClass}`}>
                     <div className="max-w-3xl">
                         <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
-                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <Link href="/" className="hover:underline text-black font-bold">Home</Link>
                             <span className="text-black font-bold">/</span>
                             <span className="text-white font-bold">{pageCms?.page_title || 'Mission & Vision'}</span>
                         </nav>

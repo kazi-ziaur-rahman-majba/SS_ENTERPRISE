@@ -23,9 +23,9 @@ export default function ServiceDetails({ pageCms, service, serviceCategory, slug
                 <div className={`relative z-10 ${containerClass}`}>
                     <div className="max-w-3xl">
                         <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
-                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <Link href="/" className="hover:underline text-black font-bold">Home</Link>
                             <span className="text-black font-bold">/</span>
-                            <Link href="/business" className="hover:underline text-black font-extrabold">Our Businesses</Link>
+                            <Link href="/business" className="hover:underline text-black font-bold">Our Businesses</Link>
                             <span className="text-black font-bold">/</span>
                             <span className="text-white font-bold">{service?.category_name}</span>
                         </nav>
@@ -69,7 +69,7 @@ export default function ServiceDetails({ pageCms, service, serviceCategory, slug
                         <main className="lg:col-span-3 space-y-8">
                             {service ? (
                                 <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-slate-100 space-y-8">
-                                    <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight border-l-4 border-blue-600 pl-4">
+                                    <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight border-l-4 border-blue-600 pl-4">
                                         {service.title}
                                     </h2>
 

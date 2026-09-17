@@ -23,7 +23,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                 <div className={`relative z-10 ${containerClass}`}>
                     <div className="max-w-3xl">
                         <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
-                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <Link href="/" className="hover:underline text-black font-bold">Home</Link>
                             <span className="text-black font-bold">/</span>
                             <span className="text-white font-bold">{pageCms?.page_title || 'About Us'}</span>
                         </nav>
@@ -66,7 +66,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                                         <CheckCircle className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="font-extrabold text-slate-900 text-sm">Diversified Sectors</h4>
+                                        <h4 className="font-bold text-slate-900 text-sm">Diversified Sectors</h4>
                                         <p className="text-slate-500 text-xs mt-0.5">Multi-industry Leader</p>
                                     </div>
                                 </div>
@@ -75,7 +75,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                                         <Award className="w-5 h-5" />
                                     </div>
                                     <div>
-                                        <h4 className="font-extrabold text-slate-900 text-sm">Top-Notch Quality</h4>
+                                        <h4 className="font-bold text-slate-900 text-sm">Top-Notch Quality</h4>
                                         <p className="text-slate-500 text-xs mt-0.5">Reliable & Trusted</p>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                                     {/* Card Content */}
                                     <div className="p-6 text-center flex-grow flex flex-col justify-between bg-white relative z-10 border-t border-slate-100">
                                         <div>
-                                            <h3 className="font-extrabold text-slate-900 text-lg sm:text-xl tracking-tight group-hover:text-blue-600 transition-colors">
+                                            <h3 className="font-bold text-slate-900 text-lg sm:text-xl tracking-tight group-hover:text-blue-600 transition-colors">
                                                 {member.name}
                                             </h3>
                                             <p className="text-blue-600 text-xs font-bold uppercase tracking-widest mt-1.5">

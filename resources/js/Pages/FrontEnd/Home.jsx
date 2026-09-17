@@ -120,7 +120,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <Award className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-bold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_1_number, '27+')}
                                     </span>
                                     <span className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
@@ -133,7 +133,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <Users className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-bold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_2_number, '1170+')}
                                     </span>
                                     <span className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
@@ -146,7 +146,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <Sliders className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-bold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_3_number, '500+')}
                                     </span>
                                     <span className="text-[11px] sm:text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
@@ -159,7 +159,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <ThumbsUp className="w-5 h-5 sm:w-6 sm:h-6" />
                                 </div>
                                 <div className="min-w-0">
-                                    <span className="block text-lg sm:text-2xl md:text-3xl font-extrabold text-[#0066ff] leading-tight truncate">
+                                    <span className="block text-lg sm:text-2xl md:text-3xl font-bold text-[#0066ff] leading-tight truncate">
                                         {getStat(homePageCms?.stat_4_number, '100%')}
                                     </span>
                                     <span className="text-xs font-semibold text-slate-600 leading-snug line-clamp-2">
@@ -202,7 +202,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                             <span className="inline-block text-[#0066ff] font-bold text-xs uppercase tracking-widest bg-blue-50 px-3.5 py-1.5 rounded-xl mb-2">
                                                 {aboutUs.sub_title || 'ABOUT US'}
                                             </span>
-                                            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                                            <h2 className="text-2xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
                                                 {aboutUs.title || 'Building Trust. Delivering Excellence.'}
                                             </h2>
                                         </div>
@@ -583,7 +583,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                     <section className="py-12 sm:py-16 bg-white border-t border-slate-100">
                         <div className={containerClass}>
                             <div className="mb-8">
-                                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight uppercase">
+                                <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight uppercase">
                                     {homePageCms?.client_title || 'OUR ESTEEMED CLIENTS'}
                                 </h2>
                                 <div className="w-14 h-1 bg-[#0066ff] rounded-full mt-2" />

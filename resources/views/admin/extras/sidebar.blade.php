@@ -206,6 +206,11 @@
             <div class="menu-title">Sports Affiliation CMS</div>
         </a>
     </li>
+    <li><a href="{{ route('contact-page-cms.index') }}">
+            <div class="parent-icon"><i class="fadeIn animated bx bx-envelope"></i></div>
+            <div class="menu-title">Contact Page CMS</div>
+        </a>
+    </li>
     @if (in_array('contact-list', $permissions) || in_array('admins', $permissions) || in_array('admin-role', $permissions))
         <li>
             <a href="javascript:;" class="has-arrow">

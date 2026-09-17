@@ -26,7 +26,7 @@ export default function Faq({ pageCms, blogs }) {
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl">
                         <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
-                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <Link href="/" className="hover:underline text-black font-bold">Home</Link>
                             <span className="text-black font-bold">/</span>
                             <span className="text-white font-bold">FAQ</span>
                         </nav>
@@ -45,7 +45,7 @@ export default function Faq({ pageCms, blogs }) {
                             <HelpCircle className="w-5 h-5" />
                             <span>Help & Support</span>
                         </div>
-                        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-900">
                             {pageCms?.faq_title || 'General Questions'}
                         </h2>
 

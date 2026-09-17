@@ -58,7 +58,7 @@ export default function Contact({ pageCms, siteSetting }) {
                 <div className={`relative z-10 ${containerClass}`}>
                     <div className="max-w-3xl">
                         <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
-                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <Link href="/" className="hover:underline text-black font-bold">Home</Link>
                             <span className="text-black font-bold">/</span>
                             <span className="text-white font-bold">{pageCms?.page_title || 'Contact'}</span>
                         </nav>
@@ -125,10 +125,10 @@ export default function Contact({ pageCms, siteSetting }) {
                     {/* Contact Form */}
                     <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-100 shadow-sm space-y-8">
                         <div>
-                            <span className="text-blue-600 font-bold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md">
+                            <span className="text-blue-600 font-semibold text-xs uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-md">
                                 Get In Touch
                             </span>
-                            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight mt-2">
+                            <h2 className="text-2xl sm:text-3xl font-semibold text-slate-900 tracking-tight mt-2">
                                 Send Us a Message
                             </h2>
                         </div>
@@ -147,7 +147,7 @@ export default function Contact({ pageCms, siteSetting }) {
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                 <div>
-                                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Name *</label>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Name *</label>
                                     <input
                                         type="text"
                                         required
@@ -158,7 +158,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Email *</label>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Email *</label>
                                     <input
                                         type="email"
                                         required
@@ -169,7 +169,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Phone *</label>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Phone *</label>
                                     <input
                                         type="text"
                                         required
@@ -180,7 +180,7 @@ export default function Contact({ pageCms, siteSetting }) {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Subject *</label>
+                                    <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Subject *</label>
                                     <input
                                         type="text"
                                         required
@@ -193,7 +193,7 @@ export default function Contact({ pageCms, siteSetting }) {
                             </div>
 
                             <div>
-                                <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2">Message *</label>
+                                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Message *</label>
                                 <textarea
                                     rows="5"
                                     required

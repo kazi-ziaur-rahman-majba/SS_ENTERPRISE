@@ -19,7 +19,7 @@ export default function SearchResult({ data }) {
                         <span>/</span>
                         <span className="text-slate-300">Search Results</span>
                     </nav>
-                    <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                    <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">
                         Search Results
                     </h1>
                 </div>

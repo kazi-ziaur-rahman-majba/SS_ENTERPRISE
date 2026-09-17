@@ -16,6 +16,7 @@ use App\Models\GalleryCategory;
 use App\Models\Gallery;
 use App\Models\GalleryPageCms;
 use App\Models\HomePageCms;
+use App\Models\ContactPageCms;
 use App\Models\MembershipCertificate;
 use App\Models\MissionVision;
 use App\Models\OurClient;
@@ -85,7 +86,10 @@ class IndexController extends Controller
 
     public function contactUs()
     {
-        $pageCms = HomePageCms::latest()->first();
+        $pageCms = ContactPageCms::first() ?? new ContactPageCms([
+            'banner_title' => 'Contact Us',
+            'page_title' => 'Contact',
+        ]);
         $siteSetting = SiteSetting::latest()->first();
         return Inertia::render('FrontEnd/Contact', compact('pageCms', 'siteSetting'));
     }

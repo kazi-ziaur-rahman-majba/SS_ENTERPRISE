@@ -34,9 +34,9 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl">
                         <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
-                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <Link href="/" className="hover:underline text-black font-bold">Home</Link>
                             <span className="text-black font-bold">/</span>
-                            <Link href="/blog" className="hover:underline text-black font-extrabold">Blog</Link>
+                            <Link href="/blog" className="hover:underline text-black font-bold">Blog</Link>
                             <span className="text-black font-bold">/</span>
                             <span className="text-white font-bold line-clamp-1">{blog?.title}</span>
                         </nav>

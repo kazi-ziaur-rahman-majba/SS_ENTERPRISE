@@ -34,6 +34,7 @@ use App\Http\Controllers\GalleryPageCmsController;
 use App\Http\Controllers\ContactMailController;
 use App\Http\Controllers\MembershipCertificateController;
 use App\Http\Controllers\SportsAffiliationCmsController;
+use App\Http\Controllers\ContactPageCmsController;
 
 
 
@@ -141,5 +142,6 @@ Route::middleware(['isAdmin'])->prefix('admin')->group(function () {
     Route::resource('why-work-us', WorkProcessController::class);
     Route::resource('membership-certificate', MembershipCertificateController::class);
     Route::resource('sports-affiliation-cms', SportsAffiliationCmsController::class);
+    Route::resource('contact-page-cms', ContactPageCmsController::class);
 });
 
