@@ -47,25 +47,26 @@ export default function Achievement({ membershipCertificate }) {
             <Head title={`${bannerTitle} - SS Group`} />
 
             {/* Banner Section */}
-            <section className="relative text-white py-12 sm:py-20 overflow-hidden bg-slate-900">
+            <section className="relative py-12 sm:py-24 overflow-hidden">
                 {membershipCertificate?.banner_image && (
                     <img
                         src={getImageUrl(membershipCertificate.banner_image)}
                         alt="Banner Background"
-                        className="absolute inset-0 w-full h-full object-cover opacity-30"
+                        className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/60 to-slate-950/80 pointer-events-none" />
 
                 <div className={`relative z-10 ${containerClass}`}>
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-2.5">
-                        <Link href="/" className="hover:underline">Home</Link>
-                        <span>/</span>
-                        <span className="text-slate-300">{pageTitle}</span>
-                    </nav>
-                    <h1 className="text-3xl sm:text-5xl font-bold tracking-tight">
-                        {bannerTitle}
-                    </h1>
+                    <div className="max-w-3xl">
+                        <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
+                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <span className="text-black font-bold">/</span>
+                            <span className="text-white font-bold">{pageTitle}</span>
+                        </nav>
+                        <h1 className="text-3xl sm:text-5xl font-bold text-white">
+                            {bannerTitle}
+                        </h1>
+                    </div>
                 </div>
             </section>
 

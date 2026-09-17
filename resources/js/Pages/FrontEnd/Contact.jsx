@@ -47,7 +47,7 @@ export default function Contact({ pageCms, siteSetting }) {
             <Head title={`${pageCms?.banner_title || 'Contact Us'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative text-white py-12 sm:py-24 overflow-hidden">
+            <section className="relative py-12 sm:py-24 overflow-hidden">
                 {pageCms?.banner_image && (
                     <img
                         src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}
@@ -56,14 +56,16 @@ export default function Contact({ pageCms, siteSetting }) {
                     />
                 )}
                 <div className={`relative z-10 ${containerClass}`}>
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
-                        <Link href="/" className="hover:underline">Home</Link>
-                        <span>/</span>
-                        <span className="text-slate-300">{pageCms?.page_title || 'Contact'}</span>
-                    </nav>
-                    <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight">
-                        {pageCms?.banner_title || 'Contact Us'}
-                    </h1>
+                    <div className="max-w-3xl">
+                        <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
+                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <span className="text-black font-bold">/</span>
+                            <span className="text-white font-bold">{pageCms?.page_title || 'Contact'}</span>
+                        </nav>
+                        <h1 className="text-3xl sm:text-5xl font-bold text-white">
+                            {pageCms?.banner_title || 'Contact Us'}
+                        </h1>
+                    </div>
                 </div>
             </section>
 

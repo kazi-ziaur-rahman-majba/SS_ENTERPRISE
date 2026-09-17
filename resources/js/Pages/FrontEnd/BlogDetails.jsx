@@ -23,7 +23,7 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
             <Head title={`${blog?.title || 'Article'} - SS Group`} />
 
             {/* Banner */}
-            <section className="relative text-white py-12 sm:py-24 overflow-hidden">
+            <section className="relative py-12 sm:py-24 overflow-hidden">
                 {pageCms?.detail_page_banner_image && (
                     <img
                         src={pageCms.detail_page_banner_image.startsWith('/') ? pageCms.detail_page_banner_image : `/${pageCms.detail_page_banner_image}`}
@@ -32,16 +32,18 @@ export default function BlogDetails({ pageCms, blog, blogs, blogCategories }) {
                     />
                 )}
                 <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-400 mb-3">
-                        <Link href="/" className="hover:underline">Home</Link>
-                        <span>/</span>
-                        <Link href="/blog" className="hover:underline">Blog</Link>
-                        <span>/</span>
-                        <span className="text-slate-300 line-clamp-1">{blog?.title}</span>
-                    </nav>
-                    <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                        {blog?.title}
-                    </h1>
+                    <div className="max-w-3xl">
+                        <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
+                            <Link href="/" className="hover:underline text-black font-extrabold">Home</Link>
+                            <span className="text-black font-bold">/</span>
+                            <Link href="/blog" className="hover:underline text-black font-extrabold">Blog</Link>
+                            <span className="text-black font-bold">/</span>
+                            <span className="text-white font-bold line-clamp-1">{blog?.title}</span>
+                        </nav>
+                        <h1 className="text-3xl sm:text-5xl font-bold leading-tight text-white">
+                            {blog?.title}
+                        </h1>
+                    </div>
                 </div>
             </section>
 
