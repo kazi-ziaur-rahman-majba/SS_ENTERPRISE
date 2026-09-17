@@ -192,6 +192,8 @@ export default function SportsAffiliation({ pageCms }) {
                                             <img 
                                                 src={imgUrl} 
                                                 alt={slide.title || 'Sports Slider'} 
+                                                loading={idx === 0 ? "eager" : "lazy"}
+                                                decoding="async"
                                                 className="w-full h-full object-cover"
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-8 text-white">
@@ -422,6 +424,8 @@ export default function SportsAffiliation({ pageCms }) {
                                             <img 
                                                 src={pImgUrl} 
                                                 alt={player.name} 
+                                                loading="lazy"
+                                                decoding="async"
                                                 className="w-14 h-14 rounded-full object-cover border-2 border-emerald-400"
                                             />
                                         ) : (

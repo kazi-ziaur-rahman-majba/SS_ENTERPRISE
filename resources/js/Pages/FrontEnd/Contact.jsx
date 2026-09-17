@@ -52,6 +52,8 @@ export default function Contact({ pageCms, siteSetting }) {
                     <img
                         src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}
                         alt="Contact Banner"
+                        loading="eager"
+                        fetchpriority="high"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}

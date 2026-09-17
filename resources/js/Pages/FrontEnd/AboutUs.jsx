@@ -17,6 +17,8 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                     <img
                         src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}
                         alt="Banner"
+                        loading="eager"
+                        fetchpriority="high"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}
@@ -94,6 +96,8 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                                             <img
                                                 src={imgItem.image?.startsWith('/') ? imgItem.image : `/${imgItem.image}`}
                                                 alt={imgItem.title || 'About image'}
+                                                loading="lazy"
+                                                decoding="async"
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
                                             />
                                             {imgItem.title && (
@@ -148,6 +152,8 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
                                         <img
                                             src={member.image?.startsWith('/') ? member.image : `/${member.image}`}
                                             alt={member.name}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-cover object-top group-hover:scale-108 transition-transform duration-700 ease-out"
                                         />
                                         {/* Soft hover gradient */}

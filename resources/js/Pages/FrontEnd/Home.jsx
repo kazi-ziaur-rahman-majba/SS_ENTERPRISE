@@ -52,6 +52,8 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <img
                                         src={imgSrc}
                                         alt={slider.title || 'Slider image'}
+                                        loading={idx === 0 ? "eager" : "lazy"}
+                                        decoding="async"
                                         className="absolute inset-0 w-full h-full object-cover z-0"
                                     />
                                 )}
@@ -243,6 +245,8 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                         <img
                                             src={getImgSrc(aboutUs.first_image, 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80')}
                                             alt={aboutUs.title || 'About Us Image'}
+                                            loading="lazy"
+                                            decoding="async"
                                             className="w-full h-full object-cover"
                                             onError={(e) => {
                                                 e.currentTarget.src = 'https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&w=800&q=80';
@@ -563,6 +567,8 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                     <img
                                         src={imgSrc}
                                         alt={client.title || 'Client logo'}
+                                        loading="lazy"
+                                        decoding="async"
                                         className="max-h-full max-w-full object-contain"
                                         onError={(e) => {
                                             e.currentTarget.style.display = 'none';

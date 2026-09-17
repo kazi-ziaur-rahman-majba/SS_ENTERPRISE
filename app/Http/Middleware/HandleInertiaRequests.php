@@ -39,13 +39,17 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'siteSetting' => function () {
-                return SiteSetting::latest()->first();
+                return \Illuminate\Support\Facades\Cache::remember('site_setting_shared', 3600, function () {
+                    return SiteSetting::latest()->first();
+                });
             },
             'servicesMenu' => function () {
-                return ServiceCategory::select('service_categories.*', 'services.slug')
-                    ->leftJoin('services', 'services.category_id', '=', 'service_categories.id')
-                    ->orderBy('service_categories.position', 'ASC')
-                    ->get();
+                return \Illuminate\Support\Facades\Cache::remember('services_menu_shared', 3600, function () {
+                    return ServiceCategory::select('service_categories.*', 'services.slug')
+                        ->leftJoin('services', 'services.category_id', '=', 'service_categories.id')
+                        ->orderBy('service_categories.position', 'ASC')
+                        ->get();
+                });
             },
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),

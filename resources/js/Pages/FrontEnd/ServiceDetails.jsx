@@ -17,6 +17,8 @@ export default function ServiceDetails({ pageCms, service, serviceCategory, slug
                     <img
                         src={pageCms.detail_page_banner_image.startsWith('/') ? pageCms.detail_page_banner_image : `/${pageCms.detail_page_banner_image}`}
                         alt="Banner"
+                        loading="eager"
+                        fetchpriority="high"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}

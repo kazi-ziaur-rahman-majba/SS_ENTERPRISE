@@ -86,11 +86,15 @@ class IndexController extends Controller
 
     public function contactUs()
     {
-        $pageCms = ContactPageCms::first() ?? new ContactPageCms([
-            'banner_title' => 'Contact Us',
-            'page_title' => 'Contact',
-        ]);
-        $siteSetting = SiteSetting::latest()->first();
+        $pageCms = Cache::remember('contact_page_cms_data', 3600, function () {
+            return ContactPageCms::first() ?? new ContactPageCms([
+                'banner_title' => 'Contact Us',
+                'page_title' => 'Contact',
+            ]);
+        });
+        $siteSetting = Cache::remember('site_setting_contact', 3600, function () {
+            return SiteSetting::latest()->first();
+        });
         return Inertia::render('FrontEnd/Contact', compact('pageCms', 'siteSetting'));
     }
 
@@ -165,7 +169,9 @@ class IndexController extends Controller
 
     public function sportsAffiliation()
     {
-        $pageCms = SportsAffiliationCms::latest()->first();
+        $pageCms = Cache::remember('sports_affiliation_cms_data', 3600, function () {
+            return SportsAffiliationCms::latest()->first();
+        });
         return Inertia::render('FrontEnd/SportsAffiliation', compact('pageCms'));
     }
 

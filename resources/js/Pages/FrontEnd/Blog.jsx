@@ -17,6 +17,8 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                     <img
                         src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}
                         alt="Banner"
+                        loading="eager"
+                        fetchpriority="high"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}
@@ -48,6 +50,8 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                                                 <img
                                                     src={`/${post.image}`}
                                                     alt={post.title}
+                                                    loading="lazy"
+                                                    decoding="async"
                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                 />
                                             )}
