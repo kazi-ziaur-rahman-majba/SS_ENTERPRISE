@@ -18,7 +18,7 @@ export default function Blog({ pageCms, blogs, blogCategories }) {
                         src={pageCms.banner_image.startsWith('/') ? pageCms.banner_image : `/${pageCms.banner_image}`}
                         alt="Banner"
                         loading="eager"
-                        fetchpriority="high"
+                        fetchPriority="high"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                 )}

@@ -577,7 +577,7 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                                 )}
                             </div>
                             {client.title && (
-                                <span className="font-bold text-[#0066ff] text-[11px] sm:text-xs text-center leading-tight line-clamp-1 shrink-0 pt-1">
+                                <span className="font-bold text-[#0066ff] text-[11px] sm:text-xs text-center leading-tight line-clamp-1 shrink-0 pt-1 capitalize">
                                     {client.title}
                                 </span>
                             )}
@@ -589,8 +589,8 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                     <section className="py-12 sm:py-16 bg-white border-t border-slate-100">
                         <div className={containerClass}>
                             <div className="mb-8">
-                                <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight uppercase">
-                                    {homePageCms?.client_title || 'OUR ESTEEMED CLIENTS'}
+                                <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">
+                                    {homePageCms?.client_title || 'Our Esteemed Clients'}
                                 </h2>
                                 <div className="w-14 h-1 bg-[#0066ff] rounded-full mt-2" />
                             </div>
