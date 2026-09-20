@@ -35,35 +35,46 @@ class ContactMailController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $validated = $request->validate([
+        $rules = [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'required|string',
             'subject' => 'required|string',
             'message' => 'required|string',
-        ]);
+        ];
 
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'phone' => 'required|string',
-            'subject' => 'required|string',
-            'message' => 'required|string',
-            'g-recaptcha-response' => ['required', new ReCaptchaV3('submitContact')],
-        ]);
+        if ($request->filled('g-recaptcha-response')) {
+            $rules['g-recaptcha-response'] = ['required', new ReCaptchaV3('submitContact')];
+        }
+
+        $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
             return response()->json(['success' => false, 'message' => 'Validation failed.', 'errors' => $validator->errors()]);
         }
-        ContactMail::create($validator->validated());
+
+        $validated = $validator->validated();
+
+        ContactMail::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'],
+            'subject' => $validated['subject'],
+            'message' => $validated['message'],
+        ]);
 
         $siteSetting = SiteSetting::orderBy('id', 'DESC')->first();
-        $emailList = $siteSetting->contact_email;
-        $recipientEmails = explode(',', $emailList);
-        $recipientEmails = array_map('trim', $recipientEmails);
-         
-         Mail::to($recipientEmails)->send(new ContactUs($validated));
+        if ($siteSetting && !empty($siteSetting->contact_email)) {
+            $emailList = $siteSetting->contact_email;
+            $recipientEmails = array_map('trim', explode(',', $emailList));
+            try {
+                Mail::to($recipientEmails)->send(new ContactUs($validated));
+            } catch (\Exception $e) {
+                // Log mail error without breaking the user response
+                \Illuminate\Support\Facades\Log::error('Contact mail error: ' . $e->getMessage());
+            }
+        }
+
         return response()->json(['success' => true, 'message' => 'Contact request successfully sent']);
     }
 
