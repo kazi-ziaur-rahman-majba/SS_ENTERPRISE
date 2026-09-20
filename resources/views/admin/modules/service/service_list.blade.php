@@ -71,7 +71,7 @@
                                             @endforeach
                                         @else
                                             <tr>
-                                                <td colspan="4">
+                                                <td colspan="5">
                                                     <h4 class="text-center" style="color:red;">No Data Found!!</h4>
                                                 </td>
                                             </tr>
@@ -81,6 +81,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>SL</th>
+                                            <th>Category</th>
                                             <th>Title</th>
                                             <th>Created AT</th>
                                             <th>Action</th>

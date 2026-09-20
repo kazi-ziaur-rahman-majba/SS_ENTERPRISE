@@ -37,7 +37,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
             </section>
 
             {/* Main Content Section */}
-            <section className="py-20 sm:py-28 bg-white relative overflow-hidden">
+            <section className="py-10 sm:py-28 bg-white relative overflow-hidden">
                 {/* Background subtle blur decorative elements */}
                 <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-50/70 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-slate-100/80 rounded-full blur-3xl pointer-events-none" />
@@ -129,7 +129,7 @@ export default function AboutUs({ pageCms, homePageCms, teams }) {
 
             {/* Teams Section */}
             {teams && teams.length > 0 && (
-                <section className="py-20 sm:py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 border-t border-slate-100">
+                <section className="py-10 sm:py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 border-t border-slate-100">
                     <div className={containerClass}>
                         <div className="text-center max-w-2xl mx-auto mb-12">
                             <span className="text-blue-600 font-bold text-xs uppercase tracking-widest block mb-1">

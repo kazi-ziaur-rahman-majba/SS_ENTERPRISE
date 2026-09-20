@@ -47,7 +47,7 @@ export default function Achievement({ membershipCertificate }) {
             <Head title={`${bannerTitle} - SS Group`} />
 
             {/* Banner Section */}
-            <section className="relative py-12 sm:py-24 overflow-hidden">
+            <section className="relative py-8 sm:py-24 overflow-hidden">
                 {membershipCertificate?.banner_image && (
                     <img
                         src={getImageUrl(membershipCertificate.banner_image)}
@@ -58,12 +58,12 @@ export default function Achievement({ membershipCertificate }) {
 
                 <div className={`relative z-10 ${containerClass}`}>
                     <div className="max-w-3xl">
-                        <nav className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-black mb-3">
+                        <nav className="flex items-center gap-2 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-black mb-2 sm:mb-3">
                             <Link href="/" className="hover:underline text-black font-bold">Home</Link>
                             <span className="text-black font-bold">/</span>
                             <span className="text-white font-bold">{pageTitle}</span>
                         </nav>
-                        <h1 className="text-3xl sm:text-5xl font-bold text-white">
+                        <h1 className="text-2xl sm:text-5xl font-bold text-white tracking-tight">
                             {bannerTitle}
                         </h1>
                     </div>
@@ -71,21 +71,25 @@ export default function Achievement({ membershipCertificate }) {
             </section>
 
             {/* Section 1: Member / Business Logos (Pure White Background) */}
-            <section className="bg-white py-12 sm:py-20 border-b border-slate-100">
+            <section className="bg-white py-8 sm:py-20 border-b border-slate-100">
                 <div className={containerClass}>
-                    <div className="text-center mb-10">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
+                    <div className="text-center mb-6 sm:mb-10">
+                        <h2 className="text-xl sm:text-3xl font-bold text-slate-800 tracking-tight">
                             {memberTitle}
                         </h2>
                         <div className="w-12 h-1 bg-blue-500 mx-auto rounded-full mt-2" />
                     </div>
 
                     {memberImages && memberImages.length > 0 ? (
-                        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+                        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-3.5 sm:gap-10">
                             {memberImages.map((imgSrc, idx) => (
                                 <div
                                     key={idx}
-                                    className="bg-white p-5 rounded-2xl border border-slate-100 shadow-xs hover:shadow-md transition-all duration-300 flex items-center justify-center w-48 sm:w-60 h-28 sm:h-32"
+                                    className={`bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-100 shadow-2xs hover:shadow-md transition-all duration-300 flex items-center justify-center w-full sm:w-60 h-24 sm:h-32 ${
+                                        memberImages.length % 2 !== 0 && idx === memberImages.length - 1
+                                            ? 'col-span-2 sm:col-span-1 max-w-[220px] sm:max-w-none mx-auto'
+                                            : ''
+                                    }`}
                                 >
                                     <img
                                         src={getImageUrl(imgSrc)}
@@ -102,25 +106,25 @@ export default function Achievement({ membershipCertificate }) {
             </section>
 
             {/* Section 2: Certifications (Soft Light Blue Gradient Background) */}
-            <section className="relative bg-gradient-to-b from-sky-50/80 via-blue-50/40 to-sky-100/70 py-12 sm:py-20 overflow-hidden">
+            <section className="relative bg-gradient-to-b from-sky-50/80 via-blue-50/40 to-sky-100/70 py-8 sm:py-20 overflow-hidden">
                 {/* Decorative background glow spots */}
                 <div className="absolute top-1/4 -left-32 w-96 h-96 bg-blue-200/40 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute bottom-10 -right-32 w-96 h-96 bg-sky-200/50 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-blue-100/30 rounded-full blur-[120px] pointer-events-none" />
 
                 <div className={`relative z-10 ${containerClass}`}>
-                    <div className="text-center mb-10">
-                        <h2 className="text-2xl sm:text-3xl font-bold text-slate-800 tracking-tight">
+                    <div className="text-center mb-6 sm:mb-10">
+                        <h2 className="text-xl sm:text-3xl font-bold text-slate-800 tracking-tight">
                             {certificatesTitle}
                         </h2>
                         <div className="w-12 h-1 bg-blue-500 mx-auto rounded-full mt-2" />
                     </div>
 
                     {certifications && certifications.length > 0 ? (
-                        <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+                        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-3.5 sm:gap-10">
                             {certifications.map((item, idx) => (
-                                <div key={idx} className="flex flex-col items-center">
-                                    <div className="bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-xs flex items-center justify-center w-44 sm:w-52 h-44 sm:h-52 mb-2.5 hover:shadow-md transition-shadow">
+                                <div key={idx} className="flex flex-col items-center w-full sm:w-auto">
+                                    <div className="bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-200/90 shadow-2xs flex items-center justify-center w-full sm:w-52 h-36 sm:h-52 mb-2 hover:shadow-md transition-shadow">
                                         <img
                                             src={getImageUrl(item.image)}
                                             alt={item.title || `Certificate ${idx + 1}`}
@@ -128,7 +132,7 @@ export default function Achievement({ membershipCertificate }) {
                                         />
                                     </div>
                                     {item.title && (
-                                        <span className="text-slate-700 font-semibold text-sm sm:text-base text-center max-w-xs mt-0.5">
+                                        <span className="text-slate-700 font-semibold text-xs sm:text-base text-center max-w-xs mt-0.5 line-clamp-2">
                                             {item.title}
                                         </span>
                                     )}
