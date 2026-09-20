@@ -6,7 +6,7 @@ const parseJsonData = (data) => {
     if (!data) return [];
     if (Array.isArray(data)) return data;
     if (typeof data === 'string') {
-        try {
+        try {  
             return JSON.parse(data);
         } catch (e) {
             return [];
