@@ -88,7 +88,7 @@ class SportsAffiliationCmsController extends Controller
                 }
             }
         }
-        $validatedData['hero_stats'] = json_encode($heroStats);
+        $validatedData['hero_stats'] = $heroStats;
 
         // Process Hero Slides
         $heroSlides = [];
@@ -117,7 +117,7 @@ class SportsAffiliationCmsController extends Controller
                     'subtitle' => $request->slide_subtitle[$key] ?? ''
                 ];
             }
-        $validatedData['hero_stats'] = $heroStats;
+        }
         $validatedData['hero_slides'] = $heroSlides;
 
         // Process Highlight List
