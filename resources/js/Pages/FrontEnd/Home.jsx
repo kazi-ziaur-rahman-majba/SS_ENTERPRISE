@@ -356,9 +356,6 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
 
                                         {aboutTab === 'safety' && (
                                             <div className="space-y-3.5 animate-in fade-in duration-300">
-                                                {aboutUs.safety_image && (
-                                                    <img src={getImgSrc(aboutUs.safety_image, '')} alt="Safety" className="rounded-xl w-full h-32 object-cover shadow-xs mb-2" />
-                                                )}
                                                 {aboutUs.safety_detail && (
                                                     <p className="text-xs text-slate-600 leading-relaxed bg-white p-3 rounded-xl border border-slate-100 mb-2">
                                                         {aboutUs.safety_detail}
@@ -588,11 +585,14 @@ export default function Home({ sliders, aboutUs, blog, event, whatWeDo, works, g
                 return (
                     <section className="py-12 sm:py-16 bg-white border-t border-slate-100">
                         <div className={containerClass}>
-                            <div className="mb-8">
-                                <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">
+                            <div className="mb-8 sm:mb-10">
+                                <span className="text-[#0066ff] font-bold text-xs uppercase tracking-widest block mb-1.5">
+                                    OUR CLIENTS
+                                </span>
+                                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 tracking-tight leading-tight">
                                     {homePageCms?.client_title || 'Our Esteemed Clients'}
                                 </h2>
-                                <div className="w-14 h-1 bg-[#0066ff] rounded-full mt-2" />
+                                <div className="w-10 h-1 bg-[#0066ff] rounded-full mt-2.5" />
                             </div>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">

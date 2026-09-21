@@ -174,7 +174,6 @@
                             </div><!-- Tab pane 2 end -->
 
                             <div class="tab-pane animated fadeInLeft" id="tab_c">
-                                <img class="pull-left" src="{{ asset($aboutUs->safety_image) }}" alt="" />
                                 <p>{!! $aboutUs->safety_detail !!}
                                 </p>
                             </div><!-- Tab pane 3 end -->

@@ -14,7 +14,7 @@ class ServiceCategoryController extends Controller
      */
     public function index()
     {
-        $data = ServiceCategory::orderBy('position', 'ASC')->get();
+        $data = ServiceCategory::orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
         return view('admin.modules.service.category', compact('data'));
     }
 
@@ -59,6 +59,8 @@ class ServiceCategoryController extends Controller
 
         ServiceCategory::create($validatedData);
 
+        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
+
         return redirect()->route('service-category.index')->with('success', 'Service Category created successfully.');
     }
 
@@ -76,7 +78,7 @@ class ServiceCategoryController extends Controller
     public function edit($id)
     {
         $edit = ServiceCategory::findOrFail($id);
-        $data = ServiceCategory::orderBy('position', 'ASC')->get();
+        $data = ServiceCategory::orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
         return view('admin.modules.service.category', compact('edit', 'data'));
     }
 
@@ -135,6 +137,8 @@ class ServiceCategoryController extends Controller
             $service->save();
         }
 
+        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
+
         return redirect()->route('service-category.index')->with('success', 'Service Category updated successfully.');
     }
 
@@ -147,6 +151,8 @@ class ServiceCategoryController extends Controller
             \DB::table('service_categories')->where('id', $id)->update(['position' => $index + 1]);
         }
 
+        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
+
         return response()->json(['success' => true]);
     }
 
@@ -158,6 +164,8 @@ class ServiceCategoryController extends Controller
     {
         $data = ServiceCategory::findOrFail($id);
         $data->delete();
+
+        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
 
         return redirect()->route('service-category.index')->with('success', 'Service Category deleted successfully.');
     }

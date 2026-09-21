@@ -214,18 +214,6 @@
                                 <div class="col-12 bg-light p-3 rounded border mt-3">
                                     <h6 class="fw-bold text-dark mb-3"><i class="bx bx-health text-primary me-1"></i> 3. Safety Tab</h6>
                                     <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="safety_image" class="form-label">Safety Image [ Max Limit 2MB ]</label>
-                                            <input type="file" class="form-control" id="safety_image" name="safety_image">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label d-block">Current Safety Image</label>
-                                            @if (isset($data) && !empty($data->safety_image))
-                                                <img src="{{ url($data->safety_image) }}" height="50" class="rounded border shadow-sm">
-                                            @else
-                                                <img src="{{ asset('/uploads/images/noImage.png') }}" height="50" class="rounded border">
-                                            @endif
-                                        </div>
                                         <div class="col-md-12">
                                             <label class="form-label">Safety Overview Detail</label>
                                             <textarea name="safety_detail" rows="2" class="form-control">{!! old('safety_detail', $data->safety_detail ?? '') !!}</textarea>

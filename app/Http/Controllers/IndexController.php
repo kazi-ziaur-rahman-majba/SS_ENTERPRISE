@@ -114,9 +114,16 @@ class IndexController extends Controller
     public function services()
     {
         $pageCms = ServicePageCms::latest()->first();
-        $serviceCategory = ServiceCategory::select('service_categories.*', 'services.slug')
-                        ->leftJoin('services', 'services.category_id', '=', 'service_categories.id')
-                        ->orderBy('services.id', 'DESC')
+        $serviceCategory = ServiceCategory::select('service_categories.id', 'service_categories.name', 'service_categories.icon', 'service_categories.image', 'service_categories.short_description', 'service_categories.position')
+                        ->selectSub(function ($query) {
+                            $query->select('slug')
+                                ->from('services')
+                                ->whereColumn('services.category_id', 'service_categories.id')
+                                ->orderBy('id', 'ASC')
+                                ->limit(1);
+                        }, 'slug')
+                        ->orderBy('service_categories.position', 'ASC')
+                        ->orderBy('service_categories.id', 'ASC')
                         ->get();
         return Inertia::render('FrontEnd/Services', compact('pageCms', 'serviceCategory'));
     }
@@ -125,9 +132,16 @@ class IndexController extends Controller
     {
         $pageCms = ServicePageCms::latest()->first();
         $service = Service::where('slug', $slug)->first();
-        $serviceCategory = ServiceCategory::select('service_categories.*', 'services.slug')
-                        ->leftJoin('services', 'services.category_id', '=', 'service_categories.id')
+        $serviceCategory = ServiceCategory::select('service_categories.id', 'service_categories.name', 'service_categories.icon', 'service_categories.image', 'service_categories.short_description', 'service_categories.position')
+                        ->selectSub(function ($query) {
+                            $query->select('slug')
+                                ->from('services')
+                                ->whereColumn('services.category_id', 'service_categories.id')
+                                ->orderBy('id', 'ASC')
+                                ->limit(1);
+                        }, 'slug')
                         ->orderBy('service_categories.position', 'ASC')
+                        ->orderBy('service_categories.id', 'ASC')
                         ->get();
         return Inertia::render('FrontEnd/ServiceDetails', compact('pageCms', 'service', 'serviceCategory', 'slug'));
     }

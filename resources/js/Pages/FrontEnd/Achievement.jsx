@@ -81,13 +81,13 @@ export default function Achievement({ membershipCertificate }) {
                     </div>
 
                     {memberImages && memberImages.length > 0 ? (
-                        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center justify-center gap-3.5 sm:gap-10">
+                        <div className="grid grid-cols-2 sm:flex sm:flex-wrap lg:flex lg:flex-row lg:flex-nowrap items-center justify-center gap-3.5 sm:gap-6 lg:gap-8 max-w-4xl mx-auto">
                             {memberImages.map((imgSrc, idx) => (
                                 <div
                                     key={idx}
-                                    className={`bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-100 shadow-2xs hover:shadow-md transition-all duration-300 flex items-center justify-center w-full sm:w-60 h-24 sm:h-32 ${
+                                    className={`bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-100 shadow-2xs hover:shadow-md transition-all duration-300 flex items-center justify-center w-full sm:w-60 lg:w-64 h-24 sm:h-32 ${
                                         memberImages.length % 2 !== 0 && idx === memberImages.length - 1
-                                            ? 'col-span-2 sm:col-span-1 max-w-[220px] sm:max-w-none mx-auto'
+                                            ? 'col-span-2 sm:col-span-1 max-w-[220px] sm:max-w-none lg:max-w-none mx-auto lg:mx-0'
                                             : ''
                                     }`}
                                 >
