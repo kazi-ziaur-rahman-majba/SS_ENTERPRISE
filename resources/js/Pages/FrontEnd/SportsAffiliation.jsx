@@ -241,74 +241,80 @@ export default function SportsAffiliation({ pageCms }) {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        {/* Left narrative & highlights */}
-                        <div className="lg:col-span-7 space-y-6">
-                            <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                    {/* Seven Year Journey Section */}
+                    <div className="space-y-6 lg:space-y-8">
+                        {/* Title & Top Text */}
+                        <div className="space-y-3">
+                            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-slate-900 tracking-tight">
                                 {pageCms?.journey_title || 'Our Seven-Year Journey'}
                             </h3>
-
                             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                                 {pageCms?.journey_text_1 || "Our partnership with 10-12 Sports represents a commitment to transforming grassroots cricket in Bangladesh. Together, we've created opportunities for underprivileged and rural talent to reach professional levels."}
                             </p>
+                        </div>
 
-                            {/* Highlight Green Box */}
-                            <div className="relative p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg border border-emerald-400/30">
-                                <div className="flex items-center gap-2 font-bold text-base sm:text-lg text-amber-300 mb-4">
-                                    <Handshake className="w-5 h-5" />
-                                    <span>{pageCms?.highlight_title || 'Partnership Highlights (2018-current)'}</span>
+                        {/* Middle Row: Green Box & Logo Box side by side on lg */}
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+                            {/* Left: Green Box */}
+                            <div className="lg:col-span-7 flex flex-col">
+                                <div className="h-full p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white shadow-lg border border-emerald-400/30 flex flex-col justify-center">
+                                    <div className="flex items-center gap-2.5 font-bold text-base sm:text-lg text-amber-300 mb-4">
+                                        <Handshake className="w-5 h-5 shrink-0" />
+                                        <span>{pageCms?.highlight_title || 'Partnership Highlights (2018-current)'}</span>
+                                    </div>
+                                    <ul className="space-y-3">
+                                        {highlightList.map((item, idx) => (
+                                            <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm font-medium text-emerald-50">
+                                                <div className="w-5 h-5 rounded-full bg-amber-300 text-slate-900 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-xs">
+                                                    ✓
+                                                </div>
+                                                <span>{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
                                 </div>
-                                <ul className="space-y-3">
-                                    {highlightList.map((item, idx) => (
-                                        <li key={idx} className="flex items-start gap-3 text-xs sm:text-sm font-medium text-emerald-50">
-                                            <div className="w-5 h-5 rounded-full bg-amber-300 text-slate-900 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
-                                                ✓
+                            </div>
+
+                            {/* Right: Logo Showcase Card */}
+                            <div className="lg:col-span-5 flex flex-col">
+                                <div className="h-full bg-white p-6 sm:p-8 lg:p-8 rounded-3xl shadow-xl border border-slate-100 flex flex-col items-center justify-center text-center">
+                                    <div className="w-full flex flex-col sm:flex-row items-center justify-around gap-6">
+                                        {/* Company Logo Box */}
+                                        <div className="flex-1 flex flex-col items-center">
+                                            <div className="text-2xl sm:text-3xl font-extrabold text-blue-600 tracking-tight">
+                                                {pageCms?.company_logo_text || 'SS GROUP'}
                                             </div>
-                                            <span>{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                                {pageCms?.journey_text_2 || "Through this partnership, we've witnessed remarkable success stories - from rural discoveries to national team selections, proving that talent knows no geographical boundaries."}
-                            </p>
-                        </div>
-
-                        {/* Right Logo Showcase */}
-                        <div className="lg:col-span-5">
-                            <div className="bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-slate-100 text-center">
-                                <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-                                    {/* Company Logo Box */}
-                                    <div className="flex-1">
-                                        <div className="text-2xl sm:text-3xl font-bold text-blue-600 tracking-tight">
-                                            {pageCms?.company_logo_text || 'SS GROUP'}
+                                            <div className="text-xs font-semibold text-slate-400 mt-1">
+                                                {pageCms?.company_logo_subtitle || 'Since 2004'}
+                                            </div>
                                         </div>
-                                        <div className="text-xs font-semibold text-slate-400 mt-1">
-                                            {pageCms?.company_logo_subtitle || 'Since 2004'}
-                                        </div>
-                                    </div>
 
-                                    {/* Plus Divider */}
-                                    <div className="w-12 h-12 rounded-full bg-slate-100 text-emerald-500 font-bold text-xl flex items-center justify-center shrink-0">
-                                        +
-                                    </div>
+                                        {/* Plus Divider */}
+                                        <div className="w-10 h-10 rounded-full bg-slate-100 text-emerald-500 font-bold text-lg flex items-center justify-center shrink-0">
+                                            +
+                                        </div>
 
-                                    {/* Sports Logo Box */}
-                                    <div className="flex-1 flex flex-col items-center">
-                                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white font-bold text-xl flex items-center justify-center shadow-lg shadow-emerald-500/20 mb-2">
-                                            {pageCms?.sports_logo_badge || '10-12'}
-                                        </div>
-                                        <div className="text-xl font-bold text-slate-900">
-                                            {pageCms?.sports_logo_text || 'SPORTS'}
-                                        </div>
-                                        <div className="text-[11px] italic text-slate-500 mt-0.5">
-                                            {pageCms?.sports_logo_tagline || 'Grassroots to Glory'}
+                                        {/* Sports Logo Box */}
+                                        <div className="flex-1 flex flex-col items-center">
+                                            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white font-bold text-lg flex items-center justify-center shadow-md shadow-emerald-500/20 mb-1.5">
+                                                {pageCms?.sports_logo_badge || '10-12'}
+                                            </div>
+                                            <div className="text-lg font-bold text-slate-900">
+                                                {pageCms?.sports_logo_text || 'SPORTS'}
+                                            </div>
+                                            <div className="text-[11px] italic text-slate-500 mt-0.5">
+                                                {pageCms?.sports_logo_tagline || 'Grassroots to Glory'}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        {/* Bottom Text */}
+                        <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                            {pageCms?.journey_text_2 || "Through this partnership, we've witnessed remarkable success stories - from rural discoveries to national team selections, proving that talent knows no geographical boundaries."}
+                        </p>
                     </div>
                 </div>
             </section>

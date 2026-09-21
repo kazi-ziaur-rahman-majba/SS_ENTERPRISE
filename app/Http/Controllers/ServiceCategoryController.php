@@ -6,14 +6,32 @@ use App\Models\ServiceCategory;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class ServiceCategoryController extends Controller
 {
+    /**
+     * Re-index all categories sequentially to 1, 2, 3...
+     */
+    private function reindexPositions()
+    {
+        $all = ServiceCategory::orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
+        foreach ($all as $index => $cat) {
+            $expectedPos = $index + 1;
+            if ($cat->position != $expectedPos) {
+                DB::table('service_categories')->where('id', $cat->id)->update(['position' => $expectedPos]);
+            }
+        }
+        Cache::forget('services_menu_shared');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->reindexPositions();
         $data = ServiceCategory::orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
         return view('admin.modules.service.category', compact('data'));
     }
@@ -35,7 +53,8 @@ class ServiceCategoryController extends Controller
             'name' => 'required|string|max:255',
             'icon' => 'required|image|max:400',
             'image' => 'required|image|max:400',
-            'short_description' => 'required|max:255',
+            'short_description' => 'required|string',
+            'position' => 'nullable|integer|min:1',
         ]);
 
         // Process file uploads
@@ -53,13 +72,15 @@ class ServiceCategoryController extends Controller
             }
         }
 
-        // Determine the new position value
-        $maxSortOrder = ServiceCategory::max('position');
-        $validatedData['position'] = $maxSortOrder + 1;
+        if (empty($validatedData['position'])) {
+            $maxSortOrder = (int) ServiceCategory::max('position');
+            $validatedData['position'] = $maxSortOrder + 1;
+        } else {
+            $validatedData['position'] = (float) $validatedData['position'] - 0.5;
+        }
 
         ServiceCategory::create($validatedData);
-
-        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
+        $this->reindexPositions();
 
         return redirect()->route('service-category.index')->with('success', 'Service Category created successfully.');
     }
@@ -77,6 +98,7 @@ class ServiceCategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->reindexPositions();
         $edit = ServiceCategory::findOrFail($id);
         $data = ServiceCategory::orderBy('position', 'ASC')->orderBy('id', 'ASC')->get();
         return view('admin.modules.service.category', compact('edit', 'data'));
@@ -91,7 +113,8 @@ class ServiceCategoryController extends Controller
             'name' => 'required|string|max:255',
             'icon' => 'nullable|image|max:400',
             'image' => 'nullable|image|max:400',
-            'short_description' => 'required|max:255',
+            'short_description' => 'required|string',
+            'position' => 'nullable|integer|min:1',
         ]);
         $serviceCategory = ServiceCategory::findOrFail($id);
 
@@ -114,18 +137,9 @@ class ServiceCategoryController extends Controller
             }
         }
 
-
-        // dd($validatedData);
-        // Update the position if provided
-        if (isset($validatedData['position'])) {
-            $newSortOrder = $validatedData['position'];
-
-            // Adjust positions of other items if necessary
-            ServiceCategory::where('id', '!=', $id)
-                ->where('position', '>=', $newSortOrder)
-                ->increment('position');
-
-            $validatedData['position'] = $newSortOrder;
+        if (isset($request->position) && !empty($request->position)) {
+            $newPos = (float) $request->position;
+            $validatedData['position'] = $newPos - 0.5;
         }
 
         $serviceCategory->update($validatedData);
@@ -137,7 +151,7 @@ class ServiceCategoryController extends Controller
             $service->save();
         }
 
-        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
+        $this->reindexPositions();
 
         return redirect()->route('service-category.index')->with('success', 'Service Category updated successfully.');
     }
@@ -146,16 +160,16 @@ class ServiceCategoryController extends Controller
     {
         $order = $request->input('order');
 
-        foreach ($order as $index => $id) {
-            // Assuming you have a sort_order or similar column in your table
-            \DB::table('service_categories')->where('id', $id)->update(['position' => $index + 1]);
+        if (is_array($order)) {
+            foreach ($order as $index => $id) {
+                DB::table('service_categories')->where('id', $id)->update(['position' => $index + 1]);
+            }
         }
 
-        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
+        $this->reindexPositions();
 
         return response()->json(['success' => true]);
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -165,7 +179,7 @@ class ServiceCategoryController extends Controller
         $data = ServiceCategory::findOrFail($id);
         $data->delete();
 
-        \Illuminate\Support\Facades\Cache::forget('services_menu_shared');
+        $this->reindexPositions();
 
         return redirect()->route('service-category.index')->with('success', 'Service Category deleted successfully.');
     }

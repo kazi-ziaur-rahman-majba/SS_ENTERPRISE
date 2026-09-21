@@ -13,5 +13,6 @@ class ServiceCategory extends Model
         'icon',
         'image',
         'short_description',
+        'position',
     ];
 }

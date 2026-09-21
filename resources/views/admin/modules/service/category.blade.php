@@ -29,7 +29,7 @@
                                 <table id="all_user_table" class="table table-default">
                                     <thead class="text-capitalize">
                                         <tr>
-                                            <th>ID</th>
+                                            <th>Pos</th>
                                             <th>Name</th>
                                             <th>Action</th>
                                         </tr>
@@ -38,8 +38,13 @@
                                         @if (count($data) > 0)
                                             @foreach ($data as $key => $item)
                                                 <tr data-id="{{ $item->id }}">
-                                                    <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $item->name }}</td>
+                                                    <td>
+                                                        <span class="badge bg-primary rounded-pill px-2.5 py-1">{{ $item->position }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <i class="bx bx-move me-1 text-muted" style="cursor: move;" title="Drag to reorder"></i>
+                                                        {{ $item->name }}
+                                                    </td>
                                                     <td class="d-flex">
                                                         <a href="{{ route('service-category.edit', [$item->id]) }}"
                                                             class="btn btn-sm btn-outline-primary m-1">
@@ -95,6 +100,15 @@
                                             @if (isset($edit)) value="{{ $edit->name }}" @endif>
                                     </div>
                                 </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="position" class="form-label">Position / Serial Order</label>
+                                        <input type="number" min="1" class="form-control" id="position" name="position"
+                                            placeholder="Enter position number (e.g. 1, 2, 3...)"
+                                            @if (isset($edit)) value="{{ $edit->position }}" @endif>
+                                        <small class="text-muted">Set a position number (e.g. 1, 2, 3), or drag rows in the table on the left.</small>
+                                    </div>
+                                </div>
                                 <div class="col-md-9">
                                     <label for="icon" class="form-label">Icon: [ Size - 60 X 60, Max
                                         Limit
@@ -132,10 +146,8 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
-                                        <label for="name">Short description</label>
-                                        <input type="text" class="form-control" id="short_description" name="short_description"
-                                            placeholder="Enter short description"
-                                            @if (isset($edit)) value="{{ $edit->short_description }}" @endif>
+                                        <label for="short_description" class="form-label">Description</label>
+                                        <textarea name="short_description" id="mytextarea" rows="5" class="form-control">@if (isset($edit)){{ $edit->short_description }}@endif</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">

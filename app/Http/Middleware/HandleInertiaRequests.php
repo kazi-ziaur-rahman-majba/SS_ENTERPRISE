@@ -45,7 +45,7 @@ class HandleInertiaRequests extends Middleware
             },
             'servicesMenu' => function () {
                 return \Illuminate\Support\Facades\Cache::remember('services_menu_shared', 3600, function () {
-                    return ServiceCategory::select('service_categories.id', 'service_categories.name', 'service_categories.position')
+                    $categories = ServiceCategory::select('service_categories.id', 'service_categories.name', 'service_categories.position')
                         ->selectSub(function ($query) {
                             $query->select('slug')
                                 ->from('services')
@@ -56,6 +56,14 @@ class HandleInertiaRequests extends Middleware
                         ->orderBy('service_categories.position', 'ASC')
                         ->orderBy('service_categories.id', 'ASC')
                         ->get();
+
+                    foreach ($categories as $cat) {
+                        if (empty($cat->slug)) {
+                            $cat->slug = \Illuminate\Support\Str::slug($cat->name);
+                        }
+                    }
+
+                    return $categories;
                 });
             },
             'flash' => [

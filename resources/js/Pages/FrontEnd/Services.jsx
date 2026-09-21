@@ -62,9 +62,10 @@ export default function Services({ pageCms, serviceCategory }) {
                                     <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors mb-3">
                                         <Link href={`/service/${service.slug}`}>{service.name}</Link>
                                     </h3>
-                                    <p className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow">
-                                        {service.short_description}
-                                    </p>
+                                    <div
+                                        className="text-slate-500 text-sm leading-relaxed mb-6 flex-grow line-clamp-3 prose prose-slate max-w-none"
+                                        dangerouslySetInnerHTML={{ __html: service.short_description || '' }}
+                                    />
                                     <Link
                                         href={`/service/${service.slug}`}
                                         className="inline-flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider text-blue-600 hover:text-blue-700 mt-auto"

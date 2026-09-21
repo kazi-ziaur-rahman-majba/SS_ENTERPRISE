@@ -125,6 +125,13 @@ class IndexController extends Controller
                         ->orderBy('service_categories.position', 'ASC')
                         ->orderBy('service_categories.id', 'ASC')
                         ->get();
+
+        foreach ($serviceCategory as $cat) {
+            if (empty($cat->slug)) {
+                $cat->slug = \Illuminate\Support\Str::slug($cat->name);
+            }
+        }
+
         return Inertia::render('FrontEnd/Services', compact('pageCms', 'serviceCategory'));
     }
 
@@ -143,6 +150,13 @@ class IndexController extends Controller
                         ->orderBy('service_categories.position', 'ASC')
                         ->orderBy('service_categories.id', 'ASC')
                         ->get();
+
+        foreach ($serviceCategory as $cat) {
+            if (empty($cat->slug)) {
+                $cat->slug = \Illuminate\Support\Str::slug($cat->name);
+            }
+        }
+
         return Inertia::render('FrontEnd/ServiceDetails', compact('pageCms', 'service', 'serviceCategory', 'slug'));
     }
 
